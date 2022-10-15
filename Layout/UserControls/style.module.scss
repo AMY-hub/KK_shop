@@ -1,0 +1,16 @@
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.heart {
+    fill: none !important;
+    stroke: var(--black);
+    stroke-width: 2;
+
+    &:hover,&:focus {
+        stroke: var(--accent-dark);
+    }
+}

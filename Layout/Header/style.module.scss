@@ -1,0 +1,39 @@
+@import '../../styles/rem.scss';
+
+.header {
+
+    &Top {
+        background-color: #323232;
+        color: var(--light-text);
+
+        &Container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        &City {
+            font-size: rem(14);
+        }
+
+        &Tel {
+            font-size: rem(20);
+        }
+    }
+
+    &Body {
+        color: var(--black);
+
+        &Container {
+            display: grid;
+            grid-template-columns: auto 1fr auto; 
+            gap: rem(45);
+            align-items: center;
+            padding-top: 30px;
+            padding-bottom: 16px;
+        }
+    }
+
+}

@@ -1,0 +1,7 @@
+@import '../../styles/rem.scss';
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: rem(25);
+}

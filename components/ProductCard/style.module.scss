@@ -1,0 +1,51 @@
+@import '../../styles/rem.scss';
+
+.card {
+    width: 377px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: var(--accent-font);
+
+    &Info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: rem(24);
+    }
+
+    &Title {
+        margin-bottom: rem(8);
+        font-weight: 700;
+        font-size: rem(20);
+        line-height: 24px;
+        text-transform: uppercase;
+        color: var(--semi-black);
+    }
+
+    &Description {
+        font-size: 1rem;
+        line-height: 1.12;
+        color: var(--gray-medium);
+    }
+
+    &PriceWrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        margin-left: rem(22);
+    }
+
+    &Price {
+        margin-right: rem(8);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--semi-black);
+    }
+
+    &PriceOld {
+        font-size: rem(14);
+        color: var(--gray-light);
+    }
+
+}
