@@ -1,0 +1,121 @@
+@import "../../../styles/rem.scss";
+
+.product {
+	display: grid;
+	grid-template-columns: minmax(200px, 550px) minmax(300px, auto);
+	gap: 2rem;
+	justify-items: flex-start;
+
+	&Img {
+		height: 100%;
+		margin: auto;
+	}
+
+	@media (max-width: 680px) {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	font-family: var(--accent-font);
+
+	h1 {
+		font-weight: 800;
+	}
+
+	&Name,&Art,&Vol,&Price {
+		margin-bottom: 1rem;
+	}
+
+	&Title {
+		font-family: var(--accent-font);
+		color: var(--accent-pale);
+	}
+
+	&Art {
+		font-size: rem(14);
+		line-height: 2;
+		color: var(--gray-light);
+	}
+
+	&Vol {
+		span {
+			display: inline-block;
+			padding: 0.5rem;
+			border: 1px solid black;
+			margin-right: 0.5rem;
+		}
+	}
+
+	&Price {
+		display: flex;
+		font-weight: 700;
+		font-size: rem(24);
+		line-height: 1.5;
+
+		&Old {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			color: var(--gray-light);
+			
+			&Price {
+				text-decoration: line-through;
+			}
+		}
+
+		&New {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin-right: 1rem;
+		}
+
+		&OldText {
+			color: var(--gray-light);
+			font-weight: 500;
+			font-size: rem(12);
+			line-height: 1.5;
+		}
+
+		&NewText {
+			color: var(--accent-pale);
+			font-weight: 500;
+			font-size: rem(12);
+			line-height: 1.5;
+		}
+	}
+
+	&Btns {
+		margin-top: auto;
+		display: flex;
+		justify-content: flex-start;
+
+		button {
+			margin-right: rem(30);
+		}
+	}
+
+	&FavBtn {
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+
+	@media (max-width: 860px) {
+		&Name,&Art,&Vol,&Price,&Title {
+		margin-bottom: 0.5rem;
+		}
+		&Title {
+			font-size: 1.7rem;
+		}
+	}
+
+	@media (max-width: 680px) {
+		&Title {
+			font-size: 1.5rem;
+		}
+	}
+}

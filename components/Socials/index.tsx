@@ -6,7 +6,7 @@ import WhatsAppIcon from '../../assets/images/icons/watsapp.svg';
 import ViberIcon from '../../assets/images/icons/viber.svg';
 import InstaIcon from '../../assets/images/icons/instagramm.svg';
 import VKIcon from '../../assets/images/icons/vk.svg';
-import { SocialsProps } from './Socials.props';
+import { SocialsProps } from './props';
 
 import styles from './style.module.scss';
 

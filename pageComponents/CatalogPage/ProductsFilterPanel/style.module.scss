@@ -1,0 +1,10 @@
+.panel {
+	display: flex;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	gap: 1.7rem;
+
+	@media (max-width: 424px) {
+		padding: 0 10px;
+	}
+}

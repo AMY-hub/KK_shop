@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { InfoBadgeProps } from './InfoBadge.props';
+import { InfoBadgeProps } from './props';
 
 import styles from './style.module.scss';
 

@@ -1,41 +1,64 @@
-import Image from 'next/image';
+import Link from 'next/link';
+import { useRef, useState } from 'react';
+import cn from 'classnames';
 import logo from '../../assets/images/logo.png';
 import { Container } from '../../components';
 import { NavBar } from '../NavBar';
 import { UserControls } from '../UserControls';
+
 import styles from './style.module.scss';
+import { useClickOutside } from '../../hooks/useClickOutside';
+import { useAppContext } from '../../context/AppContext';
 
 export const Header = (): JSX.Element => {
 
-    const currentCity = 'Санкт-Петербург'; //REDUX INF
+    const ref = useRef<HTMLDivElement>(null);
+    const [catalogOpen, setCatalogOpen] = useState<boolean>(false);
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
+    useClickOutside(ref, () => setCatalogOpen(false));
+
+    const { city } = useAppContext();
 
     return (
-        <header className={styles.header}>
-            <div className={styles.headerTop}>
-                <Container className={styles.headerTopContainer}>
-                    <span className={styles.headerTopCity}>
-                        {currentCity}
-                    </span>
-                    <a className={styles.headerTopTel}
-                        href="tel:84952592500"
-                    >
-                        8 495 259 25 00
-                    </a>
-                </Container>
-            </div>
-            <div className={styles.headerBody}>
-                <Container className={styles.headerBodyContainer}>
-                    <Image
-                        src={logo}
-                        alt='logo'
-                        width={124}
-                        height={38}
-                        layout='fixed'
-                    />
-                    <NavBar />
-                    <UserControls />
-                </Container>
-            </div>
-        </header >
+        <div className={cn(styles.overlay, {
+            [styles.overlay_visible]: catalogOpen
+        })}>
+            <header className={styles.header} ref={ref} id='header'>
+                <div className={styles.headerTop}>
+                    <Container className={styles.headerTopContainer}>
+                        <span className={styles.headerTopCity}>
+                            {city}
+                        </span>
+                        <a className={styles.headerTopTel}
+                            href="tel:84952592500"
+                        >
+                            8 495 259 25 00
+                        </a>
+                    </Container>
+                </div>
+
+                <div className={styles.headerBody}>
+                    <Container className={styles.headerBodyContainer}>
+                        <Link href='/'>
+                            <img
+                                className={styles.headerBodyLogo}
+                                src={logo.src}
+                                alt='logo'
+                                width={124}
+                                height={38}
+                            />
+                        </Link>
+                        <NavBar
+                            menuOpen={menuOpen}
+                            setMenuOpen={setMenuOpen}
+                            catalogOpen={catalogOpen}
+                            setCatalogOpen={setCatalogOpen}
+                            className={styles.headerBodyNav} />
+                        <UserControls className={styles.headerBodyControls} />
+                    </Container>
+                </div>
+            </header >
+        </div>
+
     );
 };

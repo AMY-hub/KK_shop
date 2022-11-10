@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { ContainerProps } from './Container.props';
+import { ContainerProps } from './props';
 
 import styles from './style.module.scss';
 

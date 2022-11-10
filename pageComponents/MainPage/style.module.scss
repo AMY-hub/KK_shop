@@ -1,0 +1,105 @@
+@import "../../styles/rem";
+
+.infoSlider {
+	margin-bottom: rem(62);
+
+	@media (max-width: 760px) {
+		margin-bottom: rem(32);
+	}
+}
+
+.about {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding-bottom: rem(36);
+
+	&Info {
+		margin-left: 62px;
+		margin-bottom: 1rem;
+
+		p {
+			margin-right: 4rem;
+			margin-bottom: 2rem;
+		}
+
+		@media (max-width: 1060px) {
+			margin-left: 0;
+		}
+	}
+
+	&Link {
+		color: var(--accent-dark);
+		font-family: var(--accent-font);
+		font-size: 1rem;
+		font-weight: 600;
+		line-height: 1.5;
+
+		&::after {
+			margin-left: 3px;
+			font-size: 1.4rem;
+			vertical-align: middle;
+		}
+
+		&:hover,
+		&:target {
+			color: var(--accent-bright);
+		}
+	}
+
+	@media (max-width: 1060px) {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+		padding: 0 3rem rem(26) 3rem;
+	}
+
+	@media (max-width: 760px) {
+		padding: 0;
+
+		&Info {
+			p {
+				margin-right: 2rem;
+				margin-bottom: 1rem;
+			}
+		}
+	}
+
+	@media (max-width: 1060px) {
+		margin-left: 0;
+	}
+}
+
+.advantages {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	gap: rem(26);
+	padding-bottom: rem(150);
+
+	@media (max-width: 1130px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (max-width: 1060px) {
+		padding-bottom: rem(60);
+	}
+
+	@media (max-width: 600px) {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	@media (max-width: 430px) {
+		padding-bottom: rem(30);
+	}
+}
+
+.products > div {
+	margin-bottom: rem(150);
+
+	@media (max-width: 1060px) {
+		margin-bottom: rem(80);
+	}
+
+	@media (max-width: 760px) {
+		margin-bottom: rem(50);
+	}
+}

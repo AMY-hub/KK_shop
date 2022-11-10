@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { TitleProps } from './Title.props';
+import { TitleProps } from './props';
 
 import styles from './style.module.scss';
 

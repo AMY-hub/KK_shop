@@ -1,58 +1,45 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Container, PaymentLogos, Socials, Contacts, Title, Button } from '../../components';
-import { Category } from '../../interfaces';
+import {
+    Container,
+    PaymentLogos,
+    Socials,
+    Contacts,
+    DropdownList
+} from '../../components';
+import { useAppContext } from '../../context/AppContext';
 import { footerInfOptions } from '../const';
+import { LinkOption } from '../../interfaces';
 
 import styles from './style.module.scss';
 
 export const Footer = (): JSX.Element => {
 
-    const [catalog, setCatalog] = useState<Category[] | null>(null);
+    const { catalog } = useAppContext();
 
-    useEffect(() => {
-        axios.get<{ categories: Category[] }>(process.env.NEXT_PUBLIC_DOMAIN + 'api/category')
-            .then(res => setCatalog(res.data.categories))
-            .catch(err => console.log(err));
-    }, []);
-
-    const currentCity = 'Санкт-Петербург'; //REDUX INF
-
-    const infoOptions = Array.from(footerInfOptions.keys()).map(opt => (
-        <Button
-            like='Link'
-            href={footerInfOptions.get(opt) ?? '#'}
-            styleType='plain'
-            size='s'
-            key={opt}
-        >{opt}
-        </Button>
-    ));
+    const catalogLinkOptions: LinkOption[] = catalog.map(el => ({
+        name: el.name,
+        url: `/products/${el.route}`
+    }));
 
     return (
         <footer className={styles.footer}>
             <Container className={styles.footerContainer}>
                 <Contacts className={styles.footerContacts} />
-                <div className={styles.footerCatalog}>
-                    <Title tag='h3'>Каталог</Title>
-                    {catalog &&
-                        catalog.map(opt => (
-                            <Button
-                                like='Link'
-                                href={`/products?categoryId=${opt.id}`}
-                                styleType='plain'
-                                size='s'
-                                key={opt.id}
-                            >{opt.name}
-                            </Button>
-                        ))}
-                </div>
-                <div className={styles.footerInfo}>
-                    <Title tag='h3'>Информация</Title>
-                    {infoOptions}
-                </div>
+                <DropdownList
+                    title='Каталог'
+                    options={[
+                        { name: 'Все товары', url: `/products` },
+                        ...catalogLinkOptions]}
+                    className={styles.footerCatalog}
+                />
+                <DropdownList
+                    title='Информация'
+                    options={footerInfOptions}
+                    className={styles.footerInfo}
+                />
                 <div className={styles.footerSocials} >
-                    <Title tag='h3'>Мы в социальных сетях</Title>
+                    <div className={styles.footerTitle}>
+                        Мы в социальных сетях
+                    </div>
                     <Socials />
                 </div>
                 <PaymentLogos className={styles.footerPayments} />

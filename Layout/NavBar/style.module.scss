@@ -1,7 +1,163 @@
-@import '../../styles/rem.scss';
+@import "../../styles/rem";
 
-.nav {
-    display: flex;
-    align-items: center;
-    gap: rem(25);
+.navList {
+	display: flex;
+	gap: rem(25);
+
+	&Item {
+		margin-bottom: 0.5rem;
+		flex-shrink: 0;
+	}
+
+	@media (max-width: 860px) {
+		flex-direction: column;
+		align-items: flex-start;
+		margin-top: 40px;
+		padding: rem(45);
+		background: var(--bg);
+	}
+}
+
+.navOverlay {
+	@media (max-width: 860px) {
+		visibility: hidden;
+		position: fixed;
+		z-index: 10;
+		top: 0;
+		bottom: 0;
+		left: -100%;
+		width: 100vw;
+		height: 100vh;
+		transition: all 300ms;
+		background-color: rgba($color: #000, $alpha: 20%);
+	}
+
+	&_visible {
+		visibility: visible;
+		left: 0;
+	}
+}
+
+.burgerBtn {
+	display: none;
+	padding: 1rem 0.5rem;
+	cursor: pointer;
+
+	span {
+		display: block;
+		width: 25px;
+		height: 2px;
+		background: var(--black);
+
+		&::before {
+			content: "";
+			display: block;
+			position: relative;
+			top: 10px;
+			height: 2px;
+			transition: all 300ms;
+			transition-delay: 100ms;
+			background: var(--black);
+		}
+
+		&::after {
+			content: "";
+			display: block;
+			position: relative;
+			bottom: 12px;
+			height: 2px;
+			transition: all 300ms;
+			transition-delay: 100ms;
+			background: var(--black);
+		}
+	}
+
+	&_close {
+		position: fixed;
+		z-index: 11;
+		top: 70px;
+		right: 20px;
+
+		span {
+			height: 0;
+
+			&::before {
+				transform: translateY(-20px) rotate(45deg);
+			}
+
+			&::after {
+				transform: rotate(135deg);
+			}
+		}
+	}
+
+	@media (max-width: 860px) {
+		display: block;
+	}
+}
+.catalogListWrapper {
+	position: absolute;
+	left: 0;
+	right: 0;
+	background-color: var(--bg);
+
+	@media (max-width: 860px) {
+		position: static;
+	}
+}
+.catalogList {
+	position: relative;
+	width: fit-content;
+	margin-left: 10%;
+	padding: rem(20);
+
+	&Btn {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		opacity: 0.7;
+		color: var(--black);
+		font-family: var(--accent-font);
+		font-size: rem(18);
+		line-height: 2;
+		gap: 1rem;
+
+		&:hover,
+		&:focus {
+			opacity: 1;
+		}
+	}
+
+	&Btn_active {
+		opacity: 1;
+		color: var(--accent-dark);
+	}
+
+	&Exp {
+		padding: 0.5rem;
+		transition: all 300ms;
+	}
+
+	@media (max-width: 1200px) {
+		margin-left: 0;
+	}
+
+	@media (max-width: 860px) {
+		&Exp_active {
+			transform: rotate(90deg);
+		}
+	}
+}
+
+.catalogSubList {
+	padding: rem(15);
+	border-left: 1px solid var(--gray-light);
+
+	@media (min-width: 861px) {
+		position: absolute;
+		top: 15px;
+		left: 100%;
+		width: max-content;
+		border-left: none;
+	}
 }

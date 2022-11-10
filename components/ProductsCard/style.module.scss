@@ -1,0 +1,85 @@
+@import "../../styles/rem";
+
+.card {
+	max-width: 500px;
+	position: relative;
+	font-family: var(--accent-font);
+	cursor: pointer;
+
+	&Sale {
+		position: absolute;
+		z-index: 9;
+		top: 0;
+		left: 0;
+		text-transform: uppercase;
+	}
+
+	&Wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&Info {
+		display: flex;
+		flex-direction: column;
+		margin-top: rem(24);
+	}
+
+	&Title {
+		margin-bottom: rem(8);
+		color: var(--semi-black);
+		font-size: rem(20);
+		font-weight: 700;
+		line-height: 24px;
+		text-transform: uppercase;
+	}
+
+	&Description {
+		color: var(--gray-medium);
+		font-size: 1rem;
+		line-height: 1.12;
+	}
+
+	&PriceWrapper {
+		display: flex;
+		margin-top: 0.5rem;
+	}
+
+	&Price {
+		margin-right: rem(8);
+		color: var(--semi-black);
+		font-size: 1rem;
+		font-weight: 700;
+	}
+
+	&PriceOld {
+		color: var(--gray-light);
+		text-decoration: line-through;
+		font-size: rem(14);
+	}
+
+	@media (max-width: 760px) {
+		&Info {
+			grid-template-columns: 1fr;
+			margin-top: 1rem;
+		}
+
+		&PriceWrapper {
+			margin-left: 0;
+			justify-self:flex-start;
+		}
+
+		&Title {
+			grid-column: auto;
+			font-size: rem(18);
+		}
+	}
+
+	@media (max-width: 430px) {
+		&Title {
+			font-size: 1rem;
+		}
+	}
+}

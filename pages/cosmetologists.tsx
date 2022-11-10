@@ -1,15 +1,15 @@
 import Head from 'next/head';
-import { WithLayout } from '../Layout';
+import { CosmetClubPage } from '../pageComponents/CosmetClubPage';
 
 function Cosmetologists(): JSX.Element {
     return (
-        <div>
+        <>
             <Head>
                 <title>Cosmetologists</title>
             </Head>
-            Cosmetologists
-        </div>
+            <CosmetClubPage />
+        </>
     );
 }
 
-export default WithLayout(Cosmetologists);
+export default Cosmetologists;

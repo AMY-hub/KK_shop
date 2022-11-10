@@ -1,59 +1,110 @@
-@import '../../styles/rem.scss';
+@import "../../styles/rem";
 
 .footer {
-    &Container {
-        display: grid;
-        grid-template-columns: [start]auto 1fr [catstart]auto[catend]1fr [infostart]auto[infoend]1fr[socstart]auto[end];
-        grid-template-rows: [start]auto auto auto auto[end];
-        align-items: flex-start;
-        gap: 2rem;
-        padding-top: rem(30);
-        padding-bottom: rem(30);
-    }
+	&Container {
+		display: grid;
+		grid-template-areas:
+			"contacts . catalog . info . social"
+			". . catalog . info . ."
+			". . catalog pay pay pay pay"
+			"copy copy . privacy privacy privacy privacy";
+		grid-template-columns: repeat(3, auto 1fr) auto;
+		align-items: flex-start;
+		padding-top: rem(30);
+		padding-bottom: rem(30);
+		gap: 2rem;
 
-    &Copyright,&Privacy {
-        line-height: 1.5;
-        color: var(--gray);
+		@media (max-width: 1060px) {
+			grid-template-areas:
+				"contacts catalog info"
+				"copy catalog social"
+				"pay pay ."
+				"privacy privacy privacy ";
+			grid-template-columns: repeat(3, 1fr);
+		}
 
-        span {
-            color: var(--black);
-        }
-    }
+		@media (max-width: 760px) {
+			grid-template-areas:
+				"catalog catalog"
+				"info info"
+				"social social"
+				"pay pay"
+				"contacts copy"
+				"privacy privacy";
+			grid-template-columns: repeat(2, 1fr);
+		}
 
-    &Info, &Catalog {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-    }
+		@media (max-width: 424px) {
+			grid-template-areas:
+				"catalog"
+				"info"
+				"social"
+				"pay"
+				"contacts"
+				"copy"
+				"privacy";
+			grid-template-columns: 1fr;
+			gap: 1.2rem;
+		}
+	}
 
-    &Info {
-        grid-column: infostart / infoend;
-        grid-row: start / 3;
-    }
+	&Title {
+		margin-bottom: rem(8);
+		font-size: rem(22);
+		line-height: 1.5;
+	}
 
-    &Catalog {
-        grid-column: catstart / catend;
-        grid-row: start / end ;
-    }
+	&Contacts {
+		grid-area: contacts;
+	}
 
-    &Payments {
-        grid-column: infostart / end;
-    }
+	&Copyright,
+	&Privacy {
+		color: var(--gray);
+		line-height: 1.5;
 
-    &Socials {
-        grid-column: socstart / end;    
-    }
+		span {
+			color: var(--black);
+		}
+	}
 
-    &Copyright {
-        grid-column: start / catstart;
-        grid-row: 4 / end;    
-    }
+	&Info {
+		grid-area: info;
+	}
 
-    &Privacy {
-        align-self: flex-end;
-        grid-column: infostart / end; 
-        grid-row: 4 / end;
-        text-align: right;
-    }
+	&Catalog {
+		grid-area: catalog;
+	}
+
+	&Payments {
+		grid-area: pay;
+		justify-self: flex-end;
+
+		@media (max-width: 1060px) {
+			justify-self: flex-start;
+		}
+
+		@media (max-width: 424px) {
+			margin: 0 -5px;
+		}
+	}
+
+	&Socials {
+		grid-area: social;
+	}
+
+	&Copyright {
+		grid-area: copy;
+		align-self: flex-end;
+	}
+
+	&Privacy {
+		grid-area: privacy;
+		align-self: flex-end;
+		text-align: right;
+
+		@media (max-width: 1060px) {
+			text-align: left;
+		}
+	}
 }

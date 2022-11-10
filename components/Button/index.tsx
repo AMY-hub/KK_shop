@@ -1,33 +1,35 @@
 import cn from 'classnames';
 import Link from 'next/link';
-import { ButtonProps } from './Button.props';
+import { ButtonProps } from './props';
 import styles from './style.module.scss';
 
 export const Button = (props: ButtonProps): JSX.Element => {
 
-    const { className, styleType = 'primary', size = 'm', wide, like } = props;
+    const { className, styleType = 'primary', size = 'm', isWide, like } = props;
     const classes = cn(styles.btn, styles[styleType], styles[size], {
-        [styles.wide]: wide,
+        [styles.wide]: isWide,
     }, className);
 
     if (like === 'Link') {
-        const { className, styleType, size, like, children, isActive, ...rest } = props;
+        const { className, isWide, styleType, size, like, children, isActive, href, ...rest } = props;
         return (
-            <Link {...rest}>
-                <a className={cn(classes, { [styles.active]: isActive })}>{children}</a>
+            <Link href={href}>
+                <a className={cn(classes, { [styles.active]: isActive })}
+                    {...rest}
+                >{children}</a>
             </Link>
         );
     }
 
     if (like === 'a') {
-        const { className, styleType, size, like, children, ...rest } = props;
+        const { className, isWide, styleType, size, like, children, ...rest } = props;
         return (
             <a className={classes} target='_blank' {...rest}>
                 {children}
             </a>
         );
     } else {
-        const { className, styleType, size, like, children, withLoading, loading, ...rest } = props;
+        const { className, isWide, styleType, size, like, children, withLoading, loading, ...rest } = props;
 
         return (
             <>

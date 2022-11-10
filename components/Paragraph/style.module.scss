@@ -1,0 +1,16 @@
+.text {
+	margin-bottom: 1em;
+	color: var(--black);
+	font-family: var(--main-font);
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+.text.l {
+	font-size: 1.2rem;
+
+	@media (max-width: 760px) {
+		font-size: 1rem;
+	}
+}

@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import Image from 'next/image';
 import logo from '../../assets/images/logo.png'
-import { ContactsProps } from './Contacts.props';
+import { ContactsProps } from './props';
 
 import styles from './style.module.scss';
 

@@ -1,15 +1,15 @@
 import Head from 'next/head';
-import { WithLayout } from '../Layout';
+import { ContactsPage } from '../pageComponents/ContactsPage';
 
 function Contacts(): JSX.Element {
     return (
-        <div>
+        <>
             <Head>
                 <title>Contacts</title>
             </Head>
-            Contacts
-        </div>
+            <ContactsPage />
+        </>
     );
 }
 
-export default WithLayout(Contacts);
+export default Contacts;

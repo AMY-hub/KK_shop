@@ -1,50 +1,69 @@
-@import '../../styles/rem.scss';
+@import "../../styles/rem";
 
 .iconBtn {
-    cursor: pointer;
-    display: inline-block;
-    padding: 6px;
-    border: none;
-    background-color: transparent;
-    transition: all 300ms;
+	display: inline-block;
+	padding: 6px;
+	transition: all 300ms;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
 
-    &:disabled {
-        pointer-events: none;
-        svg {
-            fill: var(--gray-light);
-            }
-        opacity: 0.3;
-        }
+	&:disabled {
+		opacity: 0.3;
+		pointer-events: none;
 
-    &.light {
-        svg {
-            fill: var(--black); 
-        }
+		svg {
+			fill: var(--gray-light);
 
-        &:hover,&:focus {
-            svg {
-            fill: var(--accent-dark);
-            }
-        }
+			path {
+				fill: var(--gray-light); 
+			}
+		}
+	}
 
-        &:focus {
-            border: 1px solid var(--gray-dark);
-        }
-    }
+	&.light {
+		svg {
+			fill: var(--black);
 
-    &.dark {
-         background-color: var(--black);
+			path {
+				fill: var(--black); 
+			}
+		}
 
-        svg {
-            fill: var(--bg);
-        }
+		&:hover,
+		&:focus {
+			svg {
+				fill: var(--accent-dark);
 
-        &:hover,&:focus {
-            background-color: var(--gray-medium);
-        }
+				path {
+					fill: var(--accent-dark); 
+				}
+			}
+		}
 
-        &:focus {
-            border: 1px solid var(--light-text);
-        }
-    }
+		&:focus {
+			border: 1px solid var(--gray-dark);
+		}
+	}
+
+	&.dark {
+		background-color: var(--black);
+
+		svg {
+			fill: var(--bg);
+
+			path {
+				fill: var(--bg); 
+			}
+		}
+
+		&:hover,
+		&:focus {
+			background-color: var(--gray-dark);
+		}
+
+		&:focus {
+			border: 1px solid var(--light-text);
+		}
+	}
 }

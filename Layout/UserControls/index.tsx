@@ -12,14 +12,20 @@ export const UserControls = ({ className, ...props }: UserControlsProps): JSX.El
 
     return (
         <div className={cn(styles.controls, className)} {...props}>
-            <IconButton>
+            <IconButton >
                 <SearchIcon />
             </IconButton>
-            <IconButton>
+            <IconButton
+                like='Link'
+                href='/profile'
+            >
                 <ProfileIcon />
             </IconButton >
-            <IconButton>
-                <HeartIcon className={styles.heart} />
+            <IconButton
+                like='Link'
+                href='/profile/favourites'
+            >
+                <HeartIcon width={24} height={24} />
             </IconButton>
             <IconButton>
                 <CartIcon />

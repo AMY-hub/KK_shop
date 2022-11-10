@@ -5,15 +5,22 @@
 	--accent-dark: #CC4C6E;
 	--accent-light: #F287AB;
 	--accent-pale: #D785A1;
+	--warning: #F10D48;
+	--invalid: rgba(255, 145, 145, 0.3);
 	--light-text: #FFFBFB;
-    --black: #000;
-	--semi-black: #1d1d1d;
-    --gray-dark: #4E4E4E;
-    --gray-medium: #5C5C66;
-    --gray: #828282;
-    --gray-light: #BCBCBC;
-	
-    //fonts: 
-	--main-font: 'Roboto', sans-serif;
-	--accent-font: 'Red Hat Display', sans-serif;
+	--black: #000;
+	--semi-black: #1D1D1D;
+	--gray-dark: #4E4E4E;
+	--gray-medium: #5C5C66;
+	--gray: #828282;
+	--gray-light: #BCBCBC;
+
+	//fonts:
+	--main-font: "Roboto", sans-serif;
+	--accent-font: "Montserrat", sans-serif;
+
+	//breakpoints
+	--L: 1060px;
+	--M: 760px;
+	--S: 424px;
 }

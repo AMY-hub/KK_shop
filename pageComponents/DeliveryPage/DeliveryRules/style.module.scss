@@ -1,0 +1,76 @@
+@import "../../../styles/rem";
+
+.delivery {
+	font-family: var(--accent-font);
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 1.5;
+
+	&Title {
+		font-weight: 700;
+	}
+}
+
+.rules {
+	h4 {
+		margin: 0;
+	}
+
+	ol > li {
+		margin-bottom: rem(40);
+		padding-left: rem(30);
+		font-weight: 700;
+
+		p {
+			font-weight: 400;
+		}
+
+		@media (max-width: 760px) {
+			margin-bottom: rem(30);
+			padding-left: rem(5);
+		}
+	}
+
+	&Controls {
+		display: flex;
+		gap: rem(23);
+		padding: rem(26) 0;
+
+		@media (max-width: 430px) {
+			padding: rem(5) 0 rem(10) 0;
+		}
+	}
+
+	&Delivery {
+		padding: rem(20) 0 rem(60) rem(15);
+
+		@media (max-width: 760px) {
+			padding: rem(10) 0 rem(20) rem(15);
+		}
+	}
+
+	&Receiving {
+		padding: rem(20) 0 rem(60) rem(45);
+
+		h4 {
+			margin-bottom: 1rem;
+		}
+
+		@media (max-width: 760px) {
+			padding: rem(10) 0 rem(20) 0;
+		}
+	}
+
+	&SubTitle {
+		font-family: var(--accent-font);
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: 1.5;
+	}
+
+	&SubList {
+		margin-top: 1rem;
+		margin-bottom: 2rem;
+		color: var(--gray);
+	}
+}

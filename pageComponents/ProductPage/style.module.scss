@@ -1,0 +1,59 @@
+@import "../../styles/rem";
+
+.product {
+	padding-bottom: rem(120);
+
+    &Card {
+        margin-bottom: 2rem;
+    }
+
+    &Adv {
+        margin-bottom: rem(40);
+    }
+
+    @media (max-width: 1060px) {
+        padding-bottom: rem(70);
+    }
+
+     @media (max-width: 760px) {
+        padding-bottom: rem(50);
+
+        &Adv {
+        margin-bottom: rem(20);
+        }
+    }
+}
+
+.similar,.popular {
+    padding-bottom: rem(78);
+
+    @media (max-width: 760px) {
+        padding-bottom: rem(40);
+
+        h2 {
+            margin-bottom: rem(20);
+        }
+    }
+}
+
+.similar {
+    h2 {
+        margin-bottom: rem(30);
+    }
+}
+
+.similarProducts,
+.popularProducts {
+        display: flex;
+
+        @media (max-width: 760px) {
+            flex-direction: column;
+            align-items: flex-start;   
+        }
+}
+
+.popularCard,
+.similarCard {
+    margin-right: 1.5rem;
+    margin-bottom: 1.5rem;
+}

@@ -1,15 +1,34 @@
+import axios from 'axios';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { WithLayout } from '../Layout';
+import { CERTIFICATES } from '../api/APIendpoints';
+import { Certificate } from '../interfaces';
+import { CertificatesPage } from '../pageComponents/CertificatesPage';
 
-function Certificates(): JSX.Element {
+function Certificates({ certificates }: PageProps): JSX.Element {
     return (
-        <div>
+        <>
             <Head>
                 <title>Certificates</title>
             </Head>
-            Certificates
-        </div>
+            <CertificatesPage certificates={certificates} />
+        </>
     );
 }
 
-export default WithLayout(Certificates);
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
+    const { data } = await axios
+        .get<{ certificates: Certificate[] }>(CERTIFICATES);
+
+    return {
+        props: {
+            certificates: data.certificates
+        }
+    };
+};
+
+interface PageProps {
+    certificates: Certificate[];
+}
+
+export default Certificates;

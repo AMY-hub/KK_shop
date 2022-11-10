@@ -1,0 +1,43 @@
+.slider {
+	position: relative;
+	overflow: hidden;
+	cursor: grab;
+	margin: auto;
+	
+	&Slide {
+		width: 100%;
+		img {
+			pointer-events: none;
+		}
+	}
+}
+
+
+.pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.dotWrapper {
+		padding: 10px;
+		cursor: pointer;
+	}
+
+	.dot {
+		width: 12px;
+  		height: 12px;
+  		background: var(--gray-light);
+  		border-radius: 50%;
+  		position: relative;
+	}
+
+	.dot_active {
+		position: absolute;
+		top: -2px;
+		left: -2px;
+		background: var(--accent-pale);
+		border-radius: 50%;
+		width: 15px;
+		height: 15px;
+	}
+}

@@ -1,5 +1,13 @@
 .layout {
-    height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+	display: grid;
+	grid-template-rows: 1fr auto;
+	min-width: 0;
+	min-height: 100%;
+	background-color: rgba($color: #000, $alpha: 10%);
+
+	&Main {
+		min-width: 0;
+		margin-top: 150px;
+		margin-bottom: 150px;
+	}
 }

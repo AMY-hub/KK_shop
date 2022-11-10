@@ -1,19 +1,15 @@
-export type NavOptions = 'Каталог' | 'Клуб косметологов' | 'Сертификаты' | 'Доставка и Оплата' | 'Контакты';
+export const navOptions = [
+    { name: 'Каталог', url: '/catalog' },
+    { name: 'Клуб косметологов', url: '/cosmetologists' },
+    { name: 'Сертификаты', url: '/certificates' },
+    { name: 'Доставка и Оплата', url: '/delivery' },
+    { name: 'Контакты', url: '/contacts' }
+];
 
-export type FooterInfOptions = 'Клуб косметологов' | 'Сертификаты' | 'Доставка и Оплата' | 'Контакты' | 'Конфиденциальность';
-
-export const navOtionsMap = new Map<NavOptions, string>([
-    ['Каталог', '/catalog'],
-    ['Клуб косметологов', '/cosmetologists'],
-    ['Сертификаты', '/certificates'],
-    ['Доставка и Оплата', '/delivery'],
-    ['Контакты', '/contacts']
-]);
-
-export const footerInfOptions = new Map<FooterInfOptions, string>([
-    ['Клуб косметологов', '/cosmetologists'],
-    ['Сертификаты', '/certificates'],
-    ['Доставка и Оплата', '/delivery'],
-    ['Конфиденциальность', '/privacy'],
-    ['Контакты', '/contacts']
-]); 
+export const footerInfOptions = [
+    { name: 'Клуб косметологов', url: '/cosmetologists' },
+    { name: 'Сертификаты', url: '/certificates' },
+    { name: 'Доставка и Оплата', url: '/delivery' },
+    { name: 'Конфиденциальность', url: '/privacy' },
+    { name: 'Контакты', url: '/contacts' }
+]; 

@@ -1,0 +1,73 @@
+@import "../../styles/rem";
+
+.club {
+	display: grid;
+	grid-template-columns: 650px 1fr;
+	column-gap: rem(82);
+
+	@media (max-width: 1720px) {
+		grid-template-columns: 400px 1fr;
+		column-gap: rem(52);
+	}
+
+	@media (max-width: 1060px) {
+		grid-template-columns: 257px 1fr;
+		column-gap: rem(32);
+	}
+
+	@media (max-width: 900px) {
+		grid-template-columns: 1fr;
+
+		&Img {
+			display: none;
+		}
+	}
+}
+
+.clubInfo {
+	padding-right: rem(200);
+	padding-bottom: rem(52);
+	color: var(--gray);
+	font-size: 16px;
+	line-height: 1.5;
+
+	h2 {
+		margin-bottom: rem(20);
+		color: var(--black);
+		font-size: 22px;
+		font-weight: 500;
+		line-height: 1.5;
+	}
+
+	h3 {
+		color: var(--black);
+		font-size: 16px;
+		line-height: 1.5;
+	}
+
+	&AccentText {
+		color: var(--black);
+	}
+
+	&Reg {
+		display: flex;
+		gap: rem(80);
+	}
+
+	@media (max-width: 1720px) {
+		padding-right: rem(50);
+
+		&Reg {
+			gap: rem(30);
+		}
+	}
+
+	@media (max-width: 760px) {
+		padding-right: 0;
+
+		&Reg {
+			flex-direction: column;
+			gap: rem(10);
+		}
+	}
+}

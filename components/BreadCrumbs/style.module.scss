@@ -1,0 +1,51 @@
+.bc {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding-bottom: 2rem;
+	font-family: var(--accent-font);
+	color: var(--accent-dark);
+
+	.crumb {
+		font-family: var(--accent-font);
+
+		a {
+			position: relative;
+		}
+
+		a::after {
+			content: "";
+			display: block;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			transform: scaleX(0);
+			transform-origin: bottom right;
+			transition: transform 200ms ease-out;
+			background-color: var(--accent-dark);
+		}
+
+		a:hover,
+		a:focus {
+			&::after {
+				transform: scaleX(1);
+				transform-origin: bottom left;
+			}
+		}
+
+		&Separator {
+			margin-right: 0.5rem;
+			margin-left: 0.5rem;
+		}
+	}
+
+	&Separator {
+		margin: 0 0.5rem;
+	}
+
+	@media (max-width: 430px) {
+		padding-bottom: 1rem;
+	}
+}

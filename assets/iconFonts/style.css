@@ -10,7 +10,7 @@
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"]::after, [class*=" icon-"]::after {
 
   font-family: 'icomoon' !important;
   font-style: normal;
@@ -24,42 +24,42 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-clear::before {
+.icon-clear::after {
   content: "\e906";
 }
-.icon-arr_left::before {
+.icon-arr_left::after {
   content: "\e900";
 }
-.icon-arr_right::before {
+.icon-arr_right::after {
   content: "\e901";
 }
-.icon-arr-exp::before {
+.icon-arr-exp::after {
   content: "\e902";
 }
-.icon-arr-exp_fill::before {
+.icon-arr-exp_fill::after {
   content: "\e903";
 }
-.icon-card::before {
+.icon-card::after {
   content: "\e904";
 }
-.icon-circle_arrow::before {
+.icon-circle_arrow::after {
   content: "\e905";
 }
-.icon-compare::before {
+.icon-compare::after {
   content: "\e907";
 }
-.icon-credit-card::before {
+.icon-credit-card::after {
   content: "\e908";
 }
-.icon-heart::before {
+.icon-heart::after {
   content: "\e909";
 }
-.icon-heart_fill::before {
+.icon-heart_fill::after {
   content: "\e90a";
 }
-.icon-profile::before {
+.icon-profile::after {
   content: "\e90b";
 }
-.icon-search::before {
+.icon-search::after {
   content: "\e90c";
 }

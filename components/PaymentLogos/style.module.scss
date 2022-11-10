@@ -1,7 +1,21 @@
 .payments {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+	padding: 1rem;
+
+	@media (max-width: 760px) {
+		gap: 0.7rem;
+	}
+
+	@media (max-width: 424px) {
+		svg {
+			transform: scale(0.8);
+		}
+
+		gap: 0;
+		padding-right: 0;
+		padding-left: 0;
+	}
 }

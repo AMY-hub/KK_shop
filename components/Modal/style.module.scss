@@ -1,0 +1,37 @@
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	background-color: rgba($color: #000, $alpha: 30%);
+}
+
+.modal {
+	height: 100%;
+	min-width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: var(--bg);
+	padding: 2rem;
+
+	&Title {
+		font-weight: 500;
+		font-size: 1.4rem;
+		margin-bottom: 2.5rem;
+	}
+
+	&Close {
+		width: 2rem;
+		height: 2rem;
+		position: absolute;
+		top: 2rem;
+		right: 2rem;
+	}
+}

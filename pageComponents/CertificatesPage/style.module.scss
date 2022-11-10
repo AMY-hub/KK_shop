@@ -1,0 +1,19 @@
+@import "../../styles/rem";
+
+.info {
+	a {
+		color: var(--accent-dark);
+	}
+}
+
+.cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	margin: rem(70) auto;
+	gap: rem(50);
+
+	@media (max-width: 760px) {
+		gap: rem(30);
+		margin: rem(50) auto;
+	}
+}

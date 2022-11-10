@@ -1,16 +1,16 @@
 import Head from 'next/head';
-import { WithLayout } from '../Layout';
+import { DeliveryPage } from '../pageComponents/DeliveryPage';
 
 function Delivery(): JSX.Element {
     return (
-        <div>
+        <>
             <Head>
                 <title>Delivery</title>
             </Head>
-            Delivery
-        </div>
+            <DeliveryPage />
+        </>
     );
 }
 
-export default WithLayout(Delivery);
+export default Delivery;
 

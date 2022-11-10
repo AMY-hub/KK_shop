@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import Link from 'next/link';
-import { IconButtonProps } from './IconButton.props';
+import { IconButtonProps } from './props';
 import styles from './style.module.scss';
 
 export const IconButton = (props: IconButtonProps): JSX.Element => {

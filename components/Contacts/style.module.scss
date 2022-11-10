@@ -1,16 +1,16 @@
-@import '../../styles/rem.scss';
+@import "../../styles/rem";
 
 .contacts {
-    display: flex;
-    flex-direction: column;
-    align-items:flex-start;
-    justify-content: center;
-    gap: 1rem;
-    color: var(--gray);
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 1rem;
+	color: var(--gray);
 
-    a {
-        font-weight: 700;
-        font-size: rem(22);
-        line-height: 1.2;
-    }
+	a {
+		font-size: rem(22);
+		font-weight: 700;
+		line-height: 1.2;
+	}
 }
