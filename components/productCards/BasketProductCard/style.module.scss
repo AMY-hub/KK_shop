@@ -1,0 +1,129 @@
+@import "../../../styles/rem.scss";
+
+.card {
+	padding: rem(22) 0 rem(39);
+	font-family: var(--main-font);
+	border-bottom: 1px solid var(--dark-bg);
+
+	&Wrapper {
+		display: grid;
+		grid-template-columns: auto 1fr;
+	}
+
+	&Img {
+		flex-shrink: 0;
+		cursor: pointer;
+	}
+
+	&Header {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		column-gap: 2rem;
+	}
+
+	&Controls {
+		grid-row: 1;
+		grid-column: 2;
+	}
+
+	&Info {
+		grid-column: 2;
+		padding-left: 20px;
+		padding-top: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&Title {
+		grid-column: 1;
+		margin-bottom: rem(13);
+		font-family: 'Bebas Neue';
+		color: var(--semi-black);
+		font-size: rem(18);
+		font-weight: 700;
+		line-height: 1.1;
+		letter-spacing: 0.04rem;
+		text-transform: uppercase;
+	}
+
+	&Description {
+		color: var(--gray-medium);
+		margin-bottom: 0.5rem;
+		font-size: 1rem;
+		line-height: 1.1;
+	}
+
+	&Body {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&Price {
+		font-size: rem(18);
+		color: var(--semi-black);
+	}
+
+	&PriceOld {
+		font-size: rem(18);
+		margin-right: rem(20);
+		color: var(--gray-light);
+	}
+
+	&Discount {
+		font-size: rem(14);
+		line-height: 2;
+		text-align: right;
+		color: var(--accent-dark);
+	}
+
+	&Volume {
+		margin-bottom: 1rem;
+	}
+
+	@media (max-width: 620px) {
+		padding: 1.5rem 0 1rem;
+		&Header {
+			gap: 0;
+		}
+
+		&Body {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		&Info {
+			padding-left: 10px;
+			padding-top: 0;
+		}
+
+		&Volume {
+			margin-bottom: 0;
+		}
+
+		&Discount {
+			text-align: left;
+		}
+
+		&Controls {
+			grid-column: span 2;
+			justify-self: flex-start;
+			margin-bottom: 1rem;
+		}
+	}
+
+	@media (max-width: 430px) {
+		&Wrapper {
+			flex-direction: column;
+		}
+
+		&Title {
+			font-size: 1rem;
+		}
+
+		&Controls {
+			margin-top: 1rem;
+		}
+	}
+}

@@ -1,15 +1,23 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { UserResponse } from '../interfaces';
+import tokenService from '../services/tokenService';
 import { REFRESH } from './APIendpoints';
-import { state } from '../store/store';
 
 type AxiosRequestRetry = AxiosRequestConfig & { isRetry?: boolean };
 
 const API = axios.create({
-    withCredentials: true,
-    headers: {
-        Authorization: `Bearer ${state.accessToken}`
+    withCredentials: true
+});
+
+API.interceptors.request.use((config) => {
+    const token = tokenService.getAccessToken();
+    if (token) {
+        if (!config.headers) {
+            config.headers = {};
+        }
+        config.headers.Authorization = `Bearer ${token}`;
     }
+    return config;
 });
 
 API.interceptors.response.use((res) => {
@@ -18,6 +26,7 @@ API.interceptors.response.use((res) => {
     console.log("ERR FROM INTERCEPTOR", err);
 
     const originalRequest: AxiosRequestRetry | undefined = err.config;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     originalRequest!.headers = { ...originalRequest!.headers };
 
     if (err.response?.status === 401
@@ -29,7 +38,7 @@ API.interceptors.response.use((res) => {
         try {
             const res = await axios.get<UserResponse>(REFRESH, { withCredentials: true });
             console.log('INTER RUUN');
-            state.setAccessToken(res.data.accessToken);
+            tokenService.setAccessToken(res.data.accessToken);
 
             originalRequest.headers['Authorization'] = `Bearer ${res.data.accessToken}`;
 

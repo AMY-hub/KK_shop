@@ -9,7 +9,10 @@ export const REGISTRATION = DOMAIN + 'api/user/registration';
 export const LOGIN = DOMAIN + 'api/user/login';
 export const LOGOUT = DOMAIN + 'api/user/logout';
 export const REFRESH = DOMAIN + 'api/user/refresh';
+export const FAV = DOMAIN + 'api/fav';
 export const FAV_ITEM = DOMAIN + 'api/fav/item';
+export const BASKET = DOMAIN + 'api/basket';
 export const BASKET_ITEM = DOMAIN + 'api/basket/item';
+export const PROMO = DOMAIN + 'api/promocode/code';
 
 

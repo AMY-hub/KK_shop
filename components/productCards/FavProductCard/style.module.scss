@@ -1,0 +1,81 @@
+@import "../../../styles/rem.scss";
+
+.card {
+	padding: rem(22) 0 rem(39);
+	font-family: var(--main-font);
+	border-bottom: 1px solid var(--dark-bg);
+
+	&Wrapper {
+		display: flex;
+	}
+
+	&Img {
+		flex-shrink: 0;
+		cursor: pointer;
+	}
+
+	&Info {
+		padding-left: 20px;
+		padding-top: 20px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&Title {
+		margin-bottom: rem(13);
+		font-family: 'Bebas Neue';
+		color: var(--semi-black);
+		font-size: rem(18);
+		font-weight: 700;
+		line-height: 1.1;
+		letter-spacing: 0.04rem;
+		text-transform: uppercase;
+	}
+
+	&Description {
+		color: var(--gray-medium);
+		margin-bottom: 0.5rem;
+		font-size: 1rem;
+		line-height: 1.1;
+	}
+
+	&Body {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&Price {
+		color: var(--semi-black);
+		font-weight: 700;
+	}
+
+	&PriceOld {
+		margin-right: rem(20);
+		color: var(--gray-light);
+		text-decoration: line-through;
+	}
+
+	&ControlsWrapper {
+		display: flex;
+		align-items: center;
+	}
+
+	@media (max-width: 470px) {
+		padding: 1rem 0 1rem;
+
+		&Wrapper {
+			flex-direction: column;
+		}
+
+		&Title {
+			font-size: 1rem;
+		}
+
+		&Info {
+			padding-left: 0;
+			padding-top: 5px;
+		}
+	}
+}

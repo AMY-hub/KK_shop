@@ -1,4 +1,5 @@
 // Import Swiper React components
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import cn from 'classnames';
@@ -12,7 +13,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import styles from './style.module.scss';
-import Link from 'next/link';
 
 export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: ProductsSliderProps): JSX.Element => {
 
@@ -37,6 +37,7 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
                             name={product.name}
                             nameRus={product.name_rus}
                             price={product.price}
+                            sale={product.brand.special_sale}
                             type='square'
                             img={product.img}
                             size='m'
@@ -50,26 +51,6 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
             </SwiperSlide>
         );
     });
-
-    // const mBreakpoints = {
-    //     320: {
-    //         slidesPerView: 1,
-    //         spaceBetween: 20,
-    //     },
-    //     640: {
-    //         slidesPerView: 'auto'
-    //     }
-    // };
-
-    // const lBreakpoints = {
-    //     320: {
-    //         slidesPerView: 1,
-    //         spaceBetween: 20,
-    //     },
-    //     890: {
-    //         slidesPerView: 'auto'
-    //     }
-    // };
 
     return (
         <div>
@@ -102,7 +83,6 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
                 {slides}
             </Swiper>
         </div>
-
     );
 };
 

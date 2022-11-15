@@ -109,7 +109,6 @@ export interface Review {
     text: string;
     productId: number;
     userId: number;
-    products: BasketProduct[];
 }
 
 export interface BasketProduct {
@@ -122,14 +121,6 @@ export interface BasketProduct {
     product: ProductPreview;
 }
 
-export interface Basket {
-    id: number;
-    createdAt: string;
-    updatedAt: string;
-    userId: number;
-    products: BasketProduct;
-}
-
 export interface FavProduct {
     id: number;
     createdAt: string;
@@ -137,14 +128,6 @@ export interface FavProduct {
     favListId: number,
     productId: number,
     product: ProductPreview;
-}
-
-export interface FavList {
-    id: number;
-    createdAt: string;
-    updatedAt: string;
-    userId: number;
-    favs: FavProduct[];
 }
 
 export interface BonusCard {
@@ -174,8 +157,8 @@ export interface UserResponse {
     accessToken: string;
     refreshToken: string;
     user: UserData;
-    basket: Basket;
-    fav_list: FavList;
+    basket: BasketProduct[];
+    fav_list: FavProduct[];
 }
 
 export interface RegisterFormFields {
@@ -201,3 +184,11 @@ export type Option = {
     value: string,
     label: string
 };
+
+export interface PromoCode {
+    id: number;
+    createdAt: string;
+    updatedAt: string;
+    name: string;
+    discount: number;
+}

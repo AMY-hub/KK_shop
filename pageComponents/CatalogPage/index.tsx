@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { MultiValue } from 'react-select';
-import { Option } from '../../interfaces';
 import Link from 'next/link';
+import { Option } from '../../interfaces';
 import { CatalogPageProps } from './props';
 import { BreadCrumbs, Container, ProductCard, SpecialCard, Title } from '../../components';
 import { ProductsFilterPanel } from './ProductsFilterPanel';
@@ -10,7 +11,6 @@ import { filterByPrice } from './filterByPrice';
 import { filterByBrand } from './filterByBrand';
 
 import styles from './style.module.scss';
-import { useRouter } from 'next/router';
 
 export const CatalogPage = ({ products, count, brandList }: CatalogPageProps): JSX.Element => {
 
@@ -84,6 +84,7 @@ export const CatalogPage = ({ products, count, brandList }: CatalogPageProps): J
                                         name={el.name}
                                         nameRus={el.name_rus}
                                         img={el.img}
+                                        sale={el.brand.special_sale}
                                         key={el.id}
                                     />
                                 </Link>

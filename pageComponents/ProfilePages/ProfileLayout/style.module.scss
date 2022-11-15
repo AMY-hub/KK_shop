@@ -1,0 +1,51 @@
+.layout {
+    display: grid;
+    grid-template-columns: [start] 1fr [mid] 2fr [end];
+    column-gap: 2rem;
+
+    &Header {
+        grid-column: start / mid;
+        align-self: flex-end;
+    }
+
+    &Title {
+        grid-column: mid / end;
+        align-self: flex-end;
+    }
+
+    &Divider {
+        grid-column: start / end;
+        margin-bottom: 2rem;
+        margin-top: 0.5rem;
+        width: 100%;
+        height: 1px;
+        background-color:  var(--dark-bg);
+    }
+
+    &Options {
+        grid-column: start / mid;
+        justify-self: center;
+    }
+
+    .profileContent {
+        grid-column: mid / end;
+        justify-self: flex-start;
+    }
+
+    @media (max-width: 760px) {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+
+        &Title {
+            grid-row: 4;
+        } 
+
+        &Divider { 
+            margin-bottom: 1rem;
+        }
+
+        &Options {
+            margin-bottom: 2.5rem;
+        }
+    } 
+}

@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { CERTIFICATES } from '../api/APIendpoints';
+import { API } from '../api/axiosConfig';
 import { Certificate } from '../interfaces';
 import { CertificatesPage } from '../pageComponents/CertificatesPage';
 
@@ -17,7 +17,7 @@ function Certificates({ certificates }: PageProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-    const { data } = await axios
+    const { data } = await API
         .get<{ certificates: Certificate[] }>(CERTIFICATES);
 
     return {

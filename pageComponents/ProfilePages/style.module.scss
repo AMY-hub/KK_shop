@@ -1,0 +1,29 @@
+.bonus {
+    &Card {
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    &Points {
+        margin-bottom: 4rem;
+        font-size: 1.2rem;
+        color: var(--semi-black);
+
+        span {
+            color: var(--accent-dark)
+        }
+    }
+
+    &Rules {
+        p {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    &Disclaimer {
+        font-size: 0.9rem;
+        color: var(--gray);
+    }
+}

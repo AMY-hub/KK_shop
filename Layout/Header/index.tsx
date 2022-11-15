@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import cn from 'classnames';
-import logo from '../../assets/images/logo.png';
+import { useClickOutside } from '../../hooks/useClickOutside';
+import { useAppContext } from '../../context/AppContext';
 import { Container } from '../../components';
 import { NavBar } from '../NavBar';
 import { UserControls } from '../UserControls';
+import logo from '../../assets/images/logo.png';
 
 import styles from './style.module.scss';
-import { useClickOutside } from '../../hooks/useClickOutside';
-import { useAppContext } from '../../context/AppContext';
 
 export const Header = (): JSX.Element => {
 

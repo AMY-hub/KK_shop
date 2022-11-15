@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import cn from 'classnames';
-import { useAppContext } from '../../context/AppContext';
 import { Button } from '../../components';
 import { navOptions } from '../const';
-import { NavBarProps } from './NavBar.props';
+import { NavBarProps } from './props';
 import { Category, Subcategory } from '../../interfaces';
 import ExpIcon from '../../assets/images/icons/arr-exp_fill.svg';
 
 import styles from './style.module.scss';
+import { useAppContext } from '../../context/AppContext';
 
 export const NavBar = ({ catalogOpen, setCatalogOpen, menuOpen, setMenuOpen, className, ...props }: NavBarProps): JSX.Element => {
 

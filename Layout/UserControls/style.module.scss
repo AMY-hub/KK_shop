@@ -1,7 +1,29 @@
 .controls {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-end;
 	gap: 8px;
+}
+
+
+.basket {
+	position: relative;
+
+	&Badge {
+		position: absolute;
+		bottom: -5px;
+		right: 0;
+		min-width: 24px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 5px;
+		border-radius: 50%;
+		font-size: 14px;
+		line-height: 1;
+		font-weight: 600;
+		color: var(--bg);
+		background-color: var(--accent-dark);
+	}
 }
 

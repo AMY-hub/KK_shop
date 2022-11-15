@@ -1,0 +1,18 @@
+.profile {
+    &Name {
+        font-size: 2rem;
+        line-height: 1.5;
+    }
+
+    &Card {
+        color: var(--gray-light);
+    }
+
+    @media (max-width: 760px) {
+        &Name {
+            display: flex;
+            gap: 1rem;
+            font-size: 1.3rem;
+        }
+    }
+}

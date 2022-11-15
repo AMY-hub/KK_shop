@@ -16,39 +16,20 @@ export const ProductPage = ({ productData, similar, popular }: ProductPageProps)
 
     const {
         name,
-        name_rus,
         art,
         volume,
         weight,
-        price,
-        img,
-        product_add_images,
         info,
         brand,
-        category,
-        sub_category,
         country,
-        reviews
     } = productData;
-
-    const addImages = product_add_images.map(el => el.img);
 
     return (
         <Container>
             <BreadCrumbs productName={productData.name} />
             <section className={styles.product}>
                 <ProductFullCard
-                    className={styles.productCard}
-                    name={name}
-                    nameRus={name_rus}
-                    img={img}
-                    addImages={addImages}
-                    price={price}
-                    art={art}
-                    volume={volume}
-                    reviews={reviews}
-                    discount={brand.special_sale ?
-                        brand.special_sale.discount : null}
+                    productData={productData}
                 />
                 <AdvantagesBlock className={styles.productAdv} />
                 <ProductInfoTab

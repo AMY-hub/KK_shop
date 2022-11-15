@@ -1,7 +1,8 @@
-import styles from './style.module.scss';
-import { CertificatesPageProps } from './props';
-import { CertificateCard } from '../../components/CertificateCard';
+import { CertificateCard } from '../../components';
 import { BreadCrumbs, Container, Paragraph, Title } from '../../components';
+import { CertificatesPageProps } from './props';
+
+import styles from './style.module.scss';
 
 export const CertificatesPage = ({ certificates }: CertificatesPageProps): JSX.Element => {
     return (

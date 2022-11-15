@@ -1,4 +1,4 @@
-import { RefObject, useLayoutEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
 type UseHeightResize = (containerRef: RefObject<HTMLDivElement>, elementRef: RefObject<HTMLDivElement>, defaultHeight: number) => [number, number];
 
@@ -9,7 +9,7 @@ export const useHeightResize: UseHeightResize = (containerRef, elementRef, defau
     function getHeight() {
         return (elementRef.current?.offsetHeight || defaultHeight);
     }
-    useLayoutEffect(() => {
+    useEffect(() => {
         const changeHeight = () => {
             if (elementRef.current && containerRef.current) {
                 setHeight(elementRef.current.offsetHeight);

@@ -1,63 +1,63 @@
-import { observer } from 'mobx-react-lite';
-import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { CATALOG } from '../api/APIendpoints';
-import { API } from '../api/axiosConfig';
-import { Category } from '../interfaces';
-import userService from '../services/userService';
-import { state, UserStore } from '../store/store';
+import { enableStaticRendering, observer } from 'mobx-react-lite';
+import { createContext, useContext } from 'react';
+import { RootHydration, RootStore } from '../store/rootStore';
+import { RootContextProps } from './props';
 
-interface AppContext {
-    catalog: Category[];
-    city: string;
-}
+enableStaticRendering(typeof window === 'undefined');
 
-const AppContext = createContext<AppContext | undefined>(undefined);
-const UserContext = createContext<UserStore | undefined>(undefined);
+let store: RootStore;
 
-export const ContextProvider = observer(({ children }: PropsWithChildren): JSX.Element => {
-    const [city, setCity] = useState<string>('Санкт-Петербург');
-    const [catalog, setCatalog] = useState<Category[]>([]);
+const RootContext = createContext<RootStore | undefined>(undefined);
 
-    useEffect(() => {
-        const loadCatalog = async () => {
-            const { data } = await API.get<{ categories: Category[] }>(CATALOG);
-            setCatalog(data.categories);
-        };
-        loadCatalog();
-        console.log('CATALOG LOADED IN CONTEXT');
+export const ContextProvider = observer(({ children, hydrationData }: RootContextProps): JSX.Element => {
 
-        if (userService.getAccessToken()) {
-            console.log('CHECK AUTH RUN');
-            state.checkAuth();
-        }
-    }, []);
+    const store = initStore(hydrationData);
 
     return (
-        <AppContext.Provider value={{
-            catalog,
-            city
-        }}>
-            <UserContext.Provider value={
-                state
-            }>
-                {children}
-            </UserContext.Provider>
-        </AppContext.Provider >
+        <RootContext.Provider value={store}>
+            {children}
+        </RootContext.Provider >
     );
 });
 
-export const useAppContext = () => {
-    const context = useContext(AppContext);
+const initStore = (initData?: RootHydration): RootStore => {
+    const _store = store ?? new RootStore();
+    if (initData) {
+        _store.hydrate(initData);
+    }
+
+    if (typeof window === "undefined") return _store;
+
+    if (!store) store = _store;
+    console.log('STORE INIT!', store);
+
+    return _store;
+};
+
+export const useRootContext = () => {
+    const context = useContext(RootContext);
     if (context === undefined) {
         throw new Error("Context doesn't have value provider");
     }
     return context;
 };
 
+export const useFavContext = () => {
+    const { favStore } = useRootContext();
+    return favStore;
+};
+
+export const useBasketContext = () => {
+    const { basketStore } = useRootContext();
+    return basketStore;
+};
+
 export const useUserContext = () => {
-    const context = useContext(UserContext);
-    if (context === undefined) {
-        throw new Error("Context doesn't have value provider");
-    }
-    return context;
+    const { userStore } = useRootContext();
+    return userStore;
+};
+
+export const useAppContext = () => {
+    const { appStore } = useRootContext();
+    return appStore;
 };

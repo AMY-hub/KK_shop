@@ -2,6 +2,7 @@ import axios from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { BRAND, CATALOG, PRODUCTS } from '../../../api/APIendpoints';
+import { API } from '../../../api/axiosConfig';
 import { Brand, Category, ProductPreview, ProductsResponse } from '../../../interfaces';
 import { CatalogPage } from '../../../pageComponents/CatalogPage';
 
@@ -29,14 +30,13 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
         };
     }
 
-    const { data: { brands } } = await axios.get<{ brands: Brand[] }>(BRAND);
+    const { data: { brands } } = await API.get<{ brands: Brand[] }>(BRAND);
 
-    const { data: { categories } } = await axios.get<{ categories: Category[] }>(CATALOG);
-    console.log('PARAMS', params);
+    const { data: { categories } } = await API.get<{ categories: Category[] }>(CATALOG);
 
     const category = categories.find(el => params.category === el.route);
 
-    const { data } = await axios.get<ProductsResponse>(PRODUCTS + `?categoryId=${category?.id}`);
+    const { data } = await API.get<ProductsResponse>(PRODUCTS + `?categoryId=${category?.id}`);
 
     return {
         props: {
@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const { data } = await axios.get<{ categories: Category[] }>(CATALOG);
+    const { data } = await API.get<{ categories: Category[] }>(CATALOG);
 
     const paths = data.categories.map(el => ({ params: { category: el.route } }));
 

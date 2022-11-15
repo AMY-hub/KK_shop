@@ -1,0 +1,101 @@
+.footer {
+    padding: 1rem 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    &Bonus {
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+        line-height: 2;
+        color: var(--gray);
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            color: var(--semi-black);
+            font-weight: 600;
+        }
+    }
+
+    &Fields {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    &Field {
+        margin-bottom: 0.5rem;
+        padding: 10px 17px;
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--gray-light);
+
+        input {
+            font-size: 1rem;
+            line-height: 1.5;
+            outline: none;
+            border: none;
+            background: transparent;
+            color: var(--semi-black);
+
+            &::placeholder {
+            color: var(--gray);
+            }
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            svg {
+                fill: var(--gray-light);
+                transition: fill 300ms;
+            }
+
+            &:hover {
+                svg {
+                    fill: var(--gray);
+                }
+            }
+        }
+    }
+
+    &Price {
+        margin-bottom: 0.5rem;
+        display: flex;
+        font-size: 18px;
+        text-align: right;
+        span {
+            font-size: 14px;
+            line-height: 2;
+            color: var(--gray)
+        }
+    }
+
+    &Discount {
+        margin-right: 2rem;
+        color: var(--accent-dark);
+    }
+
+    &Order {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &Message {
+        position: absolute;
+        bottom: -25px;
+        font-size: 0.9rem;
+        color: var(--accent-dark);
+    }
+
+    @media (max-width: 620px) {
+        flex-direction: column;
+        align-items: flex-end;
+
+        &Price {
+            justify-content: flex-end;
+        }
+    }
+}

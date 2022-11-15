@@ -1,37 +1,61 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import cn from 'classnames';
-import { Button, IconButton, Title, ProductSlider, Modal, AuthTab } from '../../../components';
+import { useBasketContext, useFavContext, useUserContext } from '../../../context/AppContext';
+import { Title, ProductSlider, Modal, AuthTab, FavButton, BasketBtn } from '../../../components';
+import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
 import { ProductFullCardProps } from './props';
-import FavIcon from '../../../assets/images/icons/heart.svg';
 
 import styles from './style.module.scss';
 
-export const ProductFullCard = (props: ProductFullCardProps): JSX.Element => {
+export const ProductFullCard = ({ productData, className, ...rest }: ProductFullCardProps): JSX.Element => {
 
     const [modalShown, setModalShown] = useState<boolean>(false);
     const suggestionRef = useRef<number>(0);
+    const basketStore = useBasketContext();
+    const userStore = useUserContext();
+    const favStore = useFavContext();
 
     const {
+        id,
         name,
-        nameRus,
-        img,
-        addImages,
-        volume,
+        name_rus,
         price,
-        discount,
+        img,
+        product_add_images,
+        volume,
+        brand: { special_sale },
         art,
-        className,
-        ...rest
-    } = props;
-
-    const finalPrice = discount ?
-        Math.round(price * (1 - discount / 100)) : price;
+    } = productData;
+    const addImages = product_add_images.map(el => el.img);
+    const [salePrice, highPrice] = getPricesWithSale(price, special_sale?.discount);
 
     const handleSuggestion = () => {
-        if (!suggestionRef.current) {
-            suggestionRef.current = 1;
-            setModalShown(true);
+        if (suggestionRef.current) {
+            return;
+        }
+        suggestionRef.current = 1;
+        setModalShown(true);
+    };
+
+    const handleFav = (productId: number) => {
+        if (!userStore.isLoggedIn) {
+            suggestionRef.current = 0;
+            handleSuggestion();
+            return;
+        }
+        favStore.toggleProduct(productId);
+    };
+
+    const handleBasket = (productId: number) => {
+        if (!userStore.isLoggedIn) {
+            handleSuggestion();
+        }
+        const productInBasket = basketStore.findInBasket(productId);
+        if (productInBasket) {
+            basketStore.updateProduct(productId, productInBasket.amount + 1);
+        } else {
+            basketStore.addProduct(productId);
         }
     };
 
@@ -53,7 +77,7 @@ export const ProductFullCard = (props: ProductFullCardProps): JSX.Element => {
             }
             <div className={styles.info}>
                 <span className={styles.infoName}>
-                    {nameRus}
+                    {name_rus}
                 </span>
                 <Title
                     className={styles.infoTitle}
@@ -72,15 +96,15 @@ export const ProductFullCard = (props: ProductFullCardProps): JSX.Element => {
                 <div className={styles.infoPrice}>
                     <div className={styles.infoPriceNew}>
                         <span className={styles.infoPriceNewPrice}>
-                            {`${finalPrice} руб`}
+                            {`${salePrice} руб`}
                         </span>
                         <span className={styles.infoPriceNewText}>
-                            {`Со скидкой ${discount || 20}%`}
+                            {`Со скидкой ${special_sale?.discount || 20}%`}
                         </span>
                     </div>
                     <div className={styles.infoPriceOld}>
                         <span className={styles.infoPriceOldPrice}>
-                            {`${price * 1.2} руб`}
+                            {`${highPrice} руб`}
                         </span>
                         <span className={styles.infoPriceOldText}>
                             Без скидки
@@ -88,23 +112,21 @@ export const ProductFullCard = (props: ProductFullCardProps): JSX.Element => {
                     </div>
                 </div>
                 <div className={styles.infoBtns}>
-                    <Button onClick={handleSuggestion}>
-                        Добавить в корзину
-                    </Button>
-                    <IconButton
-                        onClick={handleSuggestion}
-                        className={styles.infoFavBtn}
-                        styleType='dark'>
-                        <FavIcon width={24} height={24} />
-                    </IconButton>
+                    <BasketBtn
+                        productId={id}
+                        onClick={handleBasket}
+                    />
+                    <FavButton
+                        productId={id}
+                        onClick={() => handleFav(id)}
+                    />
                 </div>
             </div>
 
             <Modal
                 shown={modalShown}
                 onClose={() => setModalShown(false)}
-                title='Зарегистрируйтесь и получите 10% бонусную карту!'
-            >
+                title='Зарегистрируйтесь и получите 10% бонусную карту!'>
                 <AuthTab />
             </Modal>
         </div>

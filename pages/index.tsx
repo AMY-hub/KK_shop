@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
     props: {
       newest: dataNew.products.rows,
       sale: dataSaleResult,
-      popular: dataPopular.products.rows
+      popular: dataPopular.products.rows,
     }
   };
 };

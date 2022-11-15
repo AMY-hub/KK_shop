@@ -21,15 +21,15 @@ export const RegistrationForm = observer(({ className, ...props }: RegistrationF
         });
 
 
-    const store = useUserContext();
+    const userStore = useUserContext();
 
     const submitHandler: SubmitHandler<RegisterFormFields> = async (data, e) => {
         e?.preventDefault();
         if (!data.birthdate) {
             data.birthdate = null;
         }
-        await store.registration(data);
-        if (!store.userError) {
+        await userStore.registration(data);
+        if (!userStore.error) {
             reset();
         }
     };
@@ -103,11 +103,11 @@ export const RegistrationForm = observer(({ className, ...props }: RegistrationF
             >
                 Зарегистрироваться
             </Button>
-            {store.userError &&
+            {userStore.error &&
                 <AlertMessage
-                    message={store.userError}
+                    message={userStore.error}
                     type='warning'
-                    onClose={() => store.setError('')}
+                    onClose={() => userStore.error = ''}
                 />
             }
         </form>

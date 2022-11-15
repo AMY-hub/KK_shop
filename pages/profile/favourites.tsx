@@ -1,16 +1,39 @@
+import { observer } from 'mobx-react-lite';
 import Head from 'next/head';
-import { FavPage } from '../../pageComponents/FavPage';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useUserContext } from '../../context/AppContext';
+import { FavPage } from '../../pageComponents/ProfilePages/FavPage';
+import { ProfileLayout } from '../../pageComponents/ProfilePages/ProfileLayout';
 
 const Favourites = () => {
+    const status = useUserContext().status;
+    const user = useUserContext().getUser();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!user && status !== 'loading') {
+            router.push('/login');
+        }
+    }, [status, user, router]);
+
+    if (!user && status === 'loading') {
+        return (<div>Loading...</div>);
+    }
 
     return (
         <>
             <Head>
                 <title>Избранное</title>
             </Head>
-            <FavPage />
+            {user &&
+                <ProfileLayout
+                    user={user}
+                    title='Мой лист пожеланий'>
+                    <FavPage />
+                </ProfileLayout>}
         </>
     );
 };
 
-export default Favourites;
+export default observer(Favourites);

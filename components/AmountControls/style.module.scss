@@ -1,0 +1,23 @@
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &Incr,&Decr,&Amount,&Clear {
+        width: 30px;
+        height: 30px;
+        margin-left: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
+        flex-shrink: 0;
+        padding: 5px;
+        border-radius: 50%;
+    }
+
+    &Incr,&Decr {
+        background-color: var(--dark-bg);
+    }
+}

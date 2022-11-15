@@ -16,7 +16,7 @@ export const DropdownList = ({ title, options, className, ...props }: DropdownLi
             opacity: 1,
             height: 'auto',
             transition: shouldReduceMotion ? {} : {
-                staggerChildren: 0.05
+                staggerChildren: 0.03
             }
         },
         closed: { opacity: 0, height: 0 }
@@ -34,6 +34,7 @@ export const DropdownList = ({ title, options, className, ...props }: DropdownLi
                 href={opt.url}
                 styleType='plain'
                 size='s'
+                className={cn({ [styles.disabled]: !opened })}
                 tabIndex={opened ? 0 : -1}
             >{opt.name}
             </Button>

@@ -15,12 +15,12 @@ export const LoginForm = observer(({ className, ...props }: LoginFormProps): JSX
         reset,
         formState: { errors, isSubmitting } } = useForm<LoginFormFields>();
 
-    const store = useUserContext();
+    const userStore = useUserContext();
 
     const submitHandler: SubmitHandler<LoginFormFields> = async (data, e) => {
         e?.preventDefault();
-        await store.login(data);
-        if (!store.userError) {
+        await userStore.login(data);
+        if (!userStore.error) {
             reset();
         }
     };
@@ -51,11 +51,11 @@ export const LoginForm = observer(({ className, ...props }: LoginFormProps): JSX
             >
                 Войти
             </Button>
-            {store.userError &&
+            {userStore.error &&
                 <AlertMessage
-                    message={store.userError}
+                    message={userStore.error}
                     type='warning'
-                    onClose={() => store.setError('')}
+                    onClose={() => userStore.error = ''}
                 />
             }
         </form>
