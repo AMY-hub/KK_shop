@@ -16,10 +16,13 @@
 	min-width: 50%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	flex-direction: column;
 	background-color: var(--bg);
 	padding: 2rem;
+
+	&Body {
+		margin-top: 4rem;
+	}
 
 	&Title {
 		font-weight: 500;
@@ -33,5 +36,15 @@
 		position: absolute;
 		top: 2rem;
 		right: 2rem;
+	}
+
+	@media (max-width: 430px) {
+		&Body {
+		margin-top: 3rem;
+		}
+
+		&Title {
+			margin-bottom: 1.5rem;
+		}
 	}
 }

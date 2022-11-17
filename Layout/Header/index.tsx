@@ -1,23 +1,35 @@
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
+import Cookies from 'js-cookie';
+import { observer } from 'mobx-react-lite';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { useAppContext } from '../../context/AppContext';
-import { Container } from '../../components';
+import { Container, Modal } from '../../components';
 import { NavBar } from '../NavBar';
 import { UserControls } from '../UserControls';
+import { CityPicker } from '../CityPicker';
 import logo from '../../assets/images/logo.png';
+import PickIcon from '../../assets/images/icons/arr-exp.svg';
+import { HeaderProps } from './props';
 
 import styles from './style.module.scss';
 
-export const Header = (): JSX.Element => {
+export const Header = observer(({ catalog }: HeaderProps): JSX.Element => {
 
     const ref = useRef<HTMLDivElement>(null);
     const [catalogOpen, setCatalogOpen] = useState<boolean>(false);
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
+    const [modalShown, setModalShown] = useState<boolean>(false);
     useClickOutside(ref, () => setCatalogOpen(false));
 
     const { city } = useAppContext();
+
+    useEffect(() => {
+        if (!Cookies.get('preferCity')) {
+            setModalShown(true);
+        }
+    }, []);
 
     return (
         <div className={cn(styles.overlay, {
@@ -28,10 +40,14 @@ export const Header = (): JSX.Element => {
                     <Container className={styles.headerTopContainer}>
                         <span className={styles.headerTopCity}>
                             {city}
+                            <button
+                                onClick={() => setModalShown(true)}
+                                className={styles.headerTopPick}>
+                                <PickIcon />
+                            </button>
                         </span>
                         <a className={styles.headerTopTel}
-                            href="tel:84952592500"
-                        >
+                            href="tel:84952592500">
                             8 495 259 25 00
                         </a>
                     </Container>
@@ -49,6 +65,7 @@ export const Header = (): JSX.Element => {
                             />
                         </Link>
                         <NavBar
+                            catalog={catalog}
                             menuOpen={menuOpen}
                             setMenuOpen={setMenuOpen}
                             catalogOpen={catalogOpen}
@@ -58,7 +75,14 @@ export const Header = (): JSX.Element => {
                     </Container>
                 </div>
             </header >
+            <Modal
+                shown={modalShown}
+                onClose={() => setModalShown(false)}>
+                <CityPicker
+                    uid='city-picker'
+                    defaultCity={city}
+                    onSelect={() => setModalShown(false)} />
+            </Modal>
         </div>
-
     );
-};
+});

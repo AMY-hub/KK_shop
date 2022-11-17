@@ -1,8 +1,11 @@
+import { useRouter } from 'next/router';
 import { Container, AuthTab, Title } from '../../components';
 
 import styles from './style.module.scss';
 
 export const LoginPage = (): JSX.Element => {
+    const router = useRouter();
+
     return (
         <Container className={styles.login}>
             <Title tag='h1'>
@@ -11,7 +14,9 @@ export const LoginPage = (): JSX.Element => {
             <Title tag='h2'>
                 Получите персональную бонусную карту при регистрации!
             </Title>
-            <AuthTab className={styles.loginForm} />
+            <AuthTab
+                onAuth={() => router.back()}
+                className={styles.loginForm} />
         </Container>
     );
 };

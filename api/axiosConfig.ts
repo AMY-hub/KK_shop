@@ -23,7 +23,6 @@ API.interceptors.request.use((config) => {
 API.interceptors.response.use((res) => {
     return res;
 }, async (err: AxiosError) => {
-    console.log("ERR FROM INTERCEPTOR", err);
 
     const originalRequest: AxiosRequestRetry | undefined = err.config;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -37,9 +36,7 @@ API.interceptors.response.use((res) => {
         originalRequest.isRetry = true;
         try {
             const res = await axios.get<UserResponse>(REFRESH, { withCredentials: true });
-            console.log('INTER RUUN');
             tokenService.setAccessToken(res.data.accessToken);
-
             originalRequest.headers['Authorization'] = `Bearer ${res.data.accessToken}`;
 
             return API.request(originalRequest);

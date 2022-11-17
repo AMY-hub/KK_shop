@@ -6,7 +6,7 @@ import styles from './style.module.scss';
 
 export const ProfilePage = observer((): JSX.Element => {
 
-    const user = useUserContext().getUser();
+    const user = useUserContext().user;
 
     if (!user) {
         return <></>;

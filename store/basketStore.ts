@@ -16,19 +16,46 @@ export class BasketStore {
 
     constructor(root: RootStore) {
         this.root = root;
+        if (!this._basket.length) {
+            this.loadBasket();
+        }
         makeAutoObservable(this);
+    }
+
+    setBasket(data: BasketProduct[]) {
+        this._basket = data;
+        this.setFinalPrice();
+    }
+
+    getBasket() {
+        return this._basket;
+    }
+
+    async loadBasket() {
+        try {
+            const res = await basketService.getBasket();
+            if (res.status === 200) {
+                runInAction(() => {
+                    this._basket = res.data;
+                    this.setFinalPrice();
+                    console.log('BASKET LOADED', res.data);
+                });
+            }
+        } catch (err) {
+            this.error = getErrorMessage(err);
+        }
     }
 
     get finalPrice() {
         if (this.bonusDiscount && this.promoDiscount) {
-            return (this._finalPrice - this.bonusDiscount) * (1 - this.promoDiscount / 100);
+            return Math.round((this._finalPrice - this.bonusDiscount) * (1 - this.promoDiscount / 100));
         }
 
         if (this.bonusDiscount) {
-            return this._finalPrice - this.bonusDiscount;
+            return Math.round(this._finalPrice - this.bonusDiscount);
         }
         if (this.promoDiscount) {
-            return this._finalPrice * (1 - this.promoDiscount / 100);
+            return Math.round(this._finalPrice * (1 - this.promoDiscount / 100));
         }
         return this._finalPrice;
     }
@@ -67,16 +94,6 @@ export class BasketStore {
         } catch (err) {
             this.error = getErrorMessage(err);
         }
-
-    }
-
-    setBasket(data: BasketProduct[]) {
-        this._basket = data;
-        this.setFinalPrice();
-    }
-
-    getBasket() {
-        return this._basket;
     }
 
     async addProduct(productId: number) {
@@ -131,23 +148,6 @@ export class BasketStore {
         } catch (err) {
             this.error = getErrorMessage(err);
             console.log(err);
-        }
-    }
-
-    async clearBasket() {
-        try {
-            const res = await basketService.clearBasket();
-            if (res.status === 200 && this._basket) {
-                runInAction(() => {
-                    this.error = '';
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    this._basket = [];
-                    this._oldPrice = 0;
-                    this._finalPrice = 0;
-                });
-            }
-        } catch (err) {
-            this.error = getErrorMessage(err);
         }
     }
 

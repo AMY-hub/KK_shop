@@ -20,16 +20,15 @@ export const ContextProvider = observer(({ children, hydrationData }: RootContex
     );
 });
 
-const initStore = (initData?: RootHydration): RootStore => {
+const initStore = (hydrationData?: RootHydration): RootStore => {
     const _store = store ?? new RootStore();
-    if (initData) {
-        _store.hydrate(initData);
+    if (hydrationData) {
+        _store.hydrate(hydrationData);
     }
 
     if (typeof window === "undefined") return _store;
 
     if (!store) store = _store;
-    console.log('STORE INIT!', store);
 
     return _store;
 };

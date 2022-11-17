@@ -23,6 +23,7 @@ function Home({ newest, sale, popular }: PageProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
+
   const { data: dataNew } = await API.get<ProductsResponse>(PRODUCTS + '?sort=createdAt&order=DESC&limit=6');
 
   const { data: { sales } } = await API.get<{ sales: Sale[] }>(SALE);

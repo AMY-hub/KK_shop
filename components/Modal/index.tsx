@@ -48,13 +48,15 @@ export const Modal = ({ children, shown, onClose, className, title, ...props }: 
                         >
                             <CloseIcon />
                         </button>
-                        {title &&
-                            <div className={styles.modalTitle}>
-                                {title}
+                        <div className={styles.modalBody}>
+                            {title &&
+                                <div className={styles.modalTitle}>
+                                    {title}
+                                </div>
+                            }
+                            <div className={styles.modalContent}>
+                                {children}
                             </div>
-                        }
-                        <div className={styles.modalContent}>
-                            {children}
                         </div>
                     </div>
                 </div>

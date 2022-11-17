@@ -127,7 +127,7 @@ export const ProductFullCard = ({ productData, className, ...rest }: ProductFull
                 shown={modalShown}
                 onClose={() => setModalShown(false)}
                 title='Зарегистрируйтесь и получите 10% бонусную карту!'>
-                <AuthTab />
+                <AuthTab onAuth={() => setModalShown(false)} />
             </Modal>
         </div>
     );

@@ -9,7 +9,7 @@ import { RegistrationFormProps } from './props';
 
 import styles from './style.module.scss';
 
-export const RegistrationForm = observer(({ className, ...props }: RegistrationFormProps): JSX.Element => {
+export const RegistrationForm = observer(({ className, onAuth, ...props }: RegistrationFormProps): JSX.Element => {
 
     const {
         register,
@@ -31,6 +31,7 @@ export const RegistrationForm = observer(({ className, ...props }: RegistrationF
         await userStore.registration(data);
         if (!userStore.error) {
             reset();
+            onAuth();
         }
     };
 

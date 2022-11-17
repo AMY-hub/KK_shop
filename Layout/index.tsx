@@ -5,9 +5,7 @@ import { LayoutProps } from './props';
 
 import styles from './style.module.scss';
 
-export const Layout = ({ children }: LayoutProps): JSX.Element => {
-    console.log('LAYOUT RENDER');
-
+export const Layout = ({ children, catalog }: LayoutProps): JSX.Element => {
     const [offset, setOffset] = useState(150);
 
     useEffect(() => {
@@ -26,16 +24,15 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
         };
     }, []);
 
-
     return (
         <div className={styles.layout}>
-            <Header />
+            <Header catalog={catalog} />
             <main
                 style={{ marginTop: `${offset}px` }}
                 className={styles.layoutMain}>
                 {children}
             </main>
-            <Footer />
+            <Footer catalog={catalog} />
         </div>
     );
 };

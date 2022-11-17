@@ -5,7 +5,7 @@ import { AuthTabProps } from './props';
 
 import styles from './style.module.scss';
 
-export const AuthTab = ({ className, ...rest }: AuthTabProps): JSX.Element => {
+export const AuthTab = ({ className, onAuth, ...rest }: AuthTabProps): JSX.Element => {
 
     const [currentTab, setCurrentTab] = useState<'login' | 'register'>('register');
 
@@ -30,9 +30,9 @@ export const AuthTab = ({ className, ...rest }: AuthTabProps): JSX.Element => {
                 </button>
             </div>
             {currentTab === 'login' ?
-                <LoginForm />
+                <LoginForm onAuth={onAuth} />
                 :
-                <RegistrationForm />
+                <RegistrationForm onAuth={onAuth} />
             }
         </div>
     );

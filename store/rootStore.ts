@@ -1,4 +1,4 @@
-
+import { Category } from '../interfaces';
 import { AppStore } from './appStore';
 import { BasketStore } from './basketStore';
 import { FavStore } from './favStore';
@@ -7,11 +7,11 @@ import { UserStore } from './userStore';
 export interface RootHydration {
     appData: {
         city: string;
+        catalog: Category[];
     }
 }
 
 export class RootStore {
-
     appStore: AppStore;
     userStore: UserStore;
     favStore: FavStore;

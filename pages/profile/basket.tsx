@@ -8,7 +8,7 @@ import { ProfileLayout } from '../../pageComponents/ProfilePages/ProfileLayout';
 
 const Basket = () => {
     const status = useUserContext().status;
-    const user = useUserContext().getUser();
+    const user = useUserContext().user;
     const router = useRouter();
 
     useEffect(() => {

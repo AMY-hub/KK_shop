@@ -5,12 +5,8 @@ import { BasketProduct, PromoCode } from '../interfaces';
 
 class BasketService {
 
-    getBasketFromLS = (): Promise<AxiosResponse<BasketProduct[]>> => {
+    getBasket = async (): Promise<AxiosResponse<BasketProduct[]>> => {
         return API.get<BasketProduct[]>(BASKET);
-    };
-
-    clearBasket = async (): Promise<AxiosResponse<void>> => {
-        return API.delete<void>(BASKET_ITEM);
     };
 
     addProduct = async (productId: number): Promise<AxiosResponse<BasketProduct>> => {

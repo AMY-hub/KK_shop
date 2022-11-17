@@ -33,7 +33,7 @@ export const CustomCheckbox = forwardRef((props: CustomCheckboxProps, ref: Forwa
                     })} >
                     {checked &&
                         <svg
-                            version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xmlSpace="preserve">
+                            version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000" enableBackground="new 0 0 1000 1000" xmlSpace="preserve">
                             <g><path d="M132.5,377.5l285.8,285.8L867.5,91.7L990,214.2L418.3,908.3L10,500L132.5,377.5z" /></g>
                         </svg>
                     }

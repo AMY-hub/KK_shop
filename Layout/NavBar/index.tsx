@@ -9,13 +9,11 @@ import { Category, Subcategory } from '../../interfaces';
 import ExpIcon from '../../assets/images/icons/arr-exp_fill.svg';
 
 import styles from './style.module.scss';
-import { useAppContext } from '../../context/AppContext';
 
-export const NavBar = ({ catalogOpen, setCatalogOpen, menuOpen, setMenuOpen, className, ...props }: NavBarProps): JSX.Element => {
+export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenuOpen, className, ...props }: NavBarProps): JSX.Element => {
 
     const router = useRouter();
     const route = router.asPath;
-    const { catalog } = useAppContext();
     const [visibleSublist, setVisibleSublist] = useState<string>('');
 
     const handleNav = () => {
@@ -86,8 +84,7 @@ export const NavBar = ({ catalogOpen, setCatalogOpen, menuOpen, setMenuOpen, cla
                         className={cn(styles.catalogListBtn, {
                             [styles.catalogListBtn_active]: isSelected
                         })}>
-                        <Link
-                            href={`/products/${el.route}`}>
+                        <Link href={`/products/${el.route}`}>
                             <a
                                 className={cn(styles.catalogListBtn, {
                                     [styles.catalogListBtn_active]: isSelected
@@ -105,8 +102,7 @@ export const NavBar = ({ catalogOpen, setCatalogOpen, menuOpen, setMenuOpen, cla
                         </button>
                     </span>
                     :
-                    <Link
-                        href={`/products/${el.route}`}>
+                    <Link href={`/products/${el.route}`}>
                         <a
                             className={cn(styles.catalogListBtn, {
                                 [styles.catalogListBtn_active]: isSelected
@@ -135,8 +131,7 @@ export const NavBar = ({ catalogOpen, setCatalogOpen, menuOpen, setMenuOpen, cla
 
             return (
                 <li key={el.id}>
-                    <Link
-                        href={`/products/${topCategory.route}/${el.route}`}>
+                    <Link href={`/products/${topCategory.route}/${el.route}`}>
                         <a
                             className={cn(styles.catalogListBtn, {
                                 [styles.catalogListBtn_active]: isSelected
@@ -164,8 +159,7 @@ export const NavBar = ({ catalogOpen, setCatalogOpen, menuOpen, setMenuOpen, cla
             </button>
             <div className={cn(styles.navOverlay, {
                 [styles.navOverlay_visible]: menuOpen
-            })}
-            >
+            })}>
                 <ul className={styles.navList}>
                     {buildFirstLevel()}
                 </ul>

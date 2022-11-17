@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ForwardedRef, forwardRef } from 'react';
 import cn from 'classnames';
 import { AmountControls } from '../..';
 import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
@@ -8,7 +7,7 @@ import { BasketProductProps } from './props';
 
 import styles from './style.module.scss';
 
-export const BasketProductCard = forwardRef(({ productData, amount, className, ...props }: BasketProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const BasketProductCard = ({ productData, amount, className, ...props }: BasketProductProps): JSX.Element => {
 
     const {
         id,
@@ -30,19 +29,22 @@ export const BasketProductCard = forwardRef(({ productData, amount, className, .
         `/products/${category.route}/${id}`;
 
     return (
-        <div className={cn(styles.card, className)} {...props} ref={ref}>
+        <div className={cn(styles.card, className)} {...props}>
             <div className={styles.cardWrapper}>
                 <div className={styles.cardImg}>
                     <Link href={href}>
-                        <Image
-                            className={styles.cardImg}
-                            src={process.env.NEXT_PUBLIC_DOMAIN + img}
-                            alt={name}
-                            height={130}
-                            width={130}
-                            layout='fixed'
-                            loading='lazy'
-                        />
+                        <a>
+                            <Image
+                                className={styles.cardImg}
+                                src={process.env.NEXT_PUBLIC_DOMAIN + img}
+                                alt={name}
+                                height={130}
+                                width={130}
+                                layout='fixed'
+                                loading='lazy'
+                            />
+                        </a>
+
                     </Link>
                 </div>
 
@@ -80,4 +82,4 @@ export const BasketProductCard = forwardRef(({ productData, amount, className, .
             </div>
         </div>
     );
-});
+};

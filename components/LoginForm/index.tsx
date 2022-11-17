@@ -8,7 +8,7 @@ import { LoginFormProps } from './props';
 
 import styles from './style.module.scss';
 
-export const LoginForm = observer(({ className, ...props }: LoginFormProps): JSX.Element => {
+export const LoginForm = observer(({ className, onAuth, ...props }: LoginFormProps): JSX.Element => {
     const {
         register,
         handleSubmit,
@@ -22,6 +22,7 @@ export const LoginForm = observer(({ className, ...props }: LoginFormProps): JSX
         await userStore.login(data);
         if (!userStore.error) {
             reset();
+            onAuth();
         }
     };
 

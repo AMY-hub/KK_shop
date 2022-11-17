@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import cn from 'classnames';
-import { ForwardedRef, forwardRef } from 'react';
 import { useBasketContext, useFavContext } from '../../../context/AppContext';
 import Link from 'next/link';
 import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
@@ -11,7 +10,7 @@ import HeartIcon from '../../../assets/images/icons/heart_fill.svg';
 
 import styles from './style.module.scss';
 
-export const FavProductCard = forwardRef(({ productData, className, ...props }: FavProductCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const FavProductCard = ({ productData, className, ...props }: FavProductCardProps): JSX.Element => {
 
     const favStore = useFavContext();
     const basketStore = useBasketContext();
@@ -35,19 +34,21 @@ export const FavProductCard = forwardRef(({ productData, className, ...props }: 
         `/products/${category.route}/${id}`;
 
     return (
-        <div className={cn(styles.card, className)} {...props} ref={ref}>
+        <div className={cn(styles.card, className)} {...props}>
             <div className={styles.cardWrapper}>
                 <div className={styles.cardImg}>
                     <Link href={href}>
-                        <Image
-                            className={styles.cardImg}
-                            src={process.env.NEXT_PUBLIC_DOMAIN + img}
-                            alt={name}
-                            height={130}
-                            width={130}
-                            layout='fixed'
-                            loading='lazy'
-                        />
+                        <a>
+                            <Image
+                                className={styles.cardImg}
+                                src={process.env.NEXT_PUBLIC_DOMAIN + img}
+                                alt={name}
+                                height={130}
+                                width={130}
+                                layout='fixed'
+                                loading='lazy'
+                            />
+                        </a>
                     </Link>
                 </div>
 
@@ -88,4 +89,4 @@ export const FavProductCard = forwardRef(({ productData, className, ...props }: 
             </div>
         </div>
     );
-});
+};

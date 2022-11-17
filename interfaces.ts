@@ -192,3 +192,33 @@ export interface PromoCode {
     name: string;
     discount: number;
 }
+
+export interface LocationData {
+    postal_code: string;
+    country: string;
+    country_iso_code: string;
+    federal_district: string;
+    region_fias_id: string;
+    region_kladr_id: string;
+    region_iso_code: string;
+    region_with_type: string;
+    region_type: string;
+    region_type_full: string;
+    region: string;
+    city_fias_id: string;
+    city_kladr_id: string;
+    city_with_type: string;
+    city_type: string;
+    city_type_full: string;
+    city: string;
+}
+
+export interface Location {
+    value: string;
+    unrestricted_value: string;
+    data: LocationData;
+}
+
+export interface LocationResponse {
+    location: Location | null;
+}

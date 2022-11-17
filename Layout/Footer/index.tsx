@@ -5,15 +5,13 @@ import {
     Contacts,
     DropdownList
 } from '../../components';
-import { useAppContext } from '../../context/AppContext';
 import { footerInfOptions } from '../const';
 import { LinkOption } from '../../interfaces';
+import { FooterProps } from './props';
 
 import styles from './style.module.scss';
 
-export const Footer = (): JSX.Element => {
-
-    const { catalog } = useAppContext();
+export const Footer = ({ catalog }: FooterProps): JSX.Element => {
 
     const catalogLinkOptions: LinkOption[] = catalog.map(el => ({
         name: el.name,

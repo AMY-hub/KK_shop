@@ -7,7 +7,7 @@ import { ProfilePage } from '../../pageComponents/ProfilePages';
 
 const Profile = () => {
     const status = useUserContext().status;
-    const user = useUserContext().getUser();
+    const user = useUserContext().user;
     const router = useRouter();
 
     useEffect(() => {

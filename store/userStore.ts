@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { getErrorMessage } from '../helpers/getErrorMessage';
 import { LoginFormFields, RegisterFormFields, UserData, UserResponse } from '../interfaces';
@@ -24,11 +25,13 @@ export class UserStore {
         this.isLoggedIn = true;
         this._userData = data.user;
         this._root.basketStore.setBasket(data.basket);
+        console.log('USER BASKET SET', data.basket);
+
         this._root.favStore.setFavList(data.fav_list);
         tokenService.setAccessToken(data.accessToken);
     }
 
-    getUser() {
+    get user() {
         return this._userData;
     }
 
@@ -100,8 +103,12 @@ export class UserStore {
                 });
             }
         } catch (err) {
-            this._status = 'error';
-            this.error = getErrorMessage(err);
+            if (axios.isAxiosError(err) && err.response?.status === 401) {
+                return;
+            } else {
+                this._status = 'error';
+                this.error = getErrorMessage(err);
+            }
         }
     };
 }

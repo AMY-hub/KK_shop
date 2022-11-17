@@ -9,7 +9,7 @@ import { FormEvent, useRef, useState } from 'react';
 export const BasketFooter = observer((): JSX.Element => {
 
     const basketStore = useBasketContext();
-    const user = useUserContext().getUser();
+    const user = useUserContext().user;
     const [message, setMessage] = useState<string>('');
 
     const bonusRef = useRef<HTMLInputElement>(null);

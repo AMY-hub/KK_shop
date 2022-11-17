@@ -34,6 +34,11 @@
 			&::after {
 				display: inline-block;
 			}
+
+			.disabled {
+				pointer-events: none;
+				touch-action: none;
+			}
 		}
 	}
 
@@ -49,10 +54,5 @@
 				opacity: 1 !important;
 			}
 		}
-	}
-
-	.disabled {
-		pointer-events: none;
-		touch-action: none;
 	}
 }
