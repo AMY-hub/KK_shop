@@ -1,0 +1,60 @@
+.container {
+	display: grid;
+	grid-template-columns: 1fr auto;
+}
+
+.content {
+	overflow: auto;
+  	scrollbar-width: none;
+  	-ms-overflow-style: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.scrollbar {
+	position: relative;
+
+	&BtnUp,&BtnDown {
+		position: absolute;
+		z-index: 5;
+		font-size: 1rem;
+		width: 0.5rem;
+		height: 0.9rem;
+		padding: 0;
+		background-color: var(--gray-dark);
+		color: var(--bg);
+	}
+
+	&BtnUp {
+		top: 0;
+	}
+
+	&BtnDown {
+		bottom: 0;
+		transform: rotate(180deg);
+	}
+
+	&Bar {
+		position: relative;
+		height: 100%;  /* must have some height */
+		width: 0.5rem; /* must have some width */
+	}
+
+	&Track {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 0.5rem;
+		cursor: pointer;
+		background-color: var(--gray-light);
+	}
+
+	&Indicator {
+		position: absolute;
+		width: 0.5rem;
+		border-radius: 3px;
+		background-color: var(--gray-medium);
+	}
+}

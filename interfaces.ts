@@ -222,3 +222,14 @@ export interface Location {
 export interface LocationResponse {
     location: Location | null;
 }
+
+export interface Address {
+    id: number;
+    type: 'shop' | 'pick';
+    address: string;
+    phone: string;
+    email: string;
+    coord: [string, string];
+    createdAt: string;
+    updatedAt: string;
+}

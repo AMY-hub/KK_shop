@@ -30,3 +30,4 @@ export * from './CustomCheckbox';
 export * from './LoginForm';
 export * from './AuthTab';
 export * from './AmountControls';
+export * from './Scroll';

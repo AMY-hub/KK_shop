@@ -5,7 +5,11 @@ import { API } from '../api/axiosConfig';
 import { Certificate } from '../interfaces';
 import { CertificatesPage } from '../pageComponents/CertificatesPage';
 
-function Certificates({ certificates }: PageProps): JSX.Element {
+interface PageProps {
+    certificates: Certificate[];
+}
+
+const Certificates = ({ certificates }: PageProps): JSX.Element => {
     return (
         <>
             <Head>
@@ -14,7 +18,7 @@ function Certificates({ certificates }: PageProps): JSX.Element {
             <CertificatesPage certificates={certificates} />
         </>
     );
-}
+};
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
     const { data } = await API
@@ -26,9 +30,5 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
         }
     };
 };
-
-interface PageProps {
-    certificates: Certificate[];
-}
 
 export default Certificates;
