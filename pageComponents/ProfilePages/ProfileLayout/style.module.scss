@@ -1,15 +1,16 @@
 .layout {
+    max-width: 1300px;
     display: grid;
-    grid-template-columns: [start] 1fr [mid] 2fr [end];
+    grid-template-columns: [start] auto [mid1]5% [mid2] 1fr [end];
     column-gap: 2rem;
 
     &Header {
-        grid-column: start / mid;
+        grid-column: start / mid1;
         align-self: flex-end;
     }
 
     &Title {
-        grid-column: mid / end;
+        grid-column: mid2 / end;
         align-self: flex-end;
     }
 
@@ -23,18 +24,22 @@
     }
 
     &Options {
-        grid-column: start / mid;
+        grid-column: start / mid1;
         justify-self: center;
     }
 
     .profileContent {
-        grid-column: mid / end;
-        justify-self: flex-start;
+        grid-column: mid2 / end;
+    }
+
+    @media (max-width: 960px) {
+        column-gap: 0;
     }
 
     @media (max-width: 760px) {
-        grid-template-columns: 1fr;
-        column-gap: 0;
+        &Header,&Title,&Divider,&Options,.profileContent {
+        grid-column: start / end;
+        }
 
         &Title {
             grid-row: 4;
@@ -46,6 +51,7 @@
 
         &Options {
             margin-bottom: 2.5rem;
+             justify-self: flex-start;
         }
     } 
 }

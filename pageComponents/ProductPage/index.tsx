@@ -13,7 +13,6 @@ import { ProductFullCard } from './ProductFullCard';
 import styles from './style.module.scss';
 
 export const ProductPage = ({ productData, similar, popular }: ProductPageProps): JSX.Element => {
-
     const {
         name,
         art,

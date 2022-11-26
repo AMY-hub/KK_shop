@@ -121,6 +121,15 @@ export interface BasketProduct {
     product: ProductPreview;
 }
 
+export interface Basket {
+    id: number;
+    userId: number;
+    createdAt: string;
+    updatedAt: string;
+    temporary_key: string | null;
+    products: BasketProduct;
+}
+
 export interface FavProduct {
     id: number;
     createdAt: string;
@@ -226,10 +235,39 @@ export interface LocationResponse {
 export interface Address {
     id: number;
     type: 'shop' | 'pick';
+    city: string;
     address: string;
     phone: string;
     email: string;
     coord: [string, string];
     createdAt: string;
     updatedAt: string;
+}
+
+export interface OrderProduct {
+    id: number;
+    amount: number;
+    createdAt: string;
+    updatedAt: string;
+    orderId: number;
+    productId: number;
+    product: ProductPreview;
+}
+
+export interface Order {
+    id: number;
+    key: string;
+    address: string;
+    delivery: string;
+    status: string;
+    payment_status: string;
+    payment: string;
+    phone: string;
+    email: string;
+    price: number;
+    delivery_price: number;
+    createdAt: string;
+    updatedAt: string;
+    userId: number;
+    products: OrderProduct[];
 }

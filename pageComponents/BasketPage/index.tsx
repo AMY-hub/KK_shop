@@ -1,13 +1,17 @@
 import { observer } from 'mobx-react-lite';
-import { Title, BasketProductCard } from '../../../components';
-import { useBasketContext } from '../../../context/AppContext';
+import { Title, BasketProductCard, Preloader } from '../../components';
+import { useBasketContext } from '../../context/AppContext';
 import { BasketFooter } from './BasketFooter';
 
 import styles from './style.module.scss';
 
 export const BasketPage = observer((): JSX.Element => {
-
     const basket = useBasketContext().getBasket();
+    const basketStatus = useBasketContext().status;
+
+    if (typeof window === 'undefined' || basketStatus === 'loading') {
+        return <Preloader />;
+    }
 
     return (
         <div className={styles.basket}>

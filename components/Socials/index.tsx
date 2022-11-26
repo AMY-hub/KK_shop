@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import Link from 'next/link';
 import TelegramIcon from '../../assets/images/icons/telegramm.svg';
 import OKIcon from '../../assets/images/icons/ok.svg';
 import FacebookIcon from '../../assets/images/icons/facebook.svg';
@@ -14,41 +13,13 @@ import styles from './style.module.scss';
 export const Socials = ({ className, ...props }: SocialsProps): JSX.Element => {
     return (
         <div className={cn(styles.socials, className)} {...props}>
-            <Link href='#'>
-                <a>
-                    <TelegramIcon />
-                </a>
-            </Link>
-            <Link href='#'>
-                <a>
-                    <OKIcon />
-                </a>
-            </Link>
-            <Link href='#'>
-                <a>
-                    <FacebookIcon />
-                </a>
-            </Link>
-            <Link href='#'>
-                <a>
-                    <WhatsAppIcon />
-                </a>
-            </Link>
-            <Link href='#'>
-                <a>
-                    <ViberIcon />
-                </a>
-            </Link>
-            <Link href='#'>
-                <a>
-                    <InstaIcon />
-                </a>
-            </Link>
-            <Link href='#'>
-                <a>
-                    <VKIcon />
-                </a>
-            </Link>
+            <a href='#' target='_blank'> <TelegramIcon /> </a>
+            <a href='#' target='_blank'> <OKIcon /> </a>
+            <a href='#' target='_blank'> <FacebookIcon /> </a>
+            <a href='#' target='_blank'> <WhatsAppIcon /> </a>
+            <a href='#' target='_blank'> <ViberIcon /> </a>
+            <a href='#' target='_blank'> <InstaIcon /> </a>
+            <a href='#' target='_blank'> <VKIcon /> </a>
         </div>
     );
 };

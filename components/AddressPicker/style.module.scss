@@ -1,0 +1,78 @@
+.picker {
+    max-width: 470px;
+    ul {
+        border-radius: 1px;
+        box-shadow: none;
+        border-bottom: 1px solid var(--accent-light);
+    }
+
+    &Title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+    }
+
+    &Text {
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+        color: var(--gray);
+        span {
+            color: var(--black);
+        }
+    }
+
+    &Container {
+        position: relative;
+        input {
+            height: 4rem;
+            padding: 0.5rem;
+            font-weight: 700;
+            font-size: 3rem;
+            line-height: 1.5;
+            border: none;
+            border-radius: 1px;
+            border-bottom: 1px solid var(--gray);
+            transition: all 300ms;
+
+            &::placeholder {
+                color: var(--dark-bg);
+            }
+
+            &:focus {
+                box-shadow: 0 0 5px var(--accent-light);
+                border-bottom: none;
+            }
+        }
+    }
+
+    &Selected {
+        color: var(--accent-dark);
+    }
+
+    &Option {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        width: 100%;
+        line-height: 2;
+        transition: color 300ms;
+
+        &:hover {
+            color: var(--accent-dark);
+        }
+    }
+
+    @media (max-width: 430px) {
+        &Title {
+            font-size: 1.2rem;
+        }
+
+        &Container {
+            input {
+                height: 3rem;
+                font-size: 2.5rem;
+            }
+        }
+    }
+}
+

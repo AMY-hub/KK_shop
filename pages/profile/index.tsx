@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { Preloader } from '../../components';
 import { useUserContext } from '../../context/AppContext';
 import { ProfilePage } from '../../pageComponents/ProfilePages';
 
@@ -17,7 +18,7 @@ const Profile = () => {
     }, [status, user, router]);
 
     if (status === 'loading') {
-        return (<div>Loading...</div>);
+        return <Preloader />;
     }
 
     return (

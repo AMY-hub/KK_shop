@@ -87,55 +87,55 @@ select {
 	}
 }
 
-.slider-container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-}
+// .slider-container {
+//   position: relative;
+//   width: 200px;
+//   height: 200px;
+// }
 
-.slide {
-  border-radius: 5px;
-  background: white;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
+// .slide {
+//   border-radius: 5px;
+//   background: white;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+// }
 
-.slide[data-page="1"] {
-  border-radius: 25%;
-}
+// .slide[data-page="1"] {
+//   border-radius: 25%;
+// }
 
-.slide[data-page="2"] {
-  border-radius: 50%;
-}
+// .slide[data-page="2"] {
+//   border-radius: 50%;
+// }
 
-.dots {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
+// .dots {
+//   display: flex;
+//   justify-content: center;
+//   margin-top: 30px;
+// }
 
-.dot-container {
-  padding: 20px;
-  cursor: pointer;
-}
+// .dot-container {
+//   padding: 20px;
+//   cursor: pointer;
+// }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  position: relative;
-}
+// .dot {
+//   width: 10px;
+//   height: 10px;
+//   background: rgba(255, 255, 255, 0.5);
+//   border-radius: 50%;
+//   position: relative;
+// }
 
-.dot-highlight {
-  background: white;
-  border-radius: 50%;
-  width: 14px;
-  height: 14px;
-  position: absolute;
-  top: -2px;
-  left: -2px;
-}
+// .dot-highlight {
+//   background: white;
+//   border-radius: 50%;
+//   width: 14px;
+//   height: 14px;
+//   position: absolute;
+//   top: -2px;
+//   left: -2px;
+// }

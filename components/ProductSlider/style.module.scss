@@ -1,22 +1,35 @@
+.wrapper {
+	width: 100%;
+}
+
 .slider {
 	position: relative;
-	overflow: hidden;
-	cursor: grab;
-	margin: auto;
+	// height: 550px;
+	width: 100%;
+
+	&Img {
+		position: relative;
+	}
 	
 	&Slide {
+		cursor: grab;
 		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
 		img {
 			pointer-events: none;
 		}
 	}
 }
 
-
 .pagination {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin: 1rem;
 
 	.dotWrapper {
 		padding: 10px;
@@ -40,4 +53,9 @@
 		width: 15px;
 		height: 15px;
 	}
+}
+
+.fake {
+	opacity: 0;
+	visibility: hidden;
 }

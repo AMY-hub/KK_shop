@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import cn from 'classnames';
-import aboutImg from '../../assets/images/about_img.jpg';
+import aboutImg from '../../assets/images/about_img_c.jpg';
 import { MainInfoSlider } from './MainInfoSlider';
 import {
     Container,

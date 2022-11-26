@@ -6,19 +6,18 @@ import basketService from '../services/basketService';
 import { RootStore } from './rootStore';
 
 export class BasketStore {
-    private root: RootStore;
+    private _root: RootStore;
     private _basket: BasketProduct[] = [];
     private _finalPrice = 0;
     private _oldPrice = 0;
     bonusDiscount = 0;
     promoDiscount = 0;
     error = '';
+    status: 'idle' | 'loading' = 'idle';
 
     constructor(root: RootStore) {
-        this.root = root;
-        if (!this._basket.length) {
-            this.loadBasket();
-        }
+        this._root = root;
+        this.loadClientBasket();
         makeAutoObservable(this);
     }
 
@@ -31,18 +30,23 @@ export class BasketStore {
         return this._basket;
     }
 
-    async loadBasket() {
+    async loadClientBasket() {
+        if (typeof window === 'undefined') {
+            return;
+        }
         try {
+            this.status = 'loading';
             const res = await basketService.getBasket();
-            if (res.status === 200) {
+            if (res.status === 200 && res.data) {
                 runInAction(() => {
                     this._basket = res.data;
                     this.setFinalPrice();
-                    console.log('BASKET LOADED', res.data);
+                    this.status = 'idle';
                 });
             }
         } catch (err) {
             this.error = getErrorMessage(err);
+            this.status = 'idle';
         }
     }
 
@@ -68,10 +72,7 @@ export class BasketStore {
         if (this.bonusDiscount) {
             this.bonusDiscount = 0;
         }
-
         const percents = Math.round((val * 100) / this.finalPrice);
-        console.log(percents);
-
         if (percents > 50) {
             this.error = 'Вы не можете оплатить бонусами более 50% суммы заказа';
         } else {
@@ -166,5 +167,17 @@ export class BasketStore {
 
         this._finalPrice = sum[0];
         this._oldPrice = sum[1];
+    }
+
+    async clearBasket() {
+        if (this._basket.length !== 0) {
+            const basketId = this._basket[0].basketId;
+            const res = await basketService.clearBasket(basketId);
+            if (res.status === 200) {
+                this.bonusDiscount = 0;
+                this.promoDiscount = 0;
+                this.setBasket([]);
+            }
+        }
     }
 }

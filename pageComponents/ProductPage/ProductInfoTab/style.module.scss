@@ -56,31 +56,6 @@
 		margin-bottom: rem(40);
 	}
 
-	&ParamsTable {
-		font-size: rem(14);
-
-		thead {
-			display: block;
-			text-align: left;
-			margin-bottom: 1rem;
-			font-size: 1rem;
-			line-height: 1.5;
-		}
-
-		tr {
-			display: grid;
-			grid-template-columns: 200px 1fr;
-			margin-bottom: rem(24);
-		}
-
-		th {
-			text-align: left;
-			font-weight: 400;
-			color: var(--gray-light);
-			border-bottom: 1px dotted var(--gray-light);
-		}
-	}
-
 	@media (max-width: 430px) {
 		&Art {
 			margin-bottom: 0.5rem;
@@ -90,6 +65,33 @@
 			margin-bottom: rem(20);
 		}
 	}
+}
+
+.paramsTable {
+		max-width: 600px;
+		font-size: rem(14);
+
+		thead {
+			grid-column: span 2;
+			th {
+			display: block;
+			text-align: left;
+			margin-bottom: 1rem;
+			font-size: 1rem;
+			line-height: 1.5;	
+			}
+		}
+
+		tr {
+			margin-bottom: rem(24);
+		}
+
+		&Title {
+			text-align: left;
+			font-weight: 400;
+			color: var(--gray-light);
+			border-bottom: 1px dotted var(--gray-light);
+		}
 }
 
 .brand {

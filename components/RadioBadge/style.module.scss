@@ -1,0 +1,49 @@
+.radio {
+    display: flex;
+
+    input[type="radio"] {
+		width: 1px;
+		height: 1px;
+		border: 0;
+		padding: 0;
+		opacity: 0;
+		clip: rect(0 0 0 0);
+		overflow: hidden;
+	}
+}
+
+.radioLabel {
+	cursor: pointer;
+    padding: .75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+    color: var(--gray);
+    border: 1px solid var(--gray-light);
+    transition: all 300ms;
+    svg {
+        fill: var(--gray);
+        transition: all 300ms;
+    }
+
+	&_active {
+		border: 1px solid var(--black);
+        color: var(--black);
+        svg {
+            fill: var(--black);
+        }
+	}
+
+    &Title {
+        font-weight: 700;
+    }
+
+    span {
+        margin-top: 0.5rem;
+        color: var(--gray);
+    }
+}
+
+input[type="radio"] + .radioLabel:focus {
+    border: 1px solid var(--black);
+}

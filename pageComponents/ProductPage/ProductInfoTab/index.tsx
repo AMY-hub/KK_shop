@@ -27,7 +27,8 @@ export const ProductInfoTab = (props: ProductInfoTabProps): JSX.Element => {
         if (el.title !== 'Описание') {
             additionalParams.push(
                 <tr key={el.id}>
-                    <th>{`${el.title}:`}</th>
+                    <th className={styles.paramsTableTitle}>
+                        {`${el.title}:`}</th>
                     <td>{el.description}</td>
                 </tr>
             );
@@ -65,19 +66,29 @@ export const ProductInfoTab = (props: ProductInfoTabProps): JSX.Element => {
                     <p className={styles.aboutDescription}>
                         {info.find(el => el.title === 'Описание')?.description}
                     </p>
-                    <table className={styles.aboutParamsTable}>
-                        <thead>Подробные характеристики</thead>
+                    <table className={styles.paramsTable}>
+                        <thead>
+                            <tr>
+                                <th colSpan={2}>Подробные характеристики</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
-                                <th>Вес:</th>
+                                <th className={styles.paramsTableTitle}>
+                                    Вес:
+                                </th>
                                 <td>{`${weight} г`}</td>
                             </tr>
                             <tr>
-                                <th>Объем:</th>
+                                <th className={styles.paramsTableTitle}>
+                                    Объем:
+                                </th>
                                 <td>{`${volume} мл`}</td>
                             </tr>
                             <tr>
-                                <th>Страна производитель:</th>
+                                <th className={styles.paramsTableTitle}>
+                                    Страна производитель:
+                                </th>
                                 <td>{country.name}</td>
                             </tr>
                             {additionalParams.length !== 0 &&

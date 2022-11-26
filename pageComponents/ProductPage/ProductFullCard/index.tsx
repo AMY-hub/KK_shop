@@ -71,9 +71,7 @@ export const ProductFullCard = ({ productData, className, ...rest }: ProductFull
                     />
                 </div>
                 :
-                <ProductSlider
-                    images={[img, ...addImages]}
-                />
+                <ProductSlider images={[img, ...addImages]} />
             }
             <div className={styles.info}>
                 <span className={styles.infoName}>

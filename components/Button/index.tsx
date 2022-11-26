@@ -34,7 +34,9 @@ export const Button = (props: ButtonProps): JSX.Element => {
         return (
             <>
                 {withLoading ?
-                    <button className={classes} {...rest}>
+                    <button
+                        type='button'
+                        className={classes} {...rest}>
                         {loading ?
                             <>
                                 <div className={styles.loader}></div>
@@ -45,7 +47,9 @@ export const Button = (props: ButtonProps): JSX.Element => {
                         }
                     </button>
                     :
-                    <button className={classes} {...rest}>
+                    <button
+                        type='button'
+                        className={classes} {...rest}>
                         {children}
                     </button>
                 }

@@ -1,0 +1,98 @@
+.order {
+    max-width: 1270px;
+    display: grid;
+    grid-template-columns: [start] 1fr auto [end];
+    column-gap: 1.5rem;
+    align-items: flex-start;
+    
+    &Title {
+        grid-column: start / end;
+    }
+
+    &Registration {
+        grid-column: 1;
+        max-width: 630px;
+    }
+
+    &Step {
+        margin-bottom: 2.5rem;
+        a {
+            color: var(--accent-dark);
+        }
+
+        p {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    &StepSection {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        padding-bottom: 2.5rem;
+
+        &Fields {
+            width: 370px;
+        }
+
+        .personalData {
+            display: grid;
+            row-gap: 1.3rem;
+        }
+    }
+
+    &City,&Address {
+        font-size: 1.125rem;
+        line-height: 2;
+        margin-bottom: 1em;
+    }
+
+    &Disclaimer {
+        padding-top: 0.7rem;
+        font-size: 0.9rem;
+        color: var(--gray);
+    }
+
+    &Submit {
+        margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 1160px) {
+        &StepSection {
+            flex-direction: column;
+            gap: 0;
+            padding-left: 2rem;
+        }
+    }
+
+    @media (max-width: 900px) {
+        grid-template-columns: [start] 1fr [end];
+
+        &Preview {
+            max-width: 100%;
+        }
+
+        &Registration {
+            grid-row: 3;
+            max-width: 100%;
+            margin-top: 2rem;
+        }
+
+        &StepSection {
+            padding-bottom: 1.5rem;
+            padding-right: 2rem;
+
+            &Fields {
+                width: 100%;
+            }
+        }
+    }
+
+    @media (max-width: 430px) {
+        &StepSection {
+            padding-bottom: 1rem;
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+}

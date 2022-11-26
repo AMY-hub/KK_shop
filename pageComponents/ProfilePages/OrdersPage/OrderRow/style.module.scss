@@ -1,0 +1,72 @@
+.row {
+    td {
+        padding: 0.7rem 1rem;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        text-align: center;
+        border-bottom: 1px solid var(--gray-light);
+    }
+
+    &Price,&Status,&Date {
+        display: none;
+        padding: 0.5rem 1rem;
+        &::before {
+            font-weight: 700;
+            margin-right: 1rem;
+        }
+    }
+
+    &Date::before {
+        content: 'Дата:';
+    }
+
+    &Status::before {
+        content: 'Статус:';
+    }
+
+    &Price::before {
+        content: 'Сумма:';
+    }
+
+    &Details {
+        padding: 1.5rem;
+    }
+
+    &Card {
+        box-shadow: -3px 5px 5px rgba($color: #000000, $alpha: 0.05);
+    }
+
+    &ShowBtn {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+		margin-right: 0.5rem;
+		&::after {
+            display: block;
+            margin-right: 0.5rem;
+			font-size: 0.5rem;
+			transition: all 300ms;
+			color: var(--accent-dark);
+		}
+
+		&_active::after {
+				transform: rotate(180deg);
+                color: var(--gray);
+			}
+	}
+
+    @media (max-width: 600px) {
+        &Price,&Status,&Date {
+            display: block;
+        }
+
+        td {
+            display: none;
+            text-align: left;
+
+            &:first-child {
+                display: block;
+            }
+        }
+    }
+}

@@ -2,7 +2,6 @@ import App, { AppContext, AppProps } from 'next/app';
 import Cookies from 'js-cookie';
 import { ContextProvider } from '../context/AppContext';
 import { Layout } from '../Layout';
-import { observer } from 'mobx-react-lite';
 import { Category } from '../interfaces';
 import locationService from '../services/locationService';
 import { API } from '../api/axiosConfig';
@@ -13,10 +12,17 @@ import '../styles/vars.scss';
 import '../styles/globals.scss';
 import '../assets/iconFonts/style.css';
 
+interface Props {
+  catalog: Category[];
+  city: string;
+}
+
 function MyApp({ Component, pageProps, catalog, city }: AppProps & Props): JSX.Element {
   return (
     <ContextProvider
-      hydrationData={{ appData: { city, catalog } }}>
+      hydrationData={{
+        appData: { city, catalog }
+      }}>
       <Layout catalog={catalog}>
         <Component {...pageProps} />
       </Layout>
@@ -26,10 +32,11 @@ function MyApp({ Component, pageProps, catalog, city }: AppProps & Props): JSX.E
 
 MyApp.getInitialProps = async (context: AppContext) => {
   const req = context.ctx.req;
-  let city = '';
+  let city = 'Москва';
 
   const cityCookie = req ?
-    decodeURI(parseCookies(req.headers?.cookie || '').preferCity || '')
+    decodeURI(parseCookies(req.headers?.cookie || '')
+      .preferCity || '').replace(/%2C/g, ', ')
     : Cookies.get('preferCity');
 
   if (cityCookie) {
@@ -44,9 +51,4 @@ MyApp.getInitialProps = async (context: AppContext) => {
   return { ...ctx, city, catalog: data.categories };
 };
 
-export default observer(MyApp);
-
-interface Props {
-  catalog: Category[];
-  city: string;
-}
+export default MyApp;

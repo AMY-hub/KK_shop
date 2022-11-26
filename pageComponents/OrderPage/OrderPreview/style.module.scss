@@ -1,0 +1,70 @@
+.preview {
+	max-width: 514px;
+	padding: 2rem;
+	background-color: var(--dark-bg);
+
+	&Header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1rem;
+
+		span {
+			font-size: 1.375rem;
+			font-weight: 700;
+		}
+		
+		a {
+			font-size: 14px;
+			color: var(--gray-dark);
+		}
+	}
+
+	&Cards {
+		padding-right: 1rem;
+		display: flex;
+		flex-direction: column;
+		max-height: 500px;
+	}
+
+	&Discount {
+		width: fit-content;
+		margin-top: 1rem;
+	}
+
+	&Sum,&Delivery {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1rem;
+
+		span:first-child {
+			color: var(--gray-dark);
+		}
+	}
+
+	&Final {
+		margin-top: 1rem;
+		text-align: right;
+		font-size: 1.125rem;
+
+		span:first-child {
+			color: var(--gray-dark);
+			font-size: 12px;
+		}
+	}
+
+	@media (max-width: 900px) {
+		&Cards {
+			max-height: 300px;
+		}
+
+		&Discount {
+			margin-bottom: 1.5rem;
+		}
+	}
+
+	@media (max-width: 430px) {
+		padding: 1rem 0.5rem;
+	}
+}

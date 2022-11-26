@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
-import Link from 'next/link';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { AlertMessage, Button, CustomCheckbox, Input } from '..';
+import { isEmptySpaces } from '../../helpers/isEmptySpaces';
+import { AlertMessage, Button, CustomCheckbox, Input, PrivacyLabel } from '..';
 import { useUserContext } from '../../context/AppContext';
 import { RegisterFormFields } from '../../interfaces';
 import { RegistrationFormProps } from './props';
@@ -35,21 +35,16 @@ export const RegistrationForm = observer(({ className, onAuth, ...props }: Regis
         }
     };
 
-    const privacyLabel = (
-        <>
-            Я даю согласие на обработку своих персональных данных в соответсвии с
-            <Link href='/privacy'>
-                <a> Политикой в отношении обработки персональных данных.</a>
-            </Link>
-        </>
-    );
-
     return (
         <form
             onSubmit={handleSubmit((data, e) => submitHandler(data, e))}
             className={cn(styles.form, className)} {...props}>
             <Input
-                {...register('name', { required: 'Обязательно для заполнения', maxLength: 20 })}
+                {...register('name', {
+                    required: 'Обязательно для заполнения',
+                    maxLength: 20,
+                    validate: isEmptySpaces
+                })}
                 error={errors.name}
                 placeholder='Имя*'
                 isWide
@@ -61,7 +56,10 @@ export const RegistrationForm = observer(({ className, onAuth, ...props }: Regis
                 isWide
             />
             <Input
-                {...register('email', { required: 'Обязательно для заполнения' })}
+                {...register('email', {
+                    required: 'Обязательно для заполнения',
+                    validate: isEmptySpaces
+                })}
                 error={errors.email}
                 type='email'
                 placeholder='Ваша почта*'
@@ -89,7 +87,7 @@ export const RegistrationForm = observer(({ className, onAuth, ...props }: Regis
                 render={({ field: { ref, onChange, value } }) => (
                     <CustomCheckbox
                         error={errors.privacyCheck}
-                        label={privacyLabel}
+                        label={<PrivacyLabel />}
                         ref={ref}
                         onChange={onChange}
                         value={value}

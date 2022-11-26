@@ -72,7 +72,6 @@ export const ContactsPage = ({ points }: ContactsPageProps): JSX.Element => {
                                 </InfoBadge>
                             ))}
                     </div>
-
                 </Scroll>
                 <div
                     className={styles.contactsMapWrapper}

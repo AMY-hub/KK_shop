@@ -1,7 +1,6 @@
-import { observer } from 'mobx-react-lite';
 import Head from 'next/head';
 import { Container, Title } from '../components';
-import { BasketPage } from '../pageComponents/ProfilePages/BasketPage';
+import { BasketPage } from '../pageComponents/BasketPage';
 
 const Basket = () => {
     return (
@@ -21,4 +20,4 @@ const Basket = () => {
     );
 };
 
-export default observer(Basket);
+export default Basket;

@@ -1,0 +1,17 @@
+.pickTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.pickList {
+    button {
+        font-size: 1.125rem;
+        line-height: 2;
+        transition: color 300ms;
+
+        &:hover,&:focus {
+            color: var(--accent-dark);
+        }
+    }
+}

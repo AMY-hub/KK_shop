@@ -1,0 +1,34 @@
+.tab {
+	&Header {
+		border-bottom: 1px solid #c4c4c4;
+		margin-bottom: 2rem;
+
+		@media (max-width: 430px) {
+			margin-bottom: 1rem;
+		}
+	}
+	
+	&Btn {
+		position: relative;
+		font-family: var(--accent-font);
+		font-size: 1.2rem;
+		line-height: 1.5;
+		padding-bottom: 0.5rem;
+		margin-right: 2rem;
+		
+
+		&_active {
+			color: var(--accent-dark);
+			&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: -2px;
+			display: block;
+			width: 100%;
+			height: 3px;
+			background-color: var(--accent-dark);
+			}
+		}
+	}
+}

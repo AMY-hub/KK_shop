@@ -1,12 +1,26 @@
-import axios from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { BRAND, CATALOG, PRODUCTS } from '../../../api/APIendpoints';
 import { API } from '../../../api/axiosConfig';
+import { Preloader } from '../../../components';
 import { Brand, Category, ProductPreview, ProductsResponse } from '../../../interfaces';
 import { CatalogPage } from '../../../pageComponents/CatalogPage';
 
+interface PageProps {
+    products: ProductPreview[];
+    count: number;
+    brands: Brand[];
+}
+
 function CategoryCatalog({ products, count, brands }: PageProps): JSX.Element {
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return (
+            <Preloader />
+        );
+    }
 
     return (
         <div>
@@ -31,11 +45,8 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
     }
 
     const { data: { brands } } = await API.get<{ brands: Brand[] }>(BRAND);
-
     const { data: { categories } } = await API.get<{ categories: Category[] }>(CATALOG);
-
     const category = categories.find(el => params.category === el.route);
-
     const { data } = await API.get<ProductsResponse>(PRODUCTS + `?categoryId=${category?.id}`);
 
     return {
@@ -50,7 +61,6 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const { data } = await API.get<{ categories: Category[] }>(CATALOG);
-
     const paths = data.categories.map(el => ({ params: { category: el.route } }));
 
     return {
@@ -58,11 +68,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
         fallback: true
     };
 };
-
-interface PageProps {
-    products: ProductPreview[];
-    count: number;
-    brands: Brand[];
-}
 
 export default CategoryCatalog;

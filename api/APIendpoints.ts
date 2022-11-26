@@ -15,5 +15,6 @@ export const BASKET = DOMAIN + 'api/basket';
 export const BASKET_ITEM = DOMAIN + 'api/basket/item';
 export const PROMO = DOMAIN + 'api/promocode/code';
 export const ADDRESS = DOMAIN + 'api/address';
+export const ORDER = DOMAIN + 'api/order';
 
 

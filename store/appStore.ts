@@ -9,7 +9,7 @@ export interface AppHydration {
 
 export class AppStore {
     private root: RootStore;
-    city = 'г Санкт-Петербург';
+    city = 'Москва';
     catalog: Category[] = [];
 
     constructor(root: RootStore) {

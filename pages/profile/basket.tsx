@@ -2,8 +2,9 @@ import { observer } from 'mobx-react-lite';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { Preloader } from '../../components';
 import { useUserContext } from '../../context/AppContext';
-import { BasketPage } from '../../pageComponents/ProfilePages/BasketPage';
+import { BasketPage } from '../../pageComponents/BasketPage';
 import { ProfileLayout } from '../../pageComponents/ProfilePages/ProfileLayout';
 
 const Basket = () => {
@@ -18,7 +19,7 @@ const Basket = () => {
     }, [status, user, router]);
 
     if (!user && status === 'loading') {
-        return (<div>Loading...</div>);
+        return <Preloader />;
     }
 
     return (

@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { Preloader } from '../../components';
 import { useUserContext } from '../../context/AppContext';
 import { FavPage } from '../../pageComponents/ProfilePages/FavPage';
 import { ProfileLayout } from '../../pageComponents/ProfilePages/ProfileLayout';
@@ -18,7 +19,7 @@ const Favourites = () => {
     }, [status, user, router]);
 
     if (!user && status === 'loading') {
-        return (<div>Loading...</div>);
+        return <Preloader />;
     }
 
     return (

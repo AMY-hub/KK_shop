@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { BRAND, PRODUCTS } from '../../api/APIendpoints';
+import { API } from '../../api/axiosConfig';
 import { Brand, ProductPreview, ProductsResponse } from '../../interfaces';
 import { CatalogPage } from '../../pageComponents/CatalogPage';
 
@@ -21,9 +21,8 @@ function ProductsCatalog({ count, products, brands }: PageProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-    const { data } = await axios.get<ProductsResponse>(PRODUCTS);
-
-    const { data: { brands } } = await axios.get<{ brands: Brand[] }>(BRAND);
+    const { data } = await API.get<ProductsResponse>(PRODUCTS);
+    const { data: { brands } } = await API.get<{ brands: Brand[] }>(BRAND);
 
     return {
         props: {

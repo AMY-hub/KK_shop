@@ -1,0 +1,50 @@
+.internal {
+	padding-top: 3rem;
+
+	&Header {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 2rem;
+
+		svg  {
+			flex-shrink: 0;
+		}
+
+		h1 {
+			margin-left: 2rem;
+		}
+
+		span {
+			color: var(--accent-dark);
+		}
+	}
+
+	&Text {
+		text-align: center;
+	}
+
+	a {
+		color: var(--accent-dark);
+	}
+
+	@media (max-width: 600px) {
+		padding-top: 1rem;
+		
+		&Header {
+			margin-bottom: 0;
+
+			h1 {
+				margin-left: 0;
+			}
+
+			svg  {
+				transform: scale(0.7);
+			}
+		}
+
+		&Text {
+		text-align: left;
+	}
+	}
+}

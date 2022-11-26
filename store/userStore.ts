@@ -39,6 +39,12 @@ export class UserStore {
         return this._status;
     }
 
+    updateBonusCard = (points: number) => {
+        if (this._userData) {
+            this._userData.bonus_card.points = points;
+        }
+    };
+
     resetUser() {
         this.error = '';
         this.isLoggedIn = false;
@@ -49,8 +55,6 @@ export class UserStore {
     }
 
     login = async (data: LoginFormFields): Promise<void> => {
-        console.log('LOGIN in STORE', data);
-
         try {
             this._status = 'loading';
             const res = await userService.login(data);

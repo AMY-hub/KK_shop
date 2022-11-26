@@ -5,7 +5,7 @@
 	grid-template-columns: minmax(200px, 550px) minmax(300px, auto);
 	gap: 2rem;
 	justify-items: flex-start;
-	padding-bottom: 2rem;
+	padding-bottom: 3rem;
 
 	&Img {
 		height: 100%;
@@ -91,7 +91,7 @@
 	}
 
 	&Btns {
-		margin-top: auto;
+		margin-top: 2rem;
 		display: flex;
 		justify-content: flex-start;
 
@@ -106,6 +106,7 @@
 	}
 
 	@media (max-width: 860px) {
+		padding-bottom: 2rem;
 		&Name,&Art,&Vol,&Price,&Title {
 		margin-bottom: 0.5rem;
 		}

@@ -32,8 +32,8 @@ API.interceptors.response.use((res) => {
         && originalRequest
         && !originalRequest.isRetry
         && typeof window !== 'undefined') {
-
         originalRequest.isRetry = true;
+
         try {
             const res = await axios.get<UserResponse>(REFRESH, { withCredentials: true });
             tokenService.setAccessToken(res.data.accessToken);

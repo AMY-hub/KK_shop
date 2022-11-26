@@ -1,0 +1,27 @@
+.card {
+		display: flex;
+		margin-bottom: 1rem;
+
+		&Img {
+			flex-shrink: 0;
+		}
+
+		&Text {
+			margin-left: 0.5rem;
+		}
+
+		&Name{
+			margin-bottom: 0.5rem;
+			font-family: 'Bebas Neue';
+			color: var(--semi-black);
+			font-weight: 700;
+			line-height: 1.1;
+			letter-spacing: 0.04rem;
+			text-transform: uppercase;
+		}
+
+		&Amount {
+			font-size: .875rem;
+			color: var(--gray-dark);
+		}	
+}

@@ -1,77 +1,102 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { animate, AnimateSharedLayout, AnimationOptions, motion, PanInfo, useMotionValue } from 'framer-motion';
-import { useHeightResize } from './useHeightResize';
+import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ProductSliderProps } from './props';
 
 import styles from './style.module.scss';
 
-export const ProductSlider = ({ images }: ProductSliderProps): JSX.Element => {
+export const ProductSlider = ({ images, className, ...rest }: ProductSliderProps): JSX.Element => {
 
-    const [currentIdx, setCurrentIdx] = useState<number>(0);
-    const sliderRef = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const slideRef = useRef<HTMLDivElement>(null);
+    const [page, setPage] = useState(0);
 
-    const [height, scrollHeight] = useHeightResize(sliderRef, slideRef, 550);
-
-    const slides = images.map((img, idx) => (
+    const slides = images.map((img) => (
         <motion.div
-            ref={slideRef}
             className={styles.sliderSlide}
             key={img}
-        >
-            <Image
-                draggable="false"
-                src={process.env.NEXT_PUBLIC_DOMAIN + img}
-                layout='intrinsic'
-                width={550}
-                height={550}
-            />
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 10, opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            drag="y"
+            whileTap={{ cursor: 'grabbing' }}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(e, { offset }) => {
+                if (offset.y < 0) {
+                    paginate(-1);
+                }
+                if (offset.y > 0) {
+                    paginate(1);
+                }
+            }}>
+            <div className={styles.sliderImg}>
+                <Image
+                    draggable="false"
+                    src={process.env.NEXT_PUBLIC_DOMAIN + img}
+                    layout='intrinsic'
+                    width={550}
+                    height={550}
+                />
+            </div>
         </motion.div>
     ));
 
+    const paginate = (direction: number) => {
+        if (page + direction < images.length && page + direction >= 0) {
+            setPage(page + direction);
+        } else if (page + direction === images.length) {
+            setPage(0);
+        } else if (page + direction === -1) {
+            setPage(images.length - 1);
+        }
+    };
+
     function Pagination() {
         return (
-            <AnimateSharedLayout>
-                <div className={styles.pagination}>
-                    {images.map((el, idx) => (
-                        <div
-                            key={el}
-                            className={styles.dotWrapper}
-                            onClick={() => setCurrentIdx(idx)}
-                        >
-                            <div className={styles.dot}>
-                                {currentIdx === idx && (
+            <div className={styles.pagination}>
+                {images.map((el, idx) => (
+                    <div
+                        key={el}
+                        className={styles.dotWrapper}
+                        onClick={() => setPage(idx)}
+                    >
+                        <div className={styles.dot}>
+                            <AnimatePresence>
+                                {page === idx && (
                                     <motion.div
-                                        layoutId="highlight"
+                                        key={idx}
+                                        initial={{ scale: 0.1, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
+                                        exit={{ scale: 0.1, opacity: 0 }}
+                                        transition={{ duration: 0.4 }}
                                         className={styles.dot_active} />
                                 )}
-                            </div>
+                            </AnimatePresence>
                         </div>
-                    ))}
-                </div>
-            </AnimateSharedLayout>
+                    </div>
+                ))}
+            </div>
         );
     }
 
     return (
-        <div>
-            <motion.div
-                style={{ height }}
-                className={styles.slider}
-                ref={containerRef}
-            >
-                <motion.div
-                    ref={sliderRef}
-                    drag="y"
-                    whileTap={{ cursor: 'grabbing' }}
-                    dragConstraints={{ bottom: 0, top: -scrollHeight }}
-                    key={scrollHeight}
-                    className={styles.sliderWrapper}>
-                    {slides}
-                </motion.div>
-            </motion.div>
+        <div className={cn(styles.wrapper, className)} {...rest}>
+            <div className={styles.slider}>
+                {images.length !== 0 &&
+                    <AnimatePresence initial={false}>
+                        {slides[page]}
+                        <div className={styles.fake}>
+                            <Image
+                                src={process.env.NEXT_PUBLIC_DOMAIN + images[0]}
+                                layout='intrinsic'
+                                width={550}
+                                height={550}
+                            />
+                        </div>
+                    </AnimatePresence>
+                }
+            </div>
             <Pagination />
         </div>
     );

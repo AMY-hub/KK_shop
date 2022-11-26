@@ -1,0 +1,46 @@
+@import "../../styles/rem";
+
+.dropdown {
+	&Header {
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 3.5rem;
+	}
+
+	.dropdownContent_hidden {
+		display: none;
+		transition: all 300ms;
+	}
+
+	&ExpBtn {
+		margin-left: 1rem;
+		&::after {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 0.6rem;
+			transition: all 300ms;
+			color: var(--gray);
+		}
+
+		&_active {
+			&::after {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	 @media (max-width: 1160px) {
+		&Header {
+			margin-bottom: 1rem;
+		}
+	}
+
+	@media (max-width: 900px) {
+		&Header {
+			justify-content: flex-start;
+		}
+	}
+}

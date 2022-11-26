@@ -1,35 +1,32 @@
 import cn from 'classnames';
-import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
+import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import { AddressSuggestions, DaDataAddressSuggestion } from "react-dadata";
 import "react-dadata/dist/react-dadata.css";
-import { useAppContext } from '../../context/AppContext';
-import { CityPickerProps } from './props';
+import { AddressPickerProps } from './props';
 
 import styles from './style.module.scss';
 
-export const CityPicker = ({ uid, defaultCity, onSelect, className, ...rest }: CityPickerProps) => {
+export const AddressPicker = forwardRef(({ uid, city, defaultQuery = '', onSelect, onChange, className, ...rest }: AddressPickerProps, ref: ForwardedRef<AddressSuggestions>) => {
 
     const [value, setValue] = useState<DaDataAddressSuggestion>();
-    const appStore = useAppContext();
+
     useEffect(() => {
-        if (value) {
-            appStore.city = value.value;
-            Cookies.set('preferCity', value.value, { expires: 365 });
-            if (onSelect) {
-                onSelect();
-            }
-        } else {
-            Cookies.set('preferCity', defaultCity, { expires: 365 });
+        if (value && onChange) {
+            onChange(value.value);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value, onSelect]);
+        if (value && onSelect) {
+            onSelect();
+        }
+    }, [value, onChange, onSelect]);
+
+    const cityNameArr = city.match(/г [А-Я \-а-я]{1,}/);
+    const cityName = cityNameArr ? cityNameArr[0].replace('г ', '') : '';
 
     return (
         <div className={cn(styles.picker, className)} {...rest}>
-            <h1 className={styles.pickerTitle}>
-                Выберите ваш город:
-            </h1>
+            <div className={styles.pickerTitle}>
+                Выберите ваш адрес:
+            </div>
             <p className={styles.pickerText}>
                 Вы можете выбрать <span>более 150 000</span> населённых пунктов по всей Российской Федерации.
             </p>
@@ -39,14 +36,18 @@ export const CityPicker = ({ uid, defaultCity, onSelect, className, ...rest }: C
                 suggestionClassName={styles.pickerOption}
                 uid={uid}
                 token={process.env.NEXT_PUBLIC_DADATA_API_KEY || ''}
-                inputProps={{ placeholder: "Найти город" }}
-                defaultQuery={defaultCity}
+                inputProps={{
+                    placeholder: "Найти адрес",
+                }}
+                defaultQuery={defaultQuery}
                 value={value}
                 onChange={setValue}
                 delay={500}
                 filterFromBound='city'
-                filterToBound='city'
+                filterToBound='houses'
+                filterLocations={[{ "city": cityName }]}
+                ref={ref}
             />
         </div>
     );
-};
+});

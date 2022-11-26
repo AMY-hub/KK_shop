@@ -1,0 +1,38 @@
+.discounts {
+	position: relative;
+    margin-bottom: 50px;
+
+	&Bonus {
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+        line-height: 2;
+        color: var(--gray);
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            color: var(--semi-black);
+            font-weight: 600;
+        }
+    }
+
+	&Field {
+		margin-bottom: 0.5rem;
+	}
+
+	&Message {
+		position: absolute;
+		bottom: -40px;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		color: var(--accent-dark);
+	}
+
+	@media (max-width: 620px) {
+		&Message {
+			right: 0;
+		}
+	}
+}
+
+   

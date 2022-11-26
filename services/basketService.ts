@@ -26,6 +26,10 @@ class BasketService {
     checkPromo = async (name: string): Promise<AxiosResponse<PromoCode | null>> => {
         return API.post<PromoCode | null>(PROMO, { name });
     };
+
+    clearBasket = async (basketId: number): Promise<AxiosResponse<number>> => {
+        return API.delete<number>(BASKET + `/${basketId}`);
+    };
 }
 
 export default new BasketService();

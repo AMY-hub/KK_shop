@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { isEmptySpaces } from '../../helpers/isEmptySpaces';
 import { useForm } from "react-hook-form";
 import { FormInput, SubscriptionFormProps } from './props';
 import { useSubmit } from '../../hooks/useSubmit';
@@ -36,6 +37,7 @@ export const SubscriptionForm = ({ className, ...props }: SubscriptionFormProps)
                 <Input
                     {...register('email', {
                         required: true,
+                        validate: isEmptySpaces
                     })}
                     error={errors.email}
                     type='email'

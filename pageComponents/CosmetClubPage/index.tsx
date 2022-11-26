@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { BreadCrumbs, Container, Title } from '../../components';
-import clubImg from '../../assets/images/club.jpg';
+import clubImg from '../../assets/images/club_c.jpg';
 
 import styles from './style.module.scss';
 

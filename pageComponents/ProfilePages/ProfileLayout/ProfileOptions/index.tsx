@@ -15,7 +15,6 @@ export const ProfileOptions = ({ className, ...props }: ProfileOptionsProps): JS
         { name: 'Моя корзина', link: '/profile/basket' },
         { name: 'Мои заказы', link: '/profile/orders' },
         { name: 'Избранное', link: '/profile/favourites' },
-        { name: 'Личная информация', link: '/profile/information' },
     ];
 
     return (

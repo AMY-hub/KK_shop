@@ -1,0 +1,43 @@
+.footer {
+    padding: 1rem 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    &Price {
+        margin-bottom: 0.5rem;
+        display: flex;
+        font-size: 18px;
+        text-align: right;
+        span {
+            font-size: 14px;
+            line-height: 2;
+            color: var(--gray)
+        }
+    }
+
+    &Discount {
+        margin-right: 2rem;
+        color: var(--accent-dark);
+    }
+
+    &Order {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    @media (max-width: 620px) {
+        flex-direction: column;
+        align-items: flex-end;
+
+        &Price {
+            justify-content: flex-end;
+        }
+
+        &Order {
+            margin: 0;
+        }
+    }
+}
