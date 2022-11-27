@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import cn from 'classnames';
-import { ProductCardProps } from './props';
-
-import styles from './style.module.scss';
-import { InfoBadge } from '../../InfoBage';
 import { ForwardedRef, forwardRef } from 'react';
 import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
+import cn from 'classnames';
+import { ProductCardProps } from './props';
+import { InfoBadge } from '../..';
+
+import styles from './style.module.scss';
 
 export const ProductCard = forwardRef(({ productData, className, ...props }: ProductCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { AlertMessage, Button, DiscountsPanel } from '../../../components';
+import { Button, DiscountsPanel } from '../../../components';
 import { useBasketContext } from '../../../context/AppContext';
 
 import styles from './style.module.scss';
@@ -27,13 +27,6 @@ export const BasketFooter = observer((): JSX.Element => {
                 </div>
 
             </div>
-
-            {basketStore.error &&
-                <AlertMessage
-                    message={basketStore.error}
-                    type='warning'
-                    onClose={() => basketStore.error = ''}
-                />}
 
             <div className={styles.footerOrder}>
                 <Button

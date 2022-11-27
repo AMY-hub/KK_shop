@@ -8,10 +8,10 @@ import { RootStore } from './rootStore';
 
 export class UserStore {
     private _root: RootStore;
-    private _userData: UserData | null = null;
+    private _user: UserData | null = null;
+    private _error = '';
     isLoggedIn = false;
-    private _status: 'idle' | 'loading' | 'error' = 'idle';
-    error = '';
+    status: 'idle' | 'loading' = 'idle';
 
     constructor(root: RootStore) {
         this._root = root;
@@ -19,100 +19,97 @@ export class UserStore {
         makeAutoObservable(this);
     }
 
+    get user() {
+        return this._user;
+    }
+
+    set error(message: string) {
+        this._error = message;
+    }
+
+    get error() {
+        return this._error;
+    }
+
     setUser(data: UserResponse) {
-        console.log('Set USER', data);
         this.error = '';
         this.isLoggedIn = true;
-        this._userData = data.user;
-        this._root.basketStore.setBasket(data.basket);
-        console.log('USER BASKET SET', data.basket);
-
-        this._root.favStore.setFavList(data.fav_list);
+        this._user = data.user;
+        this._root.basketStore.basket = data.basket;
+        this._root.favStore.favList = data.fav_list;
         tokenService.setAccessToken(data.accessToken);
     }
-
-    get user() {
-        return this._userData;
-    }
-
-    get status() {
-        return this._status;
-    }
-
-    updateBonusCard = (points: number) => {
-        if (this._userData) {
-            this._userData.bonus_card.points = points;
-        }
-    };
 
     resetUser() {
         this.error = '';
         this.isLoggedIn = false;
-        this._userData = null;
-        this._root.basketStore.setBasket([]);
-        this._root.favStore.setFavList([]);
+        this._user = null;
+        this._root.basketStore.basket = [];
+        this._root.favStore.favList = [];
         tokenService.removeAccessToken();
     }
 
-    login = async (data: LoginFormFields): Promise<void> => {
+    async login(data: LoginFormFields) {
         try {
-            this._status = 'loading';
+            this.status = 'loading';
             const res = await userService.login(data);
             if (res.status === 200) {
                 runInAction(() => {
                     this.setUser(res.data);
-                    this._status = 'idle';
+                    this.status = 'idle';
                 });
             }
         } catch (err) {
-            this._status = 'error';
             this.error = getErrorMessage(err);
         }
-    };
+    }
 
-    registration = async (data: RegisterFormFields): Promise<void> => {
+    async registration(data: RegisterFormFields) {
         try {
-            this._status = 'loading';
+            this.status = 'loading';
             const res = await userService.registration(data);
             if (res.status === 200) {
                 runInAction(() => {
                     this.setUser(res.data);
-                    this._status = 'idle';
+                    this.status = 'idle';
                 });
             }
         } catch (err) {
-            this._status = 'error';
             this.error = getErrorMessage(err);
         }
-    };
+    }
 
-    logout = async (): Promise<void> => {
+    async logout() {
         try {
             await userService.logout();
             this.resetUser();
         } catch (err) {
-            this._status = 'error';
             this.error = getErrorMessage(err);
         }
-    };
+    }
 
-    checkAuth = async (): Promise<void> => {
+    async checkAuth() {
         try {
-            this._status = 'loading';
+            this.status = 'loading';
             const res = await userService.checkAuth();
             if (res.status === 200) {
                 runInAction(() => {
                     this.setUser(res.data);
-                    this._status = 'idle';
+                    this.status = 'idle';
                 });
             }
         } catch (err) {
             if (axios.isAxiosError(err) && err.response?.status === 401) {
                 return;
             } else {
-                this._status = 'error';
                 this.error = getErrorMessage(err);
             }
+        }
+    }
+
+    updateBonusCard = (points: number) => {
+        if (this._user) {
+            this._user.bonus_card.points = points;
         }
     };
 }

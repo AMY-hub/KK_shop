@@ -1,7 +1,5 @@
-@import "../../../styles/rem.scss";
-
 .card {
-	padding: rem(22) 0 rem(39);
+	padding: 1.375rem 0 2.4375rem;
 	font-family: var(--main-font);
 	border-bottom: 1px solid var(--dark-bg);
 
@@ -37,10 +35,10 @@
 
 	&Title {
 		grid-column: 1;
-		margin-bottom: rem(13);
+		margin-bottom: .8125rem;
 		font-family: 'Bebas Neue';
 		color: var(--semi-black);
-		font-size: rem(18);
+		font-size: 1.125rem;
 		font-weight: 700;
 		line-height: 1.1;
 		letter-spacing: 0.04rem;
@@ -61,18 +59,18 @@
 	}
 
 	&Price {
-		font-size: rem(18);
+		font-size: 1.125rem;
 		color: var(--semi-black);
 	}
 
 	&PriceOld {
-		font-size: rem(18);
-		margin-right: rem(20);
+		font-size: 1.125rem;
+		margin-right: 1.25rem;
 		color: var(--gray-light);
 	}
 
 	&Discount {
-		font-size: rem(14);
+		font-size: .875rem;
 		line-height: 2;
 		text-align: right;
 		color: var(--accent-dark);

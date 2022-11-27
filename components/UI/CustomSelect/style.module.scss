@@ -1,8 +1,6 @@
-@import "../../styles/rem";
-
 .input {
-	padding-top: rem(8);
-	padding-bottom: rem(8);
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
 	border: none;
 	border-bottom: 1.5px solid var(--gray-light);
 	outline: none;

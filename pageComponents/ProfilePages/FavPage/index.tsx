@@ -4,7 +4,7 @@ import { useFavContext } from '../../../context/AppContext';
 
 export const FavPage = observer((): JSX.Element => {
 
-    const favList = useFavContext().getFavList();
+    const favList = useFavContext().favList;
 
     return (
         <div>

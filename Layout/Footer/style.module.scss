@@ -1,5 +1,3 @@
-@import "../../styles/rem";
-
 .footer {
 	&Container {
 		display: grid;
@@ -10,8 +8,8 @@
 			"copy copy . privacy privacy privacy privacy";
 		grid-template-columns: repeat(3, auto 1fr) auto;
 		align-items: flex-start;
-		padding-top: rem(30);
-		padding-bottom: rem(30);
+		padding-top: 1.875rem;
+		padding-bottom: 1.875rem;
 		gap: 2rem;
 
 		@media (max-width: 1060px) {
@@ -49,8 +47,8 @@
 	}
 
 	&Title {
-		margin-bottom: rem(8);
-		font-size: rem(22);
+		margin-bottom: 0.5rem;
+		font-size: 1.375rem;
 		line-height: 1.5;
 	}
 

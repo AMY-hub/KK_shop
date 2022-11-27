@@ -1,5 +1,3 @@
-@import "../../../styles/rem";
-
 .delivery {
 	font-family: var(--accent-font);
 	font-size: 1rem;
@@ -17,8 +15,8 @@
 	}
 
 	ol > li {
-		margin-bottom: rem(40);
-		padding-left: rem(30);
+		margin-bottom: 2.5rem;
+		padding-left: 1.875rem;
 		font-weight: 700;
 
 		p {
@@ -26,38 +24,38 @@
 		}
 
 		@media (max-width: 760px) {
-			margin-bottom: rem(30);
-			padding-left: rem(5);
+			margin-bottom: 1.875rem;
+			padding-left: .3125rem;
 		}
 	}
 
 	&Controls {
 		display: flex;
-		gap: rem(23);
-		padding: rem(26) 0;
+		gap: 1.4375rem;
+		padding: 1.625rem 0;
 
 		@media (max-width: 430px) {
-			padding: rem(5) 0 rem(10) 0;
+			padding: .3125rem 0 .625rem 0;
 		}
 	}
 
 	&Delivery {
-		padding: rem(20) 0 rem(60) rem(15);
+		padding: 1.25rem 0 3.75rem .9375rem;
 
 		@media (max-width: 760px) {
-			padding: rem(10) 0 rem(20) rem(15);
+			padding: .625rem 0 1.25rem .9375rem;
 		}
 	}
 
 	&Receiving {
-		padding: rem(20) 0 rem(60) rem(45);
+		padding: 1.25rem 0 3.75rem 2.8125rem;
 
 		h4 {
 			margin-bottom: 1rem;
 		}
 
 		@media (max-width: 760px) {
-			padding: rem(10) 0 rem(20) 0;
+			padding: .625rem 0 1.25rem 0;
 		}
 	}
 

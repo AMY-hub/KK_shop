@@ -1,18 +1,16 @@
-@import "../../styles/rem";
-
 .club {
 	display: grid;
 	grid-template-columns: 650px 1fr;
-	column-gap: rem(82);
+	column-gap: 5.125rem;
 
 	@media (max-width: 1720px) {
 		grid-template-columns: 400px 1fr;
-		column-gap: rem(52);
+		column-gap: 3.25rem;
 	}
 
 	@media (max-width: 1060px) {
 		grid-template-columns: 257px 1fr;
-		column-gap: rem(32);
+		column-gap: 2rem;
 	}
 
 	@media (max-width: 900px) {
@@ -25,14 +23,14 @@
 }
 
 .clubInfo {
-	padding-right: rem(200);
-	padding-bottom: rem(52);
+	padding-right: 12.5rem;
+	padding-bottom: 3.25rem;
 	color: var(--gray);
 	font-size: 16px;
 	line-height: 1.5;
 
 	h2 {
-		margin-bottom: rem(20);
+		margin-bottom: 1.25rem;
 		color: var(--black);
 		font-size: 22px;
 		font-weight: 500;
@@ -51,14 +49,14 @@
 
 	&Reg {
 		display: flex;
-		gap: rem(80);
+		gap: 5rem;
 	}
 
 	@media (max-width: 1720px) {
-		padding-right: rem(50);
+		padding-right: 3.125rem;
 
 		&Reg {
-			gap: rem(30);
+			gap: 1.875rem;
 		}
 	}
 
@@ -67,7 +65,7 @@
 
 		&Reg {
 			flex-direction: column;
-			gap: rem(10);
+			gap: .625rem;
 		}
 	}
 }

@@ -12,7 +12,6 @@ import 'swiper/css/autoplay';
 import "swiper/css/effect-fade";
 
 import styles from './style.module.scss';
-import { useEffect, useState } from 'react';
 
 export const MainInfoSlider = (): JSX.Element => {
 

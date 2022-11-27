@@ -12,7 +12,7 @@ import { observer } from 'mobx-react-lite';
 
 export const UserControls = observer(({ className, ...props }: UserControlsProps): JSX.Element => {
 
-    const basket = useBasketContext().getBasket();
+    const basket = useBasketContext().basket;
 
     return (
         <div className={cn(styles.controls, className)} {...props}>

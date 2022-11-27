@@ -1,20 +1,18 @@
-@import "../../styles/rem";
-
 .infoSlider {
-	margin-bottom: rem(62);
+	margin-bottom: 3.875rem;
 
 	@media (max-width: 760px) {
-		margin-bottom: rem(32);
+		margin-bottom: 2rem;
 	}
 }
 
 .about {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	padding-bottom: rem(36);
+	padding-bottom: 2.25rem;
 
 	&Info {
-		margin-left: 62px;
+		margin-left: 3.875rem;
 		margin-bottom: 1rem;
 
 		p {
@@ -49,7 +47,7 @@
 	@media (max-width: 1060px) {
 		grid-template-columns: 1fr;
 		gap: 1rem;
-		padding: 0 3rem rem(26) 3rem;
+		padding: 0 3rem 1.625rem 3rem;
 	}
 
 	@media (max-width: 760px) {
@@ -71,15 +69,15 @@
 .advantages {
 	display: grid;
 	grid-template-columns: repeat(4, auto);
-	gap: rem(26);
-	padding-bottom: rem(150);
+	gap: 1.625rem;
+	padding-bottom: 150px;
 
 	@media (max-width: 1130px) {
 		grid-template-columns: repeat(2, 1fr);
 	}
 
 	@media (max-width: 1060px) {
-		padding-bottom: rem(60);
+		padding-bottom: 3.75rem;
 	}
 
 	@media (max-width: 600px) {
@@ -88,18 +86,18 @@
 	}
 
 	@media (max-width: 430px) {
-		padding-bottom: rem(30);
+		padding-bottom: 1.875rem;
 	}
 }
 
 .products > div {
-	margin-bottom: rem(150);
+	margin-bottom: 150px;
 
 	@media (max-width: 1060px) {
-		margin-bottom: rem(80);
+		margin-bottom: 5rem;
 	}
 
 	@media (max-width: 760px) {
-		margin-bottom: rem(50);
+		margin-bottom: 3.1280rem;
 	}
 }

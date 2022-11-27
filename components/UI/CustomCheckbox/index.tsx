@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import cn from 'classnames';
+import { ErrorMessage } from '../..';
 import { CustomCheckboxProps } from './props';
-import { ErrorMessage } from '../index';
 
 import styles from './style.module.scss';
 

@@ -1,5 +1,3 @@
-@import "../../../styles/rem.scss";
-
 .product {
 	display: grid;
 	grid-template-columns: minmax(200px, 550px) minmax(300px, auto);
@@ -37,7 +35,7 @@
 	}
 
 	&Art {
-		font-size: rem(14);
+		font-size: .875rem;
 		line-height: 2;
 		color: var(--gray-light);
 	}
@@ -54,7 +52,7 @@
 	&Price {
 		display: flex;
 		font-weight: 700;
-		font-size: rem(24);
+		font-size: 1.5rem;
 		line-height: 1.5;
 
 		&Old {
@@ -78,14 +76,14 @@
 		&OldText {
 			color: var(--gray-light);
 			font-weight: 500;
-			font-size: rem(12);
+			font-size: .75rem;
 			line-height: 1.5;
 		}
 
 		&NewText {
 			color: var(--accent-pale);
 			font-weight: 500;
-			font-size: rem(12);
+			font-size: .75rem;
 			line-height: 1.5;
 		}
 	}
@@ -96,7 +94,7 @@
 		justify-content: flex-start;
 
 		button {
-			margin-right: rem(30);
+			margin-right: 1.875rem;
 		}
 	}
 

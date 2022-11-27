@@ -6,7 +6,7 @@ import { BasketFooter } from './BasketFooter';
 import styles from './style.module.scss';
 
 export const BasketPage = observer((): JSX.Element => {
-    const basket = useBasketContext().getBasket();
+    const basket = useBasketContext().basket;
     const basketStatus = useBasketContext().status;
 
     if (typeof window === 'undefined' || basketStatus === 'loading') {

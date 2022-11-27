@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { motion } from 'framer-motion';
-import CloseIcon from '../../assets/images/icons/clear.svg';
+import CloseIcon from '../../../assets/images/icons/clear.svg';
 import { AlertMessageProps } from './props';
 
 import styles from './style.module.scss';

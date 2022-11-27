@@ -11,7 +11,7 @@ import styles from './style.module.scss';
 export const AddressTab = observer(({ addresses, control, pickFn, onSelectFn }: AddressTabProps): JSX.Element => {
 
     const [currentTab, setCurrentTab] = useState<'pick' | 'address'>('address');
-    const city = useAppContext().city;
+    const { city } = useAppContext();
 
     return (
         <div className={styles.tab}>

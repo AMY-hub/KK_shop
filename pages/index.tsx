@@ -5,6 +5,12 @@ import { API } from '../api/axiosConfig';
 import { ProductPreview, ProductsResponse, Sale } from '../interfaces';
 import { MainPage } from '../pageComponents/MainPage';
 
+interface PageProps {
+  newest: ProductPreview[];
+  sale: ProductPreview[] | null;
+  popular: ProductPreview[];
+}
+
 function Home({ newest, sale, popular }: PageProps): JSX.Element {
 
   return (
@@ -46,11 +52,5 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
     }
   };
 };
-
-interface PageProps {
-  newest: ProductPreview[];
-  sale: ProductPreview[] | null;
-  popular: ProductPreview[];
-}
 
 export default Home;

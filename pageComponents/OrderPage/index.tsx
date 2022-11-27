@@ -2,8 +2,9 @@ import { observer } from 'mobx-react-lite';
 import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import cn from 'classnames';
+import { AnimatePresence } from 'framer-motion';
 import { CustomCheckbox, Dropdown, Input, Button, Title, Container, RadioBadge, PrivacyLabel, Modal, CityPicker, InputTel, AlertMessage } from '../../components';
-import { useAppContext, useUserContext } from '../../context/AppContext';
+import { useAppContext, useBasketContext, useUserContext } from '../../context/AppContext';
 import { OrderPreview } from './OrderPreview';
 import { StepHeader } from './StepHeader';
 import { isEmptySpaces } from '../../helpers/isEmptySpaces';
@@ -16,12 +17,12 @@ import CardIcon from '../../assets/images/icons/credit-card.svg';
 import PickIcon from '../../assets/images/icons/pick.svg';
 
 import styles from './style.module.scss';
-import { AnimatePresence } from 'framer-motion';
 
 export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.Element => {
 
     const userState = useUserContext();
     const city = useAppContext().city;
+    const basket = useBasketContext().basket;
     const [delivery, setDelivery] = useState<Delivery>('курьер');
     const [modalAddressShown, setModalAddressShown] = useState<boolean>(false);
     const [modalCityShown, setModalCityShown] = useState<boolean>(false);
@@ -98,6 +99,14 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
 
     if (orderNumber) {
         return (<SuccessMessage order={orderNumber} isAuthorized={userState.isLoggedIn} />);
+    }
+    if (basket.length === 0) {
+        return (
+            <Container>
+                <Title tag='h2'>
+                    Добавьте товары в корзину, чтобы оформить заказ.
+                </Title>
+            </Container>);
     }
 
     return (

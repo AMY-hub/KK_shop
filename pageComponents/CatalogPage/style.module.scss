@@ -1,12 +1,10 @@
-@import "../../styles/rem";
-
 .cards {
 	display: grid;
-	bottom: rem(200);
+	bottom: 12.5rem;
 	grid-auto-flow: dense;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	margin-top: rem(50);
-	gap: rem(38);
+	margin-top: 3.125rem;
+	gap: 2.375rem;
 
 	&Big {
 		grid-column: span 2;
@@ -32,6 +30,6 @@
 		}
 
 		grid-template-columns: 1fr;
-		gap: rem(20);
+		gap: 1.25rem;
 	}
 }

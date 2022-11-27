@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { Category } from '../interfaces';
 import { RootStore } from './rootStore';
 
@@ -19,8 +19,10 @@ export class AppStore {
 
     hydrate(data: AppHydration) {
         if (data) {
-            this.city = data.city;
-            this.catalog = data.catalog;
+            runInAction(() => {
+                this.city = data.city;
+                this.catalog = data.catalog;
+            });
         }
     }
 }

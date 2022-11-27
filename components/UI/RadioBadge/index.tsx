@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { RadioBadgeProps } from './props';
-import { ErrorMessage } from '../index';
+import { ErrorMessage } from '../..';
 
 import styles from './style.module.scss';
 

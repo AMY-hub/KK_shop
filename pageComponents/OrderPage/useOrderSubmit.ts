@@ -19,7 +19,7 @@ export const useOrderSubmit: UseOrderSubmit = (reset, deliveryPrice) => {
     const [error, setError] = useState<string>('');
 
     const basketStore = useBasketContext();
-    const basket = basketStore.getBasket();
+    const basket = basketStore.basket;
     const userState = useUserContext();
     const city = useAppContext().city;
 

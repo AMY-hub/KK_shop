@@ -1,44 +1,42 @@
-@import "../../styles/rem";
-
 .product {
-	padding-bottom: rem(120);
+	padding-bottom: 7.5rem;
 
     &Card {
         margin-bottom: 2rem;
     }
 
     &Adv {
-        margin-bottom: rem(40);
+        margin-bottom: 2.5rem;
     }
 
     @media (max-width: 1060px) {
-        padding-bottom: rem(70);
+        padding-bottom: 4.375rem;
     }
 
      @media (max-width: 760px) {
-        padding-bottom: rem(50);
+        padding-bottom: 3.125rem;
 
         &Adv {
-        margin-bottom: rem(20);
+        margin-bottom: 1.25rem;
         }
     }
 }
 
 .similar,.popular {
-    padding-bottom: rem(78);
+    padding-bottom: 4.875rem;
 
     @media (max-width: 760px) {
-        padding-bottom: rem(40);
+        padding-bottom: 2.5rem;
 
         h2 {
-            margin-bottom: rem(20);
+            margin-bottom: 1.25rem;
         }
     }
 }
 
 .similar {
     h2 {
-        margin-bottom: rem(30);
+        margin-bottom: 1.875rem;
     }
 }
 

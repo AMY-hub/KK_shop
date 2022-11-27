@@ -11,7 +11,7 @@ import styles from './style.module.scss';
 export const OrderPreview = observer(({ deliveryPrice, className, ...props }: OrderPreviewProps): JSX.Element => {
 
     const basketStore = useBasketContext();
-    const basket = useBasketContext().getBasket();
+    const basket = useBasketContext().basket;
 
     const amount = basket.reduce((prev, cur) => (cur.amount + prev), 0);
 

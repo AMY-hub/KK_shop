@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import Cookies from 'js-cookie';
+import { runInAction } from 'mobx';
 import { useEffect, useState } from 'react';
 import { AddressSuggestions, DaDataAddressSuggestion } from "react-dadata";
 import "react-dadata/dist/react-dadata.css";
@@ -14,7 +15,7 @@ export const CityPicker = ({ uid, defaultCity, onSelect, className, ...rest }: C
     const appStore = useAppContext();
     useEffect(() => {
         if (value) {
-            appStore.city = value.value;
+            runInAction(() => appStore.city = value.value);
             Cookies.set('preferCity', value.value, { expires: 365 });
             if (onSelect) {
                 onSelect();

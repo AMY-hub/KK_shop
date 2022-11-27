@@ -2,11 +2,12 @@ import { FormEvent, useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import cn from 'classnames';
 import { useBasketContext, useUserContext } from '../../context/AppContext';
-import { InputForm } from '..';
+import { AlertMessage, InputForm } from '..';
+import { formatNumName } from '../../helpers/formatNumName';
 import { DiscountsPanelProps } from './props';
 
 import styles from './style.module.scss';
-import { formatNumName } from '../../helpers/formatNumName';
+import { runInAction } from 'mobx';
 
 export const DiscountsPanel = observer(({ className, ...rest }: DiscountsPanelProps): JSX.Element => {
 
@@ -36,10 +37,7 @@ export const DiscountsPanel = observer(({ className, ...rest }: DiscountsPanelPr
         e.preventDefault();
         const promo = promoRef.current?.value.trim();
         if (promo) {
-            const result = await basketStore.setPromoDiscount(promo);
-            if (result) {
-                setMessage(result);
-            }
+            basketStore.setPromoDiscount(promo);
         } else {
             setMessage('Некорректные данные');
         }
@@ -71,8 +69,17 @@ export const DiscountsPanel = observer(({ className, ...rest }: DiscountsPanelPr
                     <div>
                         {`- ${formatNumName(basketStore.bonusDiscount, ['бонус', 'бонуса', 'бонусов'])}`}
                     </div>}
+                {basketStore.promoActive &&
+                    <div>
+                        {basketStore.promoActive}
+                    </div>}
                 {message &&
                     <div>{message}</div>}
+                {basketStore.error &&
+                    <AlertMessage
+                        type='warning'
+                        message={basketStore.error}
+                        onClose={() => runInAction(() => basketStore.error = '')} />}
             </div>
         </div>
     );

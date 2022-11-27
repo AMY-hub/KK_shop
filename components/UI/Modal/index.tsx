@@ -3,7 +3,7 @@ import FocusTrap from 'focus-trap-react';
 import cn from 'classnames';
 import { ClientPortal } from '../ClientPortal';
 import { ModalProps } from './props';
-import CloseIcon from '../../assets/images/icons/close.svg';
+import CloseIcon from '../../../assets/images/icons/close.svg';
 
 import styles from './style.module.scss';
 

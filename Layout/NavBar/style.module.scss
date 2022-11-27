@@ -1,8 +1,6 @@
-@import "../../styles/rem";
-
 .navList {
 	display: flex;
-	gap: rem(25);
+	gap: 1.5625rem;
 
 	&Item {
 		margin-bottom: 0.5rem;
@@ -13,7 +11,7 @@
 		flex-direction: column;
 		align-items: flex-start;
 		margin-top: 40px;
-		padding: rem(45);
+		padding: 2.8125rem;
 		background: var(--bg);
 	}
 }
@@ -109,7 +107,7 @@
 	position: relative;
 	width: fit-content;
 	margin-left: 10%;
-	padding: rem(20);
+	padding: 1.25rem;
 
 	&Btn {
 		display: flex;
@@ -118,7 +116,7 @@
 		opacity: 0.7;
 		color: var(--black);
 		font-family: var(--accent-font);
-		font-size: rem(18);
+		font-size: 1.125rem;
 		line-height: 2;
 		gap: 1rem;
 
@@ -150,7 +148,7 @@
 }
 
 .catalogSubList {
-	padding: rem(15);
+	padding: .9375rem;
 	border-left: 1px solid var(--gray-light);
 
 	@media (min-width: 861px) {

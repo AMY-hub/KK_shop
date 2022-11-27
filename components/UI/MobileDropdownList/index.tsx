@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useState } from 'react';
-import { Button } from '..';
+import { Button } from '../..';
 import { DropdownListProps } from './props';
 
 import styles from './style.module.scss';

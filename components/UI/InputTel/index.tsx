@@ -1,7 +1,7 @@
 import { ChangeEventHandler, ForwardedRef, forwardRef, useState } from 'react';
 import cn from 'classnames';
 import { InputTelProps } from './props';
-import { ErrorMessage } from '../index';
+import { ErrorMessage } from '../..';
 
 import styles from './style.module.scss';
 
