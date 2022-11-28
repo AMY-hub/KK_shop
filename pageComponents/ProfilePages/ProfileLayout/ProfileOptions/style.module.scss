@@ -16,6 +16,14 @@
         }
     }
 
+    .exitBtn {
+        color: var(--accent-pale);
+
+        &:hover,&:focus {
+            color: var(--accent-bright);
+        }
+    }
+
     .active {
         color: var(--black);
     }

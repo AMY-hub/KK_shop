@@ -1,4 +1,5 @@
 import { ForwardedRef, forwardRef } from 'react';
+import { motion } from 'framer-motion';
 import cn from 'classnames';
 import { InputProps } from './props';
 import { ErrorMessage } from '../..';
@@ -7,7 +8,7 @@ import styles from './style.module.scss';
 
 export const Input = forwardRef(({ error, isWide, className, ...props }: InputProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
     return (
-        <div className={cn(styles.inputWrapper, className)}>
+        <motion.div layout className={cn(styles.inputWrapper, className)}>
             <input className={cn(styles.input, {
                 [styles.input_error]: error,
                 [styles.input_wide]: isWide
@@ -20,6 +21,6 @@ export const Input = forwardRef(({ error, isWide, className, ...props }: InputPr
                     className={styles.errorMessage}
                     role='alert' />
             }
-        </div>
+        </motion.div>
     );
 });

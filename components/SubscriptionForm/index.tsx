@@ -2,11 +2,11 @@ import cn from 'classnames';
 import { isEmptySpaces } from '../../helpers/isEmptySpaces';
 import { useForm } from "react-hook-form";
 import { FormInput, SubscriptionFormProps } from './props';
-import { useSubmit } from '../../hooks/useSubmit';
-import { SUBSCRIBER } from '../../api/APIendpoints';
-import { Title, Button, Input, AlertMessage } from '..';
+import { Title, Button, Input, MAlertMessage } from '..';
 
 import styles from './style.module.scss';
+import { useSubmit } from './useSubmit';
+import { AnimatePresence } from 'framer-motion';
 
 export const SubscriptionForm = ({ className, ...props }: SubscriptionFormProps): JSX.Element => {
 
@@ -20,7 +20,14 @@ export const SubscriptionForm = ({ className, ...props }: SubscriptionFormProps)
         success,
         error,
         setError,
-        submitHandler } = useSubmit(reset, SUBSCRIBER);
+        submitHandler } = useSubmit(reset);
+
+    const animationConfig = {
+        initial: { opacity: 0, height: 0 },
+        animate: { opacity: 1, height: 'auto' },
+        exit: { opacity: 0, height: 0 },
+        transition: { bounce: 0 },
+    };
 
     return (
         <div className={cn(styles.wrapper, className)} {...props}>
@@ -56,21 +63,25 @@ export const SubscriptionForm = ({ className, ...props }: SubscriptionFormProps)
                 >
                     Подписаться
                 </Button>
-                {error &&
-                    <AlertMessage
-                        message={error}
-                        type='warning'
-                        className={styles.formAlert}
-                        onClose={() => setError('')}
-                    />
-                }
-                {success &&
-                    <AlertMessage
-                        type='success'
-                        message='Вы успешно подписаны на рассылку!'
-                        className={styles.formAlert}
-                    />
-                }
+                <AnimatePresence>
+                    {error &&
+                        <MAlertMessage
+                            {...animationConfig}
+                            message={error}
+                            type='warning'
+                            className={styles.formAlert}
+                            onClose={() => setError('')}
+                        />
+                    }
+                    {success &&
+                        <MAlertMessage
+                            {...animationConfig}
+                            type='success'
+                            message='Вы успешно подписаны на рассылку!'
+                            className={styles.formAlert}
+                        />
+                    }
+                </AnimatePresence>
             </form>
         </div>
     );

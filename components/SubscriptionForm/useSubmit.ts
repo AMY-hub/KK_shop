@@ -1,37 +1,34 @@
 import axios from 'axios';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { SubmitHandler, UseFormReset, UseFormSetError } from 'react-hook-form';
+import { useState } from 'react';
+import { SubmitHandler, UseFormReset } from 'react-hook-form';
 import { SUBSCRIBER } from '../../api/APIendpoints';
+import { getErrorMessage } from '../../helpers/getErrorMessage';
 import { FormInput } from './props';
 
-type UseSubmit = (setError: UseFormSetError<FormInput>, reset: UseFormReset<FormInput>) => {
+type UseSubmit = (reset: UseFormReset<FormInput>) => {
     success: boolean,
-    setSuccess: Dispatch<SetStateAction<boolean>>,
-    onSubmit: SubmitHandler<FormInput>
+    error: string,
+    setError: (err: string) => void,
+    submitHandler: SubmitHandler<FormInput>
 };
 
-export const useSubmit: UseSubmit = (setError, reset) => {
+export const useSubmit: UseSubmit = (reset) => {
     const [success, setSuccess] = useState<boolean>(false);
-    const onSubmit: SubmitHandler<FormInput> = async ({ email }, e) => {
+    const [error, setError] = useState<string>('');
+
+    const submitHandler: SubmitHandler<FormInput> = async ({ email }, e) => {
         e?.preventDefault();
         try {
             setSuccess(false);
+            setError('');
             const res = await axios.post<FormInput>(SUBSCRIBER, { email });
             if (res.status === 200) {
                 setSuccess(true);
                 reset();
             }
         } catch (err) {
-            if (axios.isAxiosError(err)) {
-                setError('email', {
-                    message: err.response?.data.message || 'Error sending email. Please try again.'
-                });
-            } else {
-                setError('email', {
-                    message: 'Error sending email. Please try again.'
-                });
-            }
+            setError(getErrorMessage(err));
         }
     };
-    return { success, setSuccess, onSubmit };
+    return { success, error, setError, submitHandler };
 };

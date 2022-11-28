@@ -1,18 +1,17 @@
 import cn from 'classnames';
 import { motion } from 'framer-motion';
+import { ForwardedRef, forwardRef } from 'react';
 import CloseIcon from '../../../assets/images/icons/clear.svg';
 import { AlertMessageProps } from './props';
 
 import styles from './style.module.scss';
 
-export const AlertMessage = ({ message, title, type, onClose, className }: AlertMessageProps): JSX.Element => {
+export const AlertMessage = forwardRef(({ message, title, type, onClose, className }: AlertMessageProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
     return (
-        <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+        <div
             className={cn(styles.message, styles[type], className)}
-            role='alert'>
+            role='alert'
+            ref={ref}>
             <div className={styles.messageContent}>
                 {title &&
                     <div className={styles.messageTitle}>
@@ -31,6 +30,8 @@ export const AlertMessage = ({ message, title, type, onClose, className }: Alert
                     </button>
                 }
             </div>
-        </motion.div>
+        </div>
     );
-};
+});
+
+export const MAlertMessage = motion(AlertMessage);

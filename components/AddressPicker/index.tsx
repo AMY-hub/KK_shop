@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { motion } from 'framer-motion';
 import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import { AddressSuggestions, DaDataAddressSuggestion } from "react-dadata";
 import "react-dadata/dist/react-dadata.css";
@@ -23,7 +24,7 @@ export const AddressPicker = forwardRef(({ uid, city, defaultQuery = '', onSelec
     const cityName = cityNameArr ? cityNameArr[0].replace('г ', '') : '';
 
     return (
-        <div className={cn(styles.picker, className)} {...rest}>
+        <motion.div layout className={cn(styles.picker, className)} {...rest}>
             <div className={styles.pickerTitle}>
                 Выберите ваш адрес:
             </div>
@@ -48,6 +49,6 @@ export const AddressPicker = forwardRef(({ uid, city, defaultQuery = '', onSelec
                 filterLocations={[{ "city": cityName }]}
                 ref={ref}
             />
-        </div>
+        </motion.div>
     );
 });

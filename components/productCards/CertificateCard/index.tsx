@@ -1,13 +1,15 @@
 import Image from 'next/image';
+import { ForwardedRef, forwardRef } from 'react';
+import { motion } from 'framer-motion';
 import { Button } from '../..';
 import { CertificateCardProps } from './props';
 
 import styles from './style.module.scss';
 
-export const CertificateCard = ({ name, price, img }: CertificateCardProps): JSX.Element => {
+export const CertificateCard = forwardRef(({ name, price, img }: CertificateCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     return (
-        <div className={styles.card}>
+        <div className={styles.card} ref={ref}>
             <Image
                 src={process.env.NEXT_PUBLIC_DOMAIN + img}
                 alt={name}
@@ -31,4 +33,6 @@ export const CertificateCard = ({ name, price, img }: CertificateCardProps): JSX
             </div>
         </div>
     );
-};
+});
+
+export const MCertificateCard = motion(CertificateCard);

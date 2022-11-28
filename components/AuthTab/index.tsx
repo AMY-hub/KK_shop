@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import cn from 'classnames';
-import { LoginForm, RegistrationForm } from '../../components';
+import { motion } from 'framer-motion';
+import { MLoginForm, MRegistrationForm } from '../../components';
 import { AuthTabProps } from './props';
 
 import styles from './style.module.scss';
@@ -12,27 +13,45 @@ export const AuthTab = ({ className, onAuth, ...rest }: AuthTabProps): JSX.Eleme
     return (
         <div className={cn(styles.auth, className)} {...rest}>
             <div className={styles.authNav}>
-                <button
-                    className={cn(styles.authBtn, {
-                        [styles.authBtn_active]: currentTab === 'login'
-                    })}
+                <motion.button
+                    initial={{ color: "var(--semi-black)" }}
+                    animate={{
+                        color: currentTab === 'login' ?
+                            "var(--accent-dark)" : "var(--semi-black)"
+                    }}
+                    className={styles.authBtn}
                     onClick={() => setCurrentTab('login')}
                 >
                     Войти
-                </button>
-                <button
-                    className={cn(styles.authBtn, {
-                        [styles.authBtn_active]: currentTab === 'register'
-                    })}
+                    {currentTab === 'login' &&
+                        <motion.span
+                            className={styles.activeLine}
+                            layoutId="active"></motion.span>}
+                </motion.button>
+                <motion.button
+                    initial={{ color: "var(--semi-black)" }}
+                    animate={{
+                        color: currentTab === 'register' ?
+                            "var(--accent-dark)" : "var(--semi-black)"
+                    }}
+                    className={styles.authBtn}
                     onClick={() => setCurrentTab('register')}
                 >
                     Зарегистрироваться
-                </button>
+                    {currentTab === 'register' &&
+                        <motion.span
+                            className={styles.activeLine}
+                            layoutId="active"></motion.span>}
+                </motion.button>
             </div>
             {currentTab === 'login' ?
-                <LoginForm onAuth={onAuth} />
+                <MLoginForm
+                    layoutId='auth'
+                    onAuth={onAuth} />
                 :
-                <RegistrationForm onAuth={onAuth} />
+                <MRegistrationForm
+                    layoutId='auth'
+                    onAuth={onAuth} />
             }
         </div>
     );

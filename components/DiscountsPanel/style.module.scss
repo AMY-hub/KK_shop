@@ -21,9 +21,13 @@
 	}
 
 	&Message {
+		overflow: hidden;
 		font-size: 0.9rem;
 		line-height: 1.5;
 		color: var(--accent-dark);
+		div {
+			overflow: hidden;
+		}
 	}
 
 	@media (max-width: 620px) {

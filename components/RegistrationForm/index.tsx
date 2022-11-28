@@ -1,15 +1,17 @@
 import cn from 'classnames';
+import { ForwardedRef, forwardRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { AnimatePresence, motion } from 'framer-motion';
 import { isEmptySpaces } from '../../helpers/isEmptySpaces';
-import { AlertMessage, Button, CustomCheckbox, Input, PrivacyLabel } from '..';
+import { MAlertMessage, Button, CustomCheckbox, Input, PrivacyLabel } from '..';
 import { useUserContext } from '../../context/AppContext';
 import { RegisterFormFields } from '../../interfaces';
 import { RegistrationFormProps } from './props';
 
 import styles from './style.module.scss';
 
-export const RegistrationForm = observer(({ className, onAuth, ...props }: RegistrationFormProps): JSX.Element => {
+export const RegistrationForm = observer(forwardRef(({ className, onAuth, ...props }: RegistrationFormProps, ref: ForwardedRef<HTMLFormElement>): JSX.Element => {
 
     const {
         register,
@@ -37,6 +39,7 @@ export const RegistrationForm = observer(({ className, onAuth, ...props }: Regis
 
     return (
         <form
+            ref={ref}
             onSubmit={handleSubmit((data, e) => submitHandler(data, e))}
             className={cn(styles.form, className)} {...props}>
             <Input
@@ -102,13 +105,21 @@ export const RegistrationForm = observer(({ className, onAuth, ...props }: Regis
             >
                 Зарегистрироваться
             </Button>
-            {userStore.error &&
-                <AlertMessage
-                    message={userStore.error}
-                    type='warning'
-                    onClose={() => userStore.error = ''}
-                />
-            }
+            <AnimatePresence>
+                {userStore.error &&
+                    <MAlertMessage
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ bounce: 0 }}
+                        message={userStore.error}
+                        type='warning'
+                        onClose={() => userStore.error = ''}
+                    />
+                }
+            </AnimatePresence>
         </form>
     );
-});
+}));
+
+export const MRegistrationForm = motion(RegistrationForm);

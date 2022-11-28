@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import cn from 'classnames';
 import { ForwardedRef, forwardRef } from 'react';
+import { motion } from 'framer-motion';
 import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
 import { SpecialCardProps } from './props';
 
@@ -42,3 +43,5 @@ export const SpecialCard = forwardRef(({ name, nameRus, price, img, sale, type, 
         </div>
     );
 });
+
+export const MSpecialCard = motion(SpecialCard);

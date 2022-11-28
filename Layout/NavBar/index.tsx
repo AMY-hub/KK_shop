@@ -1,25 +1,59 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { AnimatePresence, motion } from 'framer-motion';
 import cn from 'classnames';
 import { Button } from '../../components';
 import { navOptions } from '../const';
 import { NavBarProps } from './props';
 import { Category, Subcategory } from '../../interfaces';
-import ExpIcon from '../../assets/images/icons/arr-exp_fill.svg';
 
 import styles from './style.module.scss';
+import { useMathMedia } from '../../hooks/useMathMedia';
 
 export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenuOpen, className, ...props }: NavBarProps): JSX.Element => {
 
     const router = useRouter();
     const route = router.asPath;
     const [visibleSublist, setVisibleSublist] = useState<string>('');
+    const isMobile = useMathMedia('(max-width: 860px)');
+    console.log('MATCH', isMobile);
+
 
     const handleNav = () => {
         setCatalogOpen(false);
         setMenuOpen(false);
     };
+
+    const animationConfigX = {
+        initial: { opacity: 0, x: -500 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -500 },
+        transition: { bounce: 0 },
+    };
+
+    const animationConfigY = {
+        initial: {
+            opacity: 0,
+            height: 0,
+            paddingBottom: 0,
+            paddingTop: 0
+        },
+        animate: {
+            opacity: 1,
+            height: 'auto',
+            paddingBottom: 15,
+            paddingTop: 15
+        },
+        exit: {
+            opacity: 0,
+            height: 0,
+            paddingBottom: 0,
+            paddingTop: 0
+        },
+        transition: { bounce: 0 },
+    };
+
 
     const buildFirstLevel = () => navOptions.map(opt => {
         if (opt.name !== 'Каталог') {
@@ -50,24 +84,27 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
                     >
                         {opt.name}
                     </Button>
-                    {catalogOpen &&
-                        <div className={styles.catalogListWrapper}>
-                            <ul className={styles.catalogList}>
-                                <Link
-                                    href={`/products`}>
-                                    <a
-                                        className={styles.catalogListBtn}
-                                        onClick={() => {
-                                            handleNav();
-                                            setVisibleSublist('');
-                                        }}>
-                                        Все товары
-                                    </a>
-                                </Link>
-                                {buildSecondLevel()}
-                            </ul>
-                        </div>
-                    }
+                    <AnimatePresence>
+                        {catalogOpen &&
+                            <motion.div
+                                {...animationConfigY}
+                                className={styles.catalogListWrapper}>
+                                <ul className={styles.catalogList}>
+                                    <Link
+                                        href={`/products`}>
+                                        <a
+                                            className={styles.catalogListBtn}
+                                            onClick={() => {
+                                                handleNav();
+                                                setVisibleSublist('');
+                                            }}>
+                                            Все товары
+                                        </a>
+                                    </Link>
+                                    {buildSecondLevel()}
+                                </ul>
+                            </motion.div>}
+                    </AnimatePresence>
                 </li>
             );
         }
@@ -75,38 +112,22 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
 
     const buildSecondLevel = () => catalog.map(el => {
         const isSelected = route.includes(el.route);
-
-
         return (
             <li key={el.id}>
                 {el.subcategories.length ?
-                    <span
-                        className={cn(styles.catalogListBtn, {
-                            [styles.catalogListBtn_active]: isSelected
+                    <button
+                        onClick={() => setVisibleSublist(el.route)}
+                        className={cn(styles.catalogListBtn, 'icon-arr-exp_fill', {
+                            [styles.catalogListBtn_active]: isSelected,
+                            [styles.catalogListBtn_exp]: visibleSublist === el.route
                         })}>
-                        <Link href={`/products/${el.route}`}>
-                            <a
-                                className={cn(styles.catalogListBtn, {
-                                    [styles.catalogListBtn_active]: isSelected
-                                })}
-                                onClick={handleNav}>
-                                {el.name}
-                            </a>
-                        </Link>
-                        <button
-                            onClick={() => setVisibleSublist(el.route)}
-                            className={cn(styles.catalogListExp, {
-                                [styles.catalogListExp_active]: visibleSublist === el.route
-                            })}>
-                            <ExpIcon />
-                        </button>
-                    </span>
+                        {el.name}
+                    </button>
                     :
                     <Link href={`/products/${el.route}`}>
-                        <a
-                            className={cn(styles.catalogListBtn, {
-                                [styles.catalogListBtn_active]: isSelected
-                            })}
+                        <a className={cn(styles.catalogListBtn, {
+                            [styles.catalogListBtn_active]: isSelected
+                        })}
                             onClick={() => {
                                 handleNav();
                                 setVisibleSublist('');
@@ -116,21 +137,29 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
                     </Link>
                 }
 
-                {visibleSublist === el.route && el.subcategories.length > 0 &&
-                    <ul className={styles.catalogSubList}>
-                        {buildThirdLevel(el, el.subcategories)}
-                    </ul>
-                }
+                <AnimatePresence mode='wait' initial={false}>
+                    {visibleSublist === el.route && el.subcategories.length > 0 &&
+                        <motion.ul
+                            {...animationConfigY}
+                            className={styles.catalogSubList}>
+                            {buildThirdLevel(el, el.subcategories)}
+                        </motion.ul>}
+                </AnimatePresence>
+
             </li>
         );
     });
 
     const buildThirdLevel = (topCategory: Category, categories: Subcategory[]) => {
-        return categories.map(el => {
+        return categories.map((el, idx) => {
             const isSelected = route.includes(el.route);
 
             return (
-                <li key={el.id}>
+                <motion.li
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    transition={{ delay: 0.1 * idx, bounce: 0 }}
+                    key={el.id}>
                     <Link href={`/products/${topCategory.route}/${el.route}`}>
                         <a
                             className={cn(styles.catalogListBtn, {
@@ -140,30 +169,45 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
                             {el.name}
                         </a>
                     </Link>
-                </li>
+                </motion.li>
             );
         });
     };
 
     return (
-        <nav className={cn(styles.nav, className)} {...props}>
-            <button
-                className={cn(styles.burgerBtn, {
-                    [styles.burgerBtn_close]: menuOpen
-                })}
-                onClick={() => {
-                    setMenuOpen(!menuOpen);
-                    setCatalogOpen(false);
-                }}>
-                <span></span>
-            </button>
-            <div className={cn(styles.navOverlay, {
-                [styles.navOverlay_visible]: menuOpen
-            })}>
-                <ul className={styles.navList}>
-                    {buildFirstLevel()}
-                </ul>
-            </div>
-        </nav>
+        <>
+            {isMobile ?
+                <nav className={cn(styles.nav, className)} {...props}>
+                    <button
+                        className={cn(styles.burgerBtn, {
+                            [styles.burgerBtn_close]: menuOpen
+                        })}
+                        onClick={() => {
+                            setMenuOpen(!menuOpen);
+                            setCatalogOpen(!catalogOpen);
+                        }}>
+                        <span></span>
+                    </button>
+                    <AnimatePresence>
+                        {menuOpen &&
+                            <motion.ul
+                                {...animationConfigX}
+                                className={styles.navList}>
+                                {buildFirstLevel()}
+                            </motion.ul>
+                        }
+                    </AnimatePresence>
+                </nav>
+                :
+                <nav className={cn(styles.nav, className)} {...props}>
+                    <ul
+                        {...animationConfigX}
+                        className={styles.navList}>
+                        {buildFirstLevel()}
+                    </ul>
+                </nav>
+            }
+        </>
+
     );
 };

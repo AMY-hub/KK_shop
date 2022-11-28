@@ -1,15 +1,18 @@
 import Image from 'next/image';
+import { ForwardedRef, forwardRef } from 'react';
 import cn from 'classnames';
+import { motion } from 'framer-motion';
 import { PreviewCardProps } from './props';
 
 import styles from './style.module.scss';
 
-export const PreviewCard = ({ productData, amount, className, ...props }: PreviewCardProps): JSX.Element => {
+export const PreviewCard = forwardRef(({ productData, amount, className, ...props }: PreviewCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     return (
         <div
             className={cn(styles.card, className)}
-            {...props}>
+            {...props}
+            ref={ref}>
             <div className={styles.cardImg}>
                 <Image
                     src={process.env.NEXT_PUBLIC_DOMAIN + productData.img}
@@ -25,4 +28,6 @@ export const PreviewCard = ({ productData, amount, className, ...props }: Previe
             </div>
         </div>
     );
-};
+});
+
+export const MPreviewCard = motion(PreviewCard);

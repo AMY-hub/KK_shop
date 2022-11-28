@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { DropdownProps } from './props';
 
@@ -22,13 +23,19 @@ export const Dropdown = ({ children, header, inititialOpen = false, className, .
                     })}>
                 </button>
             </div>
-            <div
-                className={cn(styles.dropdownContent, {
-                    [styles.dropdownContent_hidden]: !opened
-                })}
-            >
-                {children}
-            </div>
+            <AnimatePresence initial={false}>
+                {opened &&
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ bounce: 0 }}
+                        className={styles.dropdownContent}
+                    >
+                        {children}
+                    </motion.div>
+                }
+            </AnimatePresence>
         </div>
     );
 };

@@ -16,18 +16,15 @@
 		padding-bottom: 0.5rem;
 		margin-right: 2rem;
 		
-
-		&_active {
-			&::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			bottom: -2px;
+		.activeLine {
 			display: block;
+			position: absolute;
+			bottom: -2px;
+			left: 0;
+			background-color: var(--black);
 			width: 100%;
 			height: 3px;
-			background-color: var(--black);
-			}
+			border-radius: 2px;
 		}
 	}
 }

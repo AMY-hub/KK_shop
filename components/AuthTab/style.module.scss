@@ -1,5 +1,5 @@
 .auth {
-	max-width: 380px;
+	max-width: 480px;
 	margin: 0 auto;
 	
 	&Nav {
@@ -18,20 +18,16 @@
 		line-height: 1.5;
 		padding-bottom: 0.5rem;
 		margin-right: 2rem;
-		
 
-		&_active {
-			color: var(--accent-dark);
-			&::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			bottom: -2px;
+		.activeLine {
 			display: block;
+			position: absolute;
+			bottom: -2px;
+			left: 0;
+			background-color: var(--accent-dark);
 			width: 100%;
 			height: 3px;
-			background-color: var(--accent-dark);
-			}
+			border-radius: 2px;
 		}
 	}
 }

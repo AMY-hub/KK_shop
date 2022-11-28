@@ -1,6 +1,6 @@
 import { Dispatch, HTMLAttributes, SetStateAction } from 'react';
 import { MultiValue } from 'react-select';
-import { Brand, Option } from '../../interfaces';
+import { Brand, Option } from '../../../interfaces';
 
 export interface FilterProps extends HTMLAttributes<HTMLDivElement> {
     brandList: Brand[];

@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { ForwardedRef, forwardRef } from 'react';
+import { motion } from 'framer-motion';
 import cn from 'classnames';
 import { useBasketContext, useFavContext } from '../../../context/AppContext';
 import Link from 'next/link';
@@ -10,7 +12,7 @@ import HeartIcon from '../../../assets/images/icons/heart_fill.svg';
 
 import styles from './style.module.scss';
 
-export const FavProductCard = ({ productData, className, ...props }: FavProductCardProps): JSX.Element => {
+export const FavProductCard = forwardRef(({ productData, className, ...props }: FavProductCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     const favStore = useFavContext();
     const basketStore = useBasketContext();
@@ -34,7 +36,7 @@ export const FavProductCard = ({ productData, className, ...props }: FavProductC
         `/products/${category.route}/${id}`;
 
     return (
-        <div className={cn(styles.card, className)} {...props}>
+        <div className={cn(styles.card, className)} {...props} ref={ref}>
             <div className={styles.cardWrapper}>
                 <div className={styles.cardImg}>
                     <Link href={href}>
@@ -89,4 +91,6 @@ export const FavProductCard = ({ productData, className, ...props }: FavProductC
             </div>
         </div>
     );
-};
+});
+
+export const MFavProductCard = motion(FavProductCard);

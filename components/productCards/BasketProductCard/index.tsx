@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ForwardedRef, forwardRef } from 'react';
+import { motion } from 'framer-motion';
 import cn from 'classnames';
 import { AmountControls } from '../..';
 import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
@@ -7,7 +9,7 @@ import { BasketProductProps } from './props';
 
 import styles from './style.module.scss';
 
-export const BasketProductCard = ({ productData, amount, className, ...props }: BasketProductProps): JSX.Element => {
+export const BasketProductCard = forwardRef(({ productData, amount, className, ...props }: BasketProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     const {
         id,
@@ -29,7 +31,7 @@ export const BasketProductCard = ({ productData, amount, className, ...props }: 
         `/products/${category.route}/${id}`;
 
     return (
-        <div className={cn(styles.card, className)} {...props}>
+        <div className={cn(styles.card, className)} {...props} ref={ref}>
             <div className={styles.cardWrapper}>
                 <div className={styles.cardImg}>
                     <Link href={href}>
@@ -82,4 +84,6 @@ export const BasketProductCard = ({ productData, amount, className, ...props }: 
             </div>
         </div>
     );
-};
+});
+
+export const MBasketProductCard = motion(BasketProductCard);

@@ -1,8 +1,8 @@
-import cn from 'classnames';
+import { motion } from 'framer-motion';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { Controller } from 'react-hook-form';
-import { AddressPicker, PickPointsList } from '../../../components';
+import { AddressPicker, MPickPointsList } from '../../../components';
 import { useAppContext } from '../../../context/AppContext';
 import { AddressTabProps } from './props';
 
@@ -16,43 +16,60 @@ export const AddressTab = observer(({ addresses, control, pickFn, onSelectFn }: 
     return (
         <div className={styles.tab}>
             <div className={styles.tabHeader}>
-                <button
-                    className={cn(styles.tabBtn, {
-                        [styles.tabBtn_active]: currentTab === 'address'
-                    })}
+                <motion.button
+                    className={styles.tabBtn}
+                    initial={{ color: "var(--semi-black)" }}
+                    animate={{
+                        color: currentTab === 'address' ?
+                            "var(--accent-dark)" : "var(--semi-black)"
+                    }}
                     onClick={() => setCurrentTab('address')}>
                     Доставка
-                </button>
-                <button
-                    className={cn(styles.tabBtn, {
-                        [styles.tabBtn_active]: currentTab === 'pick'
-                    })}
+                    {currentTab === 'address' &&
+                        <motion.span
+                            className={styles.activeLine}
+                            layoutId="active"></motion.span>}
+                </motion.button>
+                <motion.button
+                    className={styles.tabBtn}
+                    initial={{ color: "var(--semi-black)" }}
+                    animate={{
+                        color: currentTab === 'pick' ?
+                            "var(--accent-dark)" : "var(--semi-black)"
+                    }}
                     onClick={() => setCurrentTab('pick')}>
                     Самовывоз
-                </button>
+                    {currentTab === 'pick' &&
+                        <motion.span
+                            className={styles.activeLine}
+                            layoutId="active"></motion.span>}
+                </motion.button>
             </div>
-            {currentTab === 'address' ?
-                <Controller
-                    name='address'
-                    control={control}
-                    rules={{ required: 'Обязательно для заполнения' }}
-                    render={({ field: { ref, onChange } }) => (
-                        <AddressPicker
-                            uid='address-city-picker'
-                            ref={ref}
-                            city={city}
-                            onChange={onChange}
-                            onSelect={onSelectFn}
-                        />)}
-                />
-                :
-                <PickPointsList
-                    selectFn={(val: string) => {
-                        pickFn(val);
-                        onSelectFn();
-                    }}
-                    addresses={addresses} />
-            }
+            <motion.div layout>
+                {currentTab === 'address' ?
+                    <Controller
+                        name='address'
+                        control={control}
+                        rules={{ required: 'Обязательно для заполнения' }}
+                        render={({ field: { ref, onChange } }) => (
+                            <AddressPicker
+                                uid='address-city-picker'
+                                ref={ref}
+                                city={city}
+                                onChange={onChange}
+                                onSelect={onSelectFn}
+                            />)}
+                    />
+                    :
+                    <MPickPointsList
+                        layout
+                        selectFn={(val: string) => {
+                            pickFn(val);
+                            onSelectFn();
+                        }}
+                        addresses={addresses} />
+                }
+            </motion.div>
         </div>
     );
 });

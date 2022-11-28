@@ -1,10 +1,12 @@
+import { motion } from 'framer-motion';
 import { observer } from 'mobx-react-lite';
+import { ForwardedRef, forwardRef } from 'react';
 import { useAppContext } from '../../context/AppContext';
 import { PickPointsListProps } from './props';
 
 import styles from './style.module.scss';
 
-export const PickPointsList = observer(({ addresses, selectFn, className, ...props }: PickPointsListProps): JSX.Element => {
+export const PickPointsList = observer(forwardRef(({ addresses, selectFn, className, ...props }: PickPointsListProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     const city = useAppContext().city;
 
@@ -19,7 +21,7 @@ export const PickPointsList = observer(({ addresses, selectFn, className, ...pro
             </li>));
 
     return (
-        <div className={className} {...props}>
+        <div className={className} {...props} ref={ref}>
             <div className={styles.pickTitle}>
                 Пункты самовывоза:
             </div>
@@ -33,4 +35,6 @@ export const PickPointsList = observer(({ addresses, selectFn, className, ...pro
             </ul>
         </div>
     );
-});
+}));
+
+export const MPickPointsList = motion(PickPointsList);

@@ -4,7 +4,7 @@
 
 .slider {
 	position: relative;
-	// height: 550px;
+	overflow: hidden;
 	width: 100%;
 
 	&Img {
@@ -12,6 +12,8 @@
 	}
 	
 	&Slide {
+		position: relative;
+		z-index: 1;
 		cursor: grab;
 		width: 100%;
 		position: absolute;
@@ -56,6 +58,8 @@
 }
 
 .fake {
+	position: relative;
+	z-index: 0;
 	opacity: 0;
 	visibility: hidden;
 }

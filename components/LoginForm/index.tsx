@@ -1,14 +1,16 @@
 import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
 import { observer } from 'mobx-react-lite';
+import { ForwardedRef, forwardRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { AlertMessage, Button, Input } from '..';
+import { MAlertMessage, Button, Input } from '..';
 import { useUserContext } from '../../context/AppContext';
 import { LoginFormFields } from '../../interfaces';
 import { LoginFormProps } from './props';
 
 import styles from './style.module.scss';
 
-export const LoginForm = observer(({ className, onAuth, ...props }: LoginFormProps): JSX.Element => {
+export const LoginForm = observer(forwardRef(({ className, onAuth, ...props }: LoginFormProps, ref: ForwardedRef<HTMLFormElement>): JSX.Element => {
     const {
         register,
         handleSubmit,
@@ -28,6 +30,7 @@ export const LoginForm = observer(({ className, onAuth, ...props }: LoginFormPro
 
     return (
         <form
+            ref={ref}
             onSubmit={handleSubmit((data, e) => submitHandler(data, e))}
             className={cn(styles.form, className)} {...props}>
             <Input
@@ -52,13 +55,22 @@ export const LoginForm = observer(({ className, onAuth, ...props }: LoginFormPro
             >
                 Войти
             </Button>
-            {userStore.error &&
-                <AlertMessage
-                    message={userStore.error}
-                    type='warning'
-                    onClose={() => userStore.error = ''}
-                />
-            }
+
+            <AnimatePresence>
+                {userStore.error &&
+                    <MAlertMessage
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ bounce: 0 }}
+                        message={userStore.error}
+                        type='warning'
+                        onClose={() => userStore.error = ''}
+                    />
+                }
+            </AnimatePresence>
         </form>
     );
-});
+}));
+
+export const MLoginForm = motion(LoginForm);

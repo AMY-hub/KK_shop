@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import cn from 'classnames';
 import { AnimatePresence } from 'framer-motion';
-import { CustomCheckbox, Dropdown, Input, Button, Title, Container, RadioBadge, PrivacyLabel, Modal, CityPicker, InputTel, AlertMessage } from '../../components';
+import { CustomCheckbox, Dropdown, Input, Button, Title, Container, RadioBadge, PrivacyLabel, Modal, CityPicker, InputTel, MAlertMessage } from '../../components';
 import { useAppContext, useBasketContext, useUserContext } from '../../context/AppContext';
 import { OrderPreview } from './OrderPreview';
 import { StepHeader } from './StepHeader';
@@ -294,7 +294,11 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                 className={styles.orderPreview} />
             <AnimatePresence>
                 {error &&
-                    <AlertMessage
+                    <MAlertMessage
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ bounce: 0 }}
                         type='warning'
                         message={error}
                         onClose={() => setError('')} />

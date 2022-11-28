@@ -31,7 +31,7 @@ export const OrderPreview = observer(({ deliveryPrice, className, ...props }: Or
                 <Link href='/basket'>Изменить</Link>
             </div>
 
-            <Scroll>
+            <Scroll width={4}>
                 <div className={styles.previewCards}>
                     {cards}
                 </div>

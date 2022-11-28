@@ -1,8 +1,9 @@
-import { Title, AlertMessage, Preloader } from '../../../components';
+import { Title, MAlertMessage, Preloader } from '../../../components';
 import { useOrdersLoader } from './useOrdersLoader';
 import { OrderRow } from './OrderRow';
 
 import styles from './style.module.scss';
+import { AnimatePresence } from 'framer-motion';
 
 export const OrdersPage = (): JSX.Element => {
 
@@ -35,11 +36,17 @@ export const OrdersPage = (): JSX.Element => {
                     </tbody>
                 </table>
             }
-            {error &&
-                <AlertMessage
-                    type='warning'
-                    message={error}
-                />}
+            <AnimatePresence>
+                {error &&
+                    <MAlertMessage
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ bounce: 0 }}
+                        type='warning'
+                        message={error}
+                    />}
+            </AnimatePresence>
         </div>
     );
 };

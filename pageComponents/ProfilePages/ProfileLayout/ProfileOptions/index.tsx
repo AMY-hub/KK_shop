@@ -37,7 +37,8 @@ export const ProfileOptions = ({ className, ...props }: ProfileOptionsProps): JS
             ))}
             <button
                 type='button'
-                onClick={store.logout}>
+                className={styles.exitBtn}
+                onClick={() => store.logout()}>
                 Выход
             </button>
         </div>

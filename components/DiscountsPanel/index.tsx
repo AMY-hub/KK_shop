@@ -1,13 +1,14 @@
 import { FormEvent, useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import cn from 'classnames';
+import { runInAction } from 'mobx';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useBasketContext, useUserContext } from '../../context/AppContext';
-import { AlertMessage, InputForm } from '..';
+import { MAlertMessage, InputForm } from '..';
 import { formatNumName } from '../../helpers/formatNumName';
 import { DiscountsPanelProps } from './props';
 
 import styles from './style.module.scss';
-import { runInAction } from 'mobx';
 
 export const DiscountsPanel = observer(({ className, ...rest }: DiscountsPanelProps): JSX.Element => {
 
@@ -17,6 +18,13 @@ export const DiscountsPanel = observer(({ className, ...rest }: DiscountsPanelPr
 
     const bonusRef = useRef<HTMLInputElement>(null);
     const promoRef = useRef<HTMLInputElement>(null);
+
+    const animationConfig = {
+        initial: { opacity: 0, height: 0 },
+        animate: { opacity: 1, height: 'auto' },
+        exit: { opacity: 0, height: 0 },
+        transition: { bounce: 0 },
+    };
 
     const handleBonus = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -65,21 +73,35 @@ export const DiscountsPanel = observer(({ className, ...rest }: DiscountsPanelPr
                 placeholder='Введите промокод' />
 
             <div className={styles.discountsMessage}>
-                {basketStore.bonusDiscount > 0 &&
-                    <div>
-                        {`- ${formatNumName(basketStore.bonusDiscount, ['бонус', 'бонуса', 'бонусов'])}`}
-                    </div>}
-                {basketStore.promoActive &&
-                    <div>
-                        {basketStore.promoActive}
-                    </div>}
-                {message &&
-                    <div>{message}</div>}
-                {basketStore.error &&
-                    <AlertMessage
-                        type='warning'
-                        message={basketStore.error}
-                        onClose={() => runInAction(() => basketStore.error = '')} />}
+                <AnimatePresence>
+                    {basketStore.bonusDiscount > 0 &&
+                        <motion.div
+                            {...animationConfig}>
+                            {`- ${formatNumName(basketStore.bonusDiscount, ['бонус', 'бонуса', 'бонусов'])}`}
+                        </motion.div>}
+                </AnimatePresence>
+                <AnimatePresence>
+                    {basketStore.promoActive &&
+                        <motion.div
+                            {...animationConfig}>
+                            {basketStore.promoActive}
+                        </motion.div>}
+                </AnimatePresence>
+                <AnimatePresence>
+                    {message &&
+                        <motion.div
+                            {...animationConfig}>
+                            {message}
+                        </motion.div>}
+                </AnimatePresence>
+                <AnimatePresence>
+                    {basketStore.error &&
+                        <MAlertMessage
+                            {...animationConfig}
+                            type='warning'
+                            message={basketStore.error}
+                            onClose={() => runInAction(() => basketStore.error = '')} />}
+                </AnimatePresence>
             </div>
         </div>
     );

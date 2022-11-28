@@ -1,5 +1,5 @@
 import Select, { StylesConfig } from 'react-select';
-import { Option } from '../../interfaces';
+import { Option } from '../../../interfaces';
 import { SelectProps } from './props';
 
 export function CustomSelect<E extends Option, M extends boolean>({ name, options, onChange, value, isSearchable = false, isMulti }: SelectProps<E, M>) {
@@ -54,6 +54,24 @@ export function CustomSelect<E extends Option, M extends boolean>({ name, option
             ...provided,
             zIndex: 10,
             background: 'var(--bg)'
+        }),
+        menuList: (provided) => ({
+            ...provided,
+            width: 'fit-content',
+            '::-webkit-scrollbar': {
+                width: '3px',
+                height: '0px',
+            },
+            '::-webkit-scrollbar-track': {
+                background: 'var(--dark-bg)'
+            },
+            '::-webkit-scrollbar-thumb': {
+                background: 'var(--gray)',
+                borderRadius: '2px'
+            },
+            '::-webkit-scrollbar-thumb:hover': {
+                background: 'var(--gray-dark)'
+            }
         }),
         container: (provided) => ({
             ...provided,

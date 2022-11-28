@@ -41,7 +41,7 @@ export class UserStore {
     }
 
     resetUser() {
-        this.error = '';
+        this._error = '';
         this.isLoggedIn = false;
         this._user = null;
         this._root.basketStore.basket = [];

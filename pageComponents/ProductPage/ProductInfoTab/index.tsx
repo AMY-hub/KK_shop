@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import cn from 'classnames';
+import { motion } from 'framer-motion';
 import { ProductInfoTabProps } from './props';
 import { Button } from '../../../components';
 
@@ -38,22 +39,34 @@ export const ProductInfoTab = (props: ProductInfoTabProps): JSX.Element => {
     return (
         <div className={cn(styles.info, className)} {...rest}>
             <div className={styles.infoNav}>
-                <button
-                    className={cn(styles.infoBtn, {
-                        [styles.infoBtn_active]: currentTab === 'about'
-                    })}
-                    onClick={() => setCurrentTab('about')}
-                >
+                <motion.button
+                    initial={{ color: "var(--gray-dark)" }}
+                    animate={{
+                        color: currentTab === 'about' ?
+                            "var(--black)" : "var(--gray-dark)"
+                    }}
+                    className={styles.infoBtn}
+                    onClick={() => setCurrentTab('about')}>
                     Описание
-                </button>
-                <button
-                    className={cn(styles.infoBtn, {
-                        [styles.infoBtn_active]: currentTab === 'brand'
-                    })}
-                    onClick={() => setCurrentTab('brand')}
-                >
+                    {currentTab === 'about' &&
+                        <motion.span
+                            className={styles.activeLine}
+                            layoutId="active"></motion.span>}
+                </motion.button>
+                <motion.button
+                    initial={{ color: "var(--gray-dark)" }}
+                    animate={{
+                        color: currentTab === 'brand' ?
+                            "var(--black)" : "var(--gray-dark)"
+                    }}
+                    className={styles.infoBtn}
+                    onClick={() => setCurrentTab('brand')}>
                     Бренд
-                </button>
+                    {currentTab === 'brand' &&
+                        <motion.span
+                            className={styles.activeLine}
+                            layoutId="active"></motion.span>}
+                </motion.button>
             </div>
             {currentTab === 'about' ?
                 <div className={styles.about}>
@@ -117,7 +130,6 @@ export const ProductInfoTab = (props: ProductInfoTabProps): JSX.Element => {
                     </Button>
                 </div>
             }
-
         </div>
     );
 };

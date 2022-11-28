@@ -6,8 +6,9 @@ import { ModalProps } from './props';
 import CloseIcon from '../../../assets/images/icons/close.svg';
 
 import styles from './style.module.scss';
+import { AnimatePresence, motion } from 'framer-motion';
 
-export const Modal = ({ children, shown, onClose, className, title, ...props }: ModalProps): JSX.Element | null => {
+export const Modal = ({ children, shown, onClose, className, title }: ModalProps): JSX.Element | null => {
 
     useEffect(() => {
         const handleEsc = (e: KeyboardEvent) => {
@@ -26,41 +27,59 @@ export const Modal = ({ children, shown, onClose, className, title, ...props }: 
         };
     }, [shown, onClose]);
 
-    if (!shown) {
-        return null;
-    }
+    // if (!shown) {
+    //     return null;
+    // }
 
     return (
         <ClientPortal selector='#modal'>
-            <FocusTrap>
-                <div
-                    className={styles.modalOverlay}
-                    onClick={onClose}
-                >
-                    <div
-                        onClick={e => e.stopPropagation()}
-                        className={cn(styles.modal, className)}
-                        {...props}>
-                        <button
-                            className={styles.modalClose}
-                            aria-label='Закрыть окно'
+            <AnimatePresence>
+                {shown &&
+                    <FocusTrap>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{
+                                type: 'tween'
+                            }}
+                            className={styles.modalOverlay}
                             onClick={onClose}
                         >
-                            <CloseIcon />
-                        </button>
-                        <div className={styles.modalBody}>
-                            {title &&
-                                <div className={styles.modalTitle}>
-                                    {title}
+                            <motion.div
+                                initial={{ opacity: 0, x: 1000 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 1000 }}
+                                transition={{
+                                    type: 'tween'
+                                }}
+                                onClick={e => e.stopPropagation()}
+                                className={cn(styles.modal, className)}
+                            >
+                                <button
+                                    className={styles.modalClose}
+                                    aria-label='Закрыть окно'
+                                    onClick={onClose}
+                                >
+                                    <CloseIcon />
+                                </button>
+                                <div className={styles.modalBody}>
+                                    {title &&
+                                        <div className={styles.modalTitle}>
+                                            {title}
+                                        </div>
+                                    }
+                                    <div className={styles.modalContent}>
+                                        {children}
+                                    </div>
                                 </div>
-                            }
-                            <div className={styles.modalContent}>
-                                {children}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </FocusTrap>
+                            </motion.div>
+                        </motion.div>
+                    </FocusTrap>
+                }
+            </AnimatePresence>
+
+
         </ClientPortal>
     );
 };

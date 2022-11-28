@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
 
-export interface AddressPickerProps extends HTMLAttributes<HTMLDivElement> {
+export interface AddressPickerProps extends Omit<HTMLAttributes<HTMLDivElement>,
+    'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag' | 'ref'> {
     uid: string;
     onSelect?: () => void;
     defaultQuery?: string;

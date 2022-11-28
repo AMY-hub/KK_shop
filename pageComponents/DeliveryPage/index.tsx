@@ -68,7 +68,7 @@ export const DeliveryPage = (): JSX.Element => {
                     <Button
                         className={styles.deliveryOptionsBtn}
                         like='Link'
-                        href='/catalog'
+                        href='/products'
                         size='l'
                         isWide
                     >
