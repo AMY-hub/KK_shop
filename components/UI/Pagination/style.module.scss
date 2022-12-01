@@ -1,0 +1,56 @@
+.pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&Prev,&Next {
+		color: var(---black);
+		display: flex;
+		align-items: center;
+		font-size: 1.2rem;
+		padding: 0.5rem;
+
+		&:disabled {
+			color: var(--gray-light);
+			pointer-events: none;
+		}
+	}
+
+	&Pages {
+		margin: 0 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	
+	&Page {
+		color: var(---black);
+		font-size: 1.1rem;
+		font-family: var(--accent-font);
+		font-weight: 500;
+		margin: 0.5rem;
+
+		&_active {
+			color: var(--accent-dark);
+			font-weight: 600;
+		}
+	}
+
+	&Dots {
+		padding: 0;
+		letter-spacing: 5px;
+		font-weight: 600;
+	}
+
+	@media (max-width: 760px) {
+		&Prev,&Next {
+			padding: 0.2em;
+		}
+
+		&Page {
+			font-size: 1rem;
+			margin: 0.3rem;
+		}
+	}
+}

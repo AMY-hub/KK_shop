@@ -18,13 +18,6 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
 
     const slides = products.map(product => {
 
-        const { category, sub_category, id } = product;
-
-        const href = sub_category ?
-            `/products/${category.route}/${sub_category.route}/${id}`
-            :
-            `/products/${category.route}/${id}`;
-
         return (
             <SwiperSlide
                 className={cn(styles.sliderSlide, {
@@ -32,7 +25,7 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
                 })}
                 key={product.id}>
                 {size === 'l' ?
-                    <Link href={href} passHref>
+                    <Link href={`/products/${product.id}`} passHref>
                         <SpecialCard
                             name={product.name}
                             nameRus={product.name_rus}
@@ -44,7 +37,7 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
                         />
                     </Link>
                     :
-                    <Link href={href} passHref>
+                    <Link href={`/products/${product.id}`} passHref>
                         <ProductCard productData={product} />
                     </Link>
                 }

@@ -1,129 +1,55 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { MultiValue } from 'react-select';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Option } from '../../interfaces';
+import { useRouter } from 'next/router';
 import { CatalogPageProps } from './props';
-import { BreadCrumbs, Container, MProductCard, MSpecialCard, Title } from '../../components';
+import { BreadCrumbs, Container, Grid, MProductCard, Pagination, Title } from '../../components';
 import { ProductsFilterPanel } from './ProductsFilterPanel';
-import { sortProducts } from './sortProducts';
-import { filterByPrice } from './filterByPrice';
-import { filterByBrand } from './filterByBrand';
 
 import styles from './style.module.scss';
 
-export const CatalogPage = ({ products, count, brandList }: CatalogPageProps): JSX.Element => {
-
+export const CatalogPage = ({ products, pages, brandList }: CatalogPageProps): JSX.Element => {
     const router = useRouter();
-    const shouldReduceMotion = useReducedMotion();
+    const page = parseInt(String(router.query.page)) || 1;
+    const categoryId = router.query.categoryId;
+    const subCategoryId = router.query.subCategoryId;
 
-    const [productsToShow, setProductsToShow] = useState(products);
-    const [sorting, setSorting] = useState<Option | null>(null);
-    const [price, setPrice] = useState<Option | null>(null);
-    const [brands, setBrands] = useState<Option[]>(getBrandFromQuery);
+    const animationConfig = {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 }
+    };
 
-    useEffect(() => {
-        let newProductsToShow = products;
-        console.log('PR to SHOW + PR', products);
-
-        if (brands.length > 0) {
-            newProductsToShow = filterByBrand(newProductsToShow, brands);
-        }
-        if (price) {
-            newProductsToShow = filterByPrice(newProductsToShow, price.value);
-        }
-        if (sorting) {
-            newProductsToShow = sortProducts(newProductsToShow, sorting.value);
-        }
-        console.log('AFTER SORTING', productsToShow);
-
-        setProductsToShow(newProductsToShow);
-    }, [sorting, price, brands, products]);
-
-
-    function getBrandFromQuery(): Option[] {
-        if (router.query.brand) {
-            console.log(router.query.brand);
-
-            const brandOptions: Option[] = brandList
-                .filter(el => el.route === router.query.brand)
-                .map(el => ({ label: el.name, value: el.route }));
-
-            return brandOptions;
-        }
-        return [];
-    }
-
-    function changeBrands(opt: MultiValue<Option>) {
-        setBrands([...opt]);
-    }
+    const cards = products.map(el => (
+        <Link href={`/products/${el.id}`} passHref key={el.id} >
+            <MProductCard
+                {...animationConfig}
+                productData={el}
+            />
+        </Link>
+    ));
 
     return (
         <Container>
-            <BreadCrumbs />
+            <BreadCrumbs
+                categoryId={Array.isArray(categoryId) ?
+                    categoryId[0] : categoryId}
+                subCategoryId={Array.isArray(subCategoryId) ?
+                    subCategoryId[0] : subCategoryId} />
             <ProductsFilterPanel
                 brandList={brandList}
-                sorting={sorting}
-                setSorting={setSorting}
-                price={price}
-                setPrice={setPrice}
-                brands={brands}
-                setBrands={changeBrands}
             />
-            <motion.div
-                layout={shouldReduceMotion ? false : true}
-                className={styles.cards}
-            >
-                <AnimatePresence initial={false}>
-                    {productsToShow.length ?
-                        productsToShow.map((el, idx) => {
-
-                            const href = el.sub_category ?
-                                `/products/${el.category.route}/${el.sub_category.route}/${el.id}`
-                                :
-                                `/products/${el.category.route}/${el.id}`;
-
-                            if ((idx + 1) % 5 === 0
-                                && products.length > 8) {
-                                return (
-                                    <Link href={href} passHref key={el.id} >
-                                        <MSpecialCard
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            layout={shouldReduceMotion ? false : true}
-                                            className={styles.cardsBig}
-                                            type='square'
-                                            price={el.price}
-                                            name={el.name}
-                                            nameRus={el.name_rus}
-                                            img={el.img}
-                                            sale={el.brand.special_sale}
-                                            key={el.id}
-                                        />
-                                    </Link>
-                                );
-                            }
-                            return (
-                                <Link href={href} passHref key={el.id} >
-                                    <MProductCard
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        productData={el}
-                                        layout={shouldReduceMotion ? false : true} />
-                                </Link>
-                            );
-                        })
-                        :
-                        <Title tag='h2' className={styles.cardsNotFound}>
-                            Не найдено товаров по вашему запросу
-                        </Title>
-                    }
-                </AnimatePresence>
-
+            <motion.div className={styles.cards}>
+                {cards.length === 0 ?
+                    <Title tag='h2' className={styles.cardsNotFound}>
+                        Не найдено товаров по вашему запросу
+                    </Title>
+                    :
+                    <Grid>
+                        {cards}
+                    </Grid>
+                }
             </motion.div>
+            <Pagination pagesCount={pages} currentPage={page} />
         </Container>
     );
 };

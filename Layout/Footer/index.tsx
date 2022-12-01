@@ -15,7 +15,7 @@ export const Footer = ({ catalog }: FooterProps): JSX.Element => {
 
     const catalogLinkOptions: LinkOption[] = catalog.map(el => ({
         name: el.name,
-        url: `/products/${el.route}`
+        url: `/products?categoryId=${el.id}`
     }));
 
     return (

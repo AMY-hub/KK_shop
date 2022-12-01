@@ -23,23 +23,16 @@ export const FavProductCard = forwardRef(({ productData, className, ...props }: 
         name_rus,
         price,
         img,
-        sub_category,
-        category,
         brand: { special_sale },
     } = productData;
 
     const [salePrice, highPrice] = getPricesWithSale(price, special_sale?.discount);
 
-    const href = sub_category ?
-        `/products/${category.route}/${sub_category.route}/${id}`
-        :
-        `/products/${category.route}/${id}`;
-
     return (
         <div className={cn(styles.card, className)} {...props} ref={ref}>
             <div className={styles.cardWrapper}>
                 <div className={styles.cardImg}>
-                    <Link href={href}>
+                    <Link href={`/products/${id}`}>
                         <a>
                             <Image
                                 className={styles.cardImg}

@@ -109,28 +109,31 @@
 		font-size: 1.125rem;
 		line-height: 2;
 		gap: 1rem;
-
-		&:hover,
-		&:focus {
-			opacity: 1;
-		}
+		
 		&::after {
 			display: none;
 			font-size: 0.9rem;
 			color: var(--gray);
 			transition: all 300ms;
 		}
+
+		&:hover,
+		&:focus {
+			opacity: 1;
+			&::after {
+				display: block;
+				opacity: 0.6;
+			}
+		}
 	}
 
 	&Btn_active {
 		opacity: 1;
 		color: var(--accent-dark);
-	}
-
-	&Btn_exp {
 		&::after {
-			transform: rotate(90deg);
-		}
+				display: block;
+				opacity: 0.6;
+			}
 	}
 
 	@media (max-width: 1200px) {
@@ -141,13 +144,15 @@
 		&Btn::after {
 			display: block;
 		}
+		&Btn_exp::after {
+			transform: rotate(90deg);
+		}
 	}
 }
 
 .catalogSubList {
 	overflow: hidden;
 	padding-left: .9375rem;
-	// margin: .9375rem;
 	border-left: 1px solid var(--gray-light);
 
 	@media (min-width: 861px) {
@@ -155,6 +160,5 @@
 		top: 15px;
 		left: 100%;
 		width: max-content;
-		border-left: none;
 	}
 }

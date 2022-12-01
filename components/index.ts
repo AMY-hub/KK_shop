@@ -17,6 +17,8 @@ export * from './UI/Dropdown';
 export * from './UI/RadioBadge';
 export * from './UI/Preloader';
 export * from './UI/CustomCheckbox';
+export * from './UI/Pagination';
+export * from './UI/Grid';
 
 export * from './FavButton';
 export * from './BasketBtn';

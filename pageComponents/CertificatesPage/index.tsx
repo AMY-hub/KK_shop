@@ -1,4 +1,4 @@
-import { CertificateCard } from '../../components';
+import { CertificateCard, Grid } from '../../components';
 import { BreadCrumbs, Container, Paragraph, Title } from '../../components';
 import { CertificatesPageProps } from './props';
 
@@ -28,7 +28,7 @@ export const CertificatesPage = ({ certificates }: CertificatesPageProps): JSX.E
                     <a href='mailto:Sale@kkshop.ru'> Sale@kkshop.ru</a>
                 </Paragraph>
             </div>
-            <div className={styles.cards}>
+            <Grid>
                 {certificates &&
                     certificates.map(el => (
                         <CertificateCard
@@ -38,7 +38,7 @@ export const CertificatesPage = ({ certificates }: CertificatesPageProps): JSX.E
                             img={el.img}
                         />
                     ))}
-            </div>
+            </Grid>
         </Container>
     );
 };

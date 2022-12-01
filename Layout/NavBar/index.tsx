@@ -1,24 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import cn from 'classnames';
+import { useMathMedia } from '../../hooks/useMathMedia';
 import { Button } from '../../components';
 import { navOptions } from '../const';
 import { NavBarProps } from './props';
 import { Category, Subcategory } from '../../interfaces';
 
 import styles from './style.module.scss';
-import { useMathMedia } from '../../hooks/useMathMedia';
 
 export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenuOpen, className, ...props }: NavBarProps): JSX.Element => {
 
     const router = useRouter();
-    const route = router.asPath;
     const [visibleSublist, setVisibleSublist] = useState<string>('');
     const isMobile = useMathMedia('(max-width: 860px)');
-    console.log('MATCH', isMobile);
 
+    useEffect(() => {
+        if (!router.pathname.includes('products')
+            || !router.query.categoryId) {
+            setVisibleSublist('');
+        }
+    }, [router.pathname, router.query.categoryId]);
 
     const handleNav = () => {
         setCatalogOpen(false);
@@ -67,7 +71,7 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
                         size='l'
                         className={styles.navListItem}
                         onClick={handleNav}
-                        isActive={route.includes(opt.url)}
+                        isActive={router.pathname.includes(opt.url)}
                     >
                         {opt.name}
                     </Button>
@@ -90,10 +94,8 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
                                 {...animationConfigY}
                                 className={styles.catalogListWrapper}>
                                 <ul className={styles.catalogList}>
-                                    <Link
-                                        href={`/products`}>
-                                        <a
-                                            className={styles.catalogListBtn}
+                                    <Link href={`/products`}>
+                                        <a className={styles.catalogListBtn}
                                             onClick={() => {
                                                 handleNav();
                                                 setVisibleSublist('');
@@ -111,7 +113,7 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
     });
 
     const buildSecondLevel = () => catalog.map(el => {
-        const isSelected = route.includes(el.route);
+        const isSelected = router.query?.categoryId == String(el.id);
         return (
             <li key={el.id}>
                 {el.subcategories.length ?
@@ -124,7 +126,7 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
                         {el.name}
                     </button>
                     :
-                    <Link href={`/products/${el.route}`}>
+                    <Link href={`/products?categoryId=${el.id}`}>
                         <a className={cn(styles.catalogListBtn, {
                             [styles.catalogListBtn_active]: isSelected
                         })}
@@ -152,7 +154,7 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
 
     const buildThirdLevel = (topCategory: Category, categories: Subcategory[]) => {
         return categories.map((el, idx) => {
-            const isSelected = route.includes(el.route);
+            const isSelected = router.query?.subCategoryId == String(el.id);
 
             return (
                 <motion.li
@@ -160,7 +162,7 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
                     animate={{ opacity: 1, height: 'auto' }}
                     transition={{ delay: 0.1 * idx, bounce: 0 }}
                     key={el.id}>
-                    <Link href={`/products/${topCategory.route}/${el.route}`}>
+                    <Link href={`/products?categoryId=${topCategory.id}&subCategoryId=${el.id}`}>
                         <a
                             className={cn(styles.catalogListBtn, {
                                 [styles.catalogListBtn_active]: isSelected

@@ -1,12 +1,12 @@
 import cn from 'classnames';
 import { isEmptySpaces } from '../../helpers/isEmptySpaces';
 import { useForm } from "react-hook-form";
+import { useSubmit } from './useSubmit';
+import { AnimatePresence } from 'framer-motion';
 import { FormInput, SubscriptionFormProps } from './props';
 import { Title, Button, Input, MAlertMessage } from '..';
 
 import styles from './style.module.scss';
-import { useSubmit } from './useSubmit';
-import { AnimatePresence } from 'framer-motion';
 
 export const SubscriptionForm = ({ className, ...props }: SubscriptionFormProps): JSX.Element => {
 

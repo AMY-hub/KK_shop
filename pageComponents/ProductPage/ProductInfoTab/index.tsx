@@ -124,7 +124,7 @@ export const ProductInfoTab = (props: ProductInfoTabProps): JSX.Element => {
                     }
                     <Button
                         like='Link'
-                        href={`/products?brand=${brand.route}`}
+                        href={`/products?brandId=${brand.id}`}
                     >
                         Другие товары бренда
                     </Button>

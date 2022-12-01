@@ -1,4 +1,5 @@
 import App, { AppContext, AppProps } from 'next/app';
+import Head from 'next/head';
 import Cookies from 'js-cookie';
 import { ContextProvider } from '../context/AppContext';
 import { Layout } from '../Layout';
@@ -17,16 +18,24 @@ interface Props {
   city: string;
 }
 
-function MyApp({ Component, pageProps, catalog, city }: AppProps & Props): JSX.Element {
+function MyApp({ Component, pageProps, router, catalog, city }: AppProps & Props): JSX.Element {
+  const path = router.asPath.slice(1);
+
   return (
-    <ContextProvider
-      hydrationData={{
-        appData: { city, catalog }
-      }}>
-      <Layout catalog={catalog}>
-        <Component {...pageProps} />
-      </Layout>
-    </ContextProvider>
+    <>
+      <Head>
+        <meta property='og:url' content={process.env.NEXT_PUBLIC_DOMAIN + path} />
+        <meta property='og:locale' content='ru_RU' />
+      </Head>
+      <ContextProvider
+        hydrationData={{
+          appData: { city, catalog }
+        }}>
+        <Layout catalog={catalog}>
+          <Component {...pageProps} />
+        </Layout>
+      </ContextProvider>
+    </>
   );
 }
 

@@ -5,7 +5,7 @@ function Login(): JSX.Element {
     return (
         <>
             <Head>
-                <title>Login</title>
+                <title>Авторизация</title>
             </Head>
             <LoginPage />
         </>

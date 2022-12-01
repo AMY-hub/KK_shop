@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import { BreadCrumbs, Button, Container, InfoBadge, Title } from '../../components';
 import { useAppContext } from '../../context/AppContext';
 import { DeliveryRules } from './DeliveryRules';
@@ -5,7 +6,7 @@ import CartLogo from '../../assets/images/icons/big_cart.svg';
 
 import styles from './style.module.scss';
 
-export const DeliveryPage = (): JSX.Element => {
+export const DeliveryPage = observer((): JSX.Element => {
 
     const { city } = useAppContext();
 
@@ -46,7 +47,7 @@ export const DeliveryPage = (): JSX.Element => {
                     <Title
                         tag='h2'
                         className={styles.deliveryOptionsTitle}
-                    >{`Варианты доставки в г. ${city}`}
+                    >{`Варианты доставки в ${city}`}
                     </Title>
                     <div className={styles.deliveryOptionsPrice}>
                         Доставка от 400 ₽
@@ -81,4 +82,4 @@ export const DeliveryPage = (): JSX.Element => {
             <DeliveryRules />
         </Container>
     );
-};
+});

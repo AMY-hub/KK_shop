@@ -1,35 +1,4 @@
 .cards {
-	display: grid;
-	bottom: 12.5rem;
-	grid-auto-flow: dense;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	margin-top: 3.125rem;
-	gap: 2.375rem;
-
-	&Big {
-		grid-column: span 2;
-		grid-row: span 2;
-		margin: 40px;
-		justify-self: center;
-	}
-
-	&NotFound {
-		grid-column: span 3;
-	}
-
-	@media (max-width: 1060px) {
-		&Big {
-			margin: 10px;
-		}
-	}
-
-	@media (max-width: 540px) {
-		&Big {
-			grid-column: auto;
-			grid-row: auto;
-		}
-
-		grid-template-columns: 1fr;
-		gap: 1.25rem;
-	}
+	margin-bottom: 3rem;
 }

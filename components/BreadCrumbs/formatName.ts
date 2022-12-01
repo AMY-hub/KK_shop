@@ -1,6 +1,4 @@
-import { Category } from '../../interfaces';
-
-export const formatName = (text: string, idx: number, catalog: Category[], productName?: string): string => {
+export const formatName = (text: string, productName?: string): string => {
     //constant routes:
     switch (text) {
         case 'products':
@@ -23,18 +21,6 @@ export const formatName = (text: string, idx: number, catalog: Category[], produ
     //dynamic routes:
     if (Number(text) && productName) {
         return productName;
-    }
-
-    if (idx === 1) {
-        const category = catalog.find(el => el.route === text);
-        return category ? category.name : text;
-    }
-
-    if (!Number(text) && idx > 1) {
-        const subcategory = catalog
-            .flatMap(el => el.subcategories)
-            .find(sc => sc.route === text);
-        return subcategory ? subcategory.name : text;
     }
 
     return text;

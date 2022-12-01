@@ -11,10 +11,20 @@ interface PageProps {
 }
 
 function Contacts({ points }: PageProps): JSX.Element {
+    const title = 'Контакты интернет-магазина KKshop.ru';
+    const description = 'Адреса розничных магазинов KKshop в Москве и Санкт-Петербурге, пункты самовывоза KKshop. Контактный телефон KKshop 8495 2592500. Почтовый адрес Sale@kkshop.ru';
+
     return (
         <>
             <Head>
-                <title>Contacts</title>
+                <title>KKshop - Контакты</title>
+                <meta name='description' content={description} />
+                <meta property='og:title' content={title} />
+                <meta property='og:description' content={description} />
+                <meta property='og:type' content='website' />
+                <meta property='og:image' content={process.env.NEXT_PUBLIC_DOMAIN + 'og_contacts.jpg'} />
+                <meta property='og:image:width' content='917' />
+                <meta property='og:image:height' content='502' />
             </Head>
             <YMaps>
                 <ContactsPage points={points} />

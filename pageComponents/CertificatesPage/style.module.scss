@@ -1,17 +1,7 @@
 .info {
+	margin-bottom: 3rem;
+
 	a {
 		color: var(--accent-dark);
-	}
-}
-
-.cards {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	margin: 4.375rem auto;
-	gap: 3.125rem;
-
-	@media (max-width: 760px) {
-		gap: 1.875rem;
-		margin: 3.125rem auto;
 	}
 }

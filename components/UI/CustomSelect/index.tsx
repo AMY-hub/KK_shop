@@ -2,7 +2,7 @@ import Select, { StylesConfig } from 'react-select';
 import { Option } from '../../../interfaces';
 import { SelectProps } from './props';
 
-export function CustomSelect<E extends Option, M extends boolean>({ name, options, onChange, value, isSearchable = false, isMulti }: SelectProps<E, M>) {
+export function CustomSelect<E extends Option, M extends boolean>({ id, name, options, onChange, value, isSearchable = false, isMulti }: SelectProps<E, M>) {
 
     const customStyles: StylesConfig<E, M> = {
         option: (provided, state) => ({
@@ -108,6 +108,7 @@ export function CustomSelect<E extends Option, M extends boolean>({ name, option
     return (
         <div>
             <Select
+                instanceId={id}
                 placeholder={name}
                 options={options}
                 value={value}

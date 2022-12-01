@@ -21,11 +21,16 @@ export const ProductPage = ({ productData, similar, popular }: ProductPageProps)
         info,
         brand,
         country,
+        categoryId,
+        subCategoryId
     } = productData;
 
     return (
         <Container>
-            <BreadCrumbs productName={productData.name} />
+            <BreadCrumbs
+                categoryId={String(categoryId)}
+                subCategoryId={String(subCategoryId)}
+                productName={productData.name} />
             <section className={styles.product}>
                 <ProductFullCard
                     productData={productData}

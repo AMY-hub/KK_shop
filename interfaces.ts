@@ -70,7 +70,7 @@ export interface ProductPreview {
     country: Country;
     categoryId: number;
     category: Category;
-    subCategoryId: number;
+    subCategoryId: number | null;
     sub_category: Subcategory | null;
     art: string;
 }
