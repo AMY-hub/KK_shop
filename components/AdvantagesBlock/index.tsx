@@ -12,10 +12,11 @@ export const AdvantagesBlock = ({ className, ...props }: AdvantagesBlockProps): 
         <div className={cn(styles.advantages, className)} {...props}>
             <div className={styles.advantagesItem}>
                 <div className={styles.advantagesImg}>
-                <Image
-                    src={freeImg}
-                    layout='fixed'
-                />                    
+                    <Image
+                        src={freeImg}
+                        alt='Бесплатная доставка'
+                        layout='fixed'
+                    />
                 </div>
                 <span>
                     Бесплатная
@@ -26,6 +27,7 @@ export const AdvantagesBlock = ({ className, ...props }: AdvantagesBlockProps): 
                 <div className={styles.advantagesImg}>
                     <Image
                         src={deliveryImg}
+                        alt='Доставка по РФ'
                         layout='fixed'
                     />
                 </div>
@@ -38,6 +40,7 @@ export const AdvantagesBlock = ({ className, ...props }: AdvantagesBlockProps): 
                 <div className={styles.advantagesImg}>
                     <Image
                         src={qualityImg}
+                        alt='Гарантия качества'
                         layout='fixed'
                     />
                 </div>

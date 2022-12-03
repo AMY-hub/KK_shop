@@ -2,7 +2,6 @@ import { GroupBase, OnChangeValue, OptionsOrGroups, PropsValue } from 'react-sel
 import { Option } from '../../../interfaces';
 
 export interface SelectProps<E extends Option, M extends boolean> {
-    id: string;
     name: string;
     options: OptionsOrGroups<E, GroupBase<E>>;
     isMulti: M;

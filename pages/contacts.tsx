@@ -7,10 +7,10 @@ import { Address } from '../interfaces';
 import { ContactsPage } from '../pageComponents/ContactsPage';
 
 interface PageProps {
-    points: Address[];
+    addresses: Address[];
 }
 
-function Contacts({ points }: PageProps): JSX.Element {
+function Contacts({ addresses }: PageProps): JSX.Element {
     const title = 'Контакты интернет-магазина KKshop.ru';
     const description = 'Адреса розничных магазинов KKshop в Москве и Санкт-Петербурге, пункты самовывоза KKshop. Контактный телефон KKshop 8495 2592500. Почтовый адрес Sale@kkshop.ru';
 
@@ -27,7 +27,7 @@ function Contacts({ points }: PageProps): JSX.Element {
                 <meta property='og:image:height' content='502' />
             </Head>
             <YMaps>
-                <ContactsPage points={points} />
+                <ContactsPage addresses={addresses} />
             </YMaps>
         </>
     );
@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
     const { data } = await API.get<Address[]>(ADDRESS);
     return {
         props: {
-            points: data
+            addresses: data
         }
     };
 };

@@ -187,7 +187,9 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
                         onClick={() => {
                             setMenuOpen(!menuOpen);
                             setCatalogOpen(!catalogOpen);
-                        }}>
+                        }}
+                        aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+                    >
                         <span></span>
                     </button>
                     <AnimatePresence>

@@ -7,7 +7,7 @@ import { ContactsPageProps } from './props';
 
 import styles from './style.module.scss';
 
-export const ContactsPage = ({ points }: ContactsPageProps): JSX.Element => {
+export const ContactsPage = ({ addresses }: ContactsPageProps): JSX.Element => {
 
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const [coords, setCoords] = useState<[number, number]>([55.75, 37.57]);
@@ -17,7 +17,7 @@ export const ContactsPage = ({ points }: ContactsPageProps): JSX.Element => {
         [coords, zoom]
     );
 
-    const cartMarks = points.map(p => (
+    const cartMarks = addresses.map(p => (
         <Placemark
             key={p.id}
             geometry={[+p.coord[0], +p.coord[1]]}
@@ -42,8 +42,8 @@ export const ContactsPage = ({ points }: ContactsPageProps): JSX.Element => {
             <div className={styles.contacts}>
                 <Scroll >
                     <div className={styles.pointsList}>
-                        {points &&
-                            points.map(p => (
+                        {addresses &&
+                            addresses.map(p => (
                                 <InfoBadge
                                     key={p.id}
                                     className={styles.point}
@@ -83,7 +83,7 @@ export const ContactsPage = ({ points }: ContactsPageProps): JSX.Element => {
                 </div>
             </div>
             <div className={styles.disclaimer}>
-                *Если ваш населенный пункт отсутствут в списке, вы можете заказать почтовую доставку по тарифу в соотсетствии с вашим регионом.
+                *Если ваш населенный пункт отсутствут в списке, вы можете заказать курьерскую доставку по тарифу в соотсетствии с вашим регионом.
             </div>
         </Container>
     );

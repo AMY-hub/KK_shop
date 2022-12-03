@@ -38,13 +38,16 @@ export const ProductInfoTab = (props: ProductInfoTabProps): JSX.Element => {
 
     return (
         <div className={cn(styles.info, className)} {...rest}>
-            <div className={styles.infoNav}>
+            <div className={styles.infoNav} role='tablist'>
                 <motion.button
                     initial={{ color: "var(--gray-dark)" }}
                     animate={{
                         color: currentTab === 'about' ?
                             "var(--black)" : "var(--gray-dark)"
                     }}
+                    id='about'
+                    role='tab'
+                    aria-selected={currentTab === 'about'}
                     className={styles.infoBtn}
                     onClick={() => setCurrentTab('about')}>
                     Описание
@@ -59,6 +62,9 @@ export const ProductInfoTab = (props: ProductInfoTabProps): JSX.Element => {
                         color: currentTab === 'brand' ?
                             "var(--black)" : "var(--gray-dark)"
                     }}
+                    id='brand'
+                    role='tab'
+                    aria-selected={currentTab === 'brand'}
                     className={styles.infoBtn}
                     onClick={() => setCurrentTab('brand')}>
                     Бренд
@@ -69,7 +75,9 @@ export const ProductInfoTab = (props: ProductInfoTabProps): JSX.Element => {
                 </motion.button>
             </div>
             {currentTab === 'about' ?
-                <div className={styles.about}>
+                <div className={styles.about}
+                    role='tabpanel'
+                    aria-labelledby='about'>
                     <span className={styles.aboutName}>
                         {name}
                     </span>
@@ -110,7 +118,9 @@ export const ProductInfoTab = (props: ProductInfoTabProps): JSX.Element => {
                     </table>
                 </div>
                 :
-                <div className={styles.brand}>
+                <div className={styles.brand}
+                    role='tabpanel'
+                    aria-labelledby='brand'>
                     <div className={styles.brandName}>
                         {brand.name}
                     </div>

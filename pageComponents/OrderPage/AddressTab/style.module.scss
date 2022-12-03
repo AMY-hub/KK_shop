@@ -2,29 +2,14 @@
 	&Header {
 		border-bottom: 1px solid #c4c4c4;
 		margin-bottom: 2rem;
-
-		@media (max-width: 430px) {
-			margin-bottom: 1rem;
-		}
-	}
-	
-	&Btn {
-		position: relative;
 		font-family: var(--accent-font);
 		font-size: 1.2rem;
 		line-height: 1.5;
 		padding-bottom: 0.5rem;
 		margin-right: 2rem;
-	}
 
-	.activeLine {
-		display: block;
-		position: absolute;
-		bottom: -2px;
-		left: 0;
-		background-color: var(--accent-dark);
-		width: 100%;
-		height: 3px;
-		border-radius: 2px;
+		@media (max-width: 430px) {
+			margin-bottom: 1rem;
+		}
 	}
 }

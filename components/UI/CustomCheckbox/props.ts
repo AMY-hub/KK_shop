@@ -1,10 +1,11 @@
-import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react';
-import { FieldError } from 'react-hook-form';
+import { ReactNode } from 'react';
+import { Control, FieldValues, Path } from 'react-hook-form';
 
-export interface CustomCheckboxProps extends Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'value'> {
-    error?: FieldError,
-    wide?: boolean
+export interface CustomCheckboxProps<T extends FieldValues> {
     label: ReactNode;
-    value: boolean;
-    onChange: (...event: any[]) => void;
+    control: Control<T>;
+    name: Path<T>;
+    value: string;
+    required?: boolean;
+    className?: string;
 }

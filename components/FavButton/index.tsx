@@ -13,8 +13,10 @@ export const FavButton = observer(({ productId, onClick }: FavButtonProps): JSX.
 
     return (
         <IconButton
-            aria-label='Добавить в избранное'
-            title='Добавить в избранное'
+            aria-label={isFav ?
+                'Удалить из избранного' : 'Добавить в избранное'}
+            title={isFav ?
+                'Удалить из избранного' : 'Добавить в избранное'}
             onClick={() => onClick(productId)}
             className={styles.favBtn}
             styleType='dark'>

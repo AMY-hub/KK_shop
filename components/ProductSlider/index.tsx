@@ -10,7 +10,7 @@ export const ProductSlider = ({ images, className, ...rest }: ProductSliderProps
 
     const [page, setPage] = useState(0);
 
-    const slides = images.map((img) => (
+    const slides = images.map((img, idx) => (
         <motion.div
             className={styles.sliderSlide}
             key={img}
@@ -34,6 +34,7 @@ export const ProductSlider = ({ images, className, ...rest }: ProductSliderProps
                 <Image
                     draggable="false"
                     src={process.env.NEXT_PUBLIC_DOMAIN + img}
+                    alt={`Изображение товара ${idx + 1}`}
                     layout='intrinsic'
                     width={550}
                     height={550}
@@ -56,8 +57,9 @@ export const ProductSlider = ({ images, className, ...rest }: ProductSliderProps
         return (
             <div className={styles.pagination}>
                 {images.map((el, idx) => (
-                    <div
+                    <button
                         key={el}
+                        aria-label={`К изображению ${idx + 1}`}
                         className={styles.dotWrapper}
                         onClick={() => setPage(idx)}
                     >
@@ -74,7 +76,7 @@ export const ProductSlider = ({ images, className, ...rest }: ProductSliderProps
                                 )}
                             </AnimatePresence>
                         </div>
-                    </div>
+                    </button>
                 ))}
             </div>
         );

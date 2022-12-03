@@ -1,15 +1,16 @@
 import cn from 'classnames';
 import { motion } from 'framer-motion';
-import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
+import { ForwardedRef, forwardRef, useEffect, useId, useState } from 'react';
 import { AddressSuggestions, DaDataAddressSuggestion } from "react-dadata";
 import "react-dadata/dist/react-dadata.css";
 import { AddressPickerProps } from './props';
 
 import styles from './style.module.scss';
 
-export const AddressPicker = forwardRef(({ uid, city, defaultQuery = '', onSelect, onChange, className, ...rest }: AddressPickerProps, ref: ForwardedRef<AddressSuggestions>) => {
+export const AddressPicker = forwardRef(({ city, defaultQuery = '', onSelect, onChange, className, ...rest }: AddressPickerProps, ref: ForwardedRef<AddressSuggestions>) => {
 
     const [value, setValue] = useState<DaDataAddressSuggestion>();
+    const uid = useId();
 
     useEffect(() => {
         if (value && onChange) {

@@ -1,53 +1,61 @@
-import { ChangeEventHandler, ForwardedRef, forwardRef, useState } from 'react';
+import { ChangeEventHandler, useId, useState } from 'react';
 import cn from 'classnames';
+import { FieldValues, useController } from 'react-hook-form';
 import { InputTelProps } from './props';
 import { ErrorMessage } from '../..';
 
 import styles from './style.module.scss';
 
-export const InputTel = forwardRef(({ code, error, isWide, className, onChange, ...props }: InputTelProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
+export function InputTel<T extends FieldValues = FieldValues>({ control, name, code, isWide, className, ...props }: InputTelProps<T>): JSX.Element {
 
-    const [phone, setPhone] = useState<string>('');
+    const [phone, setPhone] = useState<string>(code);
+    const id = useId();
+    const { field, fieldState } = useController({ control, name, rules: { required: 'Обязательно для заполнения' } });
 
     function formatPhone(value: string) {
+        value = value.slice(code.length);
+        console.log(value);
+
         value = value.replace(/\D/g, "");
         value = value.replace(/^(\d{3})(\d)/, "($1) $2");
         value = value.replace(/(\d{3})(\d)/, "$1-$2");
         value = value.replace(/(-\d{2})(\d)/, "$1-$2");
-        return value;
+        return code + value;
     }
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        if (e.target.value.length > 15) {
+        if (e.target.value.length > 18) {
             return;
         }
         const newValue = formatPhone(e.target.value);
         setPhone(newValue);
-        if (onChange) {
-            onChange(newValue);
-        }
+        field.onChange(newValue);
     };
 
     return (
         <div className={className}>
             <div className={styles.inputWrapper}>
-                <span>{code}</span>
                 <input className={cn(styles.input, {
-                    [styles.input_error]: error,
+                    [styles.input_error]: fieldState.error,
                     [styles.input_wide]: isWide
                 })}
+                    aria-invalid={fieldState.error ? true : false}
+                    aria-describedby={id}
                     {...props}
                     type='tel'
                     value={phone}
                     onChange={handleChange}
-                    ref={ref}
                 />
             </div>
-            {error?.message &&
-                <ErrorMessage message={error.message}
+            <span id={id} className={styles.inputHint}>
+                Введите номер телефона, начиная с цифры 9
+            </span>
+            {fieldState.error &&
+                <ErrorMessage message={fieldState.error.message
+                    ?? 'Возникла ошибка при заполнении формы'}
                     className={styles.errorMessage}
                     role='alert' />
             }
         </div>
     );
-});
+}

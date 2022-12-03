@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps, router, catalog, city }: AppProps & Props
           appData: { city, catalog }
         }}>
         <Layout catalog={catalog}>
-          <Component {...pageProps} />
+          <Component {...pageProps} key={router.asPath} />
         </Layout>
       </ContextProvider>
     </>

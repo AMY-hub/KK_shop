@@ -24,4 +24,9 @@
 		border-bottom: 1.5px solid var(--warning);
 		background: var(--invalid);
 	}
+
+	&Hint {
+		font-size: 0.8rem;
+		color: var(--gray);
+	}
 }

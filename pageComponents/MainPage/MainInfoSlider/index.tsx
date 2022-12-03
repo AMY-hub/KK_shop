@@ -1,6 +1,6 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay, EffectFade, Pagination } from 'swiper';
+import { Navigation, Autoplay, EffectFade, Pagination, A11y } from 'swiper';
 import cn from 'classnames';
 import { Button } from '../../../components';
 import IconLeft from '../../../assets/images/icons/arr_thin_left.svg';
@@ -18,7 +18,7 @@ export const MainInfoSlider = (): JSX.Element => {
     return (
         <Swiper
             className={styles.sliderWrapper}
-            modules={[Navigation, Pagination, Autoplay, EffectFade]}
+            modules={[Navigation, Pagination, Autoplay, EffectFade, A11y]}
             navigation={{
                 prevEl: '.prev',
                 nextEl: '.next',
@@ -39,7 +39,7 @@ export const MainInfoSlider = (): JSX.Element => {
                         <p>Специальные цены только до 30 апреля</p>
                         <Button
                             like='Link'
-                            href={'/products?brand=TheSaem'}
+                            href={'/products?brandId=7'}
                             size='l'
                             className={styles.contentBtn}>
                             Перейти в каталог
@@ -54,7 +54,7 @@ export const MainInfoSlider = (): JSX.Element => {
                         <p>Original Herb - новая серия для проблемной кожи</p>
                         <Button
                             like='Link'
-                            href={'/products?brand=Fraijour'}
+                            href={'/products?brandId=8'}
                             size='l'
                             className={styles.contentBtn}>
                             Перейти в каталог
@@ -69,7 +69,7 @@ export const MainInfoSlider = (): JSX.Element => {
                         <p>Специальные цены только до 30 апреля</p>
                         <Button
                             like='Link'
-                            href={'/products?brand=JanMarini'}
+                            href={'/products?brandId=6'}
                             size='l'
                             className={styles.contentBtn}>
                             Перейти в каталог

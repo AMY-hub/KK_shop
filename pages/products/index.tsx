@@ -1,6 +1,5 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { BRAND, PRODUCTS } from '../../api/APIendpoints';
 import { API } from '../../api/axiosConfig';
 import { Brand, ProductPreview, ProductsResponse } from '../../interfaces';
@@ -13,7 +12,6 @@ interface PageProps {
 }
 
 function ProductsCatalog({ pages, products, brands }: PageProps): JSX.Element {
-    const router = useRouter();
     const title = 'Интернет-магазин корейской косметики KKshop — купить косметику из Кореи в Москве, Санкт-Петербурге и регионах РФ';
     const description = 'Оригинальная корейская косметика по низким ценам в интернет-магазине KKshop. Косметика из Южной Кореи от официальных поставщиков. Купить корейскую косметику онлайн с доставкой.';
 
@@ -30,7 +28,6 @@ function ProductsCatalog({ pages, products, brands }: PageProps): JSX.Element {
                 <meta property='og:image:height' content='630' />
             </Head>
             <CatalogPage
-                key={router.asPath}
                 products={products}
                 pages={pages}
                 brandList={brands}

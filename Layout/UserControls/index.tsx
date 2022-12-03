@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import { IconButton } from '../../components';
 import { UserControlsProps } from './props';
-import SearchIcon from '../../assets/images/icons/search.svg';
 import CartIcon from '../../assets/images/icons/cart.svg';
 import HeartIcon from '../../assets/images/icons/heart.svg';
 import ProfileIcon from '../../assets/images/icons/profile.svg';
@@ -16,29 +15,35 @@ export const UserControls = observer(({ className, ...props }: UserControlsProps
 
     return (
         <div className={cn(styles.controls, className)} {...props}>
-            <IconButton >
-                <SearchIcon />
-            </IconButton>
             <IconButton
                 like='Link'
                 href='/profile'>
-                <ProfileIcon />
+                <ProfileIcon aria-hidden={true} />
+                <span className={styles.hidden}>
+                    Профиль пользователя
+                </span>
             </IconButton >
             <IconButton
                 like='Link'
                 href='/profile/favourites'>
-                <HeartIcon width={24} height={24} />
+                <HeartIcon width={24} height={24} aria-hidden={true} />
+                <span className={styles.hidden}>
+                    Избранное
+                </span>
             </IconButton>
             <IconButton
                 className={styles.basket}
                 like='Link'
                 href='/basket'>
                 {basket.length > 0 &&
-                    <span className={styles.basketBadge}>
+                    <span className={styles.basketBadge} aria-hidden={true}>
                         {basket.length}
                     </span>
                 }
-                <CartIcon />
+                <CartIcon aria-hidden={true} />
+                <span className={styles.hidden}>
+                    {`Корзина, ${basket.length} товаров`}
+                </span>
             </IconButton>
         </div>
     );

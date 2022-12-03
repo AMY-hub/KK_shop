@@ -1,37 +1,33 @@
-import { ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import cn from 'classnames';
+import { FieldValues, useController } from 'react-hook-form';
 import { RadioBadgeProps } from './props';
 import { ErrorMessage } from '../..';
 
 import styles from './style.module.scss';
 
-export const RadioBadge = forwardRef((props: RadioBadgeProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
+export function RadioBadge<T extends FieldValues = FieldValues>(props: RadioBadgeProps<T>): JSX.Element {
 
-    const { error, name, options, value, onChange } = props;
-    const [selected, setSelected] = useState<string>(value || '');
-
-    useEffect(() => {
-        if (onChange) {
-            onChange(selected);
-        }
-    }, [selected, onChange, value]);
+    const { name, control, options, className } = props;
+    const { field, fieldState } = useController({ control, name, rules: { required: 'Обязательно для заполнения' } });
 
     const badges = options.map(opt => (
         <label key={opt.value}>
             <input
-                ref={ref}
-                checked={opt.value === selected}
-                onChange={() => setSelected(opt.value)}
-                name={name} type="radio" value={opt.value} />
+                checked={opt.value === field.value}
+                onChange={() => field.onChange(opt.value)}
+                name={name}
+                type="radio"
+                value={opt.value}
+                aria-invalid={fieldState.error ? true : false} />
             <div
                 onKeyDown={(e) => {
                     if (e.code === 'Enter') {
-                        setSelected(opt.value);
+                        field.onChange(opt.value);
                     }
                 }}
                 tabIndex={0}
                 className={cn(styles.radioLabel, {
-                    [styles.radioLabel_active]: opt.value === selected,
+                    [styles.radioLabel_active]: opt.value === field.value,
                 })}>
                 {opt.labelTitle &&
                     <div className={styles.radioLabelTitle}>{opt.labelTitle}</div>}
@@ -43,16 +39,16 @@ export const RadioBadge = forwardRef((props: RadioBadgeProps, ref: ForwardedRef<
     ));
 
     return (
-        <div>
+        <div className={className}>
             <div className={styles.radio}>
                 {badges}
-
             </div>
-            {error?.message &&
-                <ErrorMessage message={error.message}
+            {fieldState.error &&
+                <ErrorMessage message={fieldState.error.message
+                    ?? 'Возникла ошибка при заполнении формы'}
                     className={styles.errorMessage}
-                    role='alert' />
+                />
             }
         </div>
     );
-});
+}

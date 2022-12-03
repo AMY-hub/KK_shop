@@ -65,6 +65,7 @@ export const ProductFullCard = ({ productData, className, ...rest }: ProductFull
                 <div className={styles.productImg}>
                     <Image
                         src={process.env.NEXT_PUBLIC_DOMAIN + img}
+                        alt={name}
                         layout='intrinsic'
                         width={550}
                         height={550}

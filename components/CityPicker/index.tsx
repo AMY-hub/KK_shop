@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import Cookies from 'js-cookie';
 import { runInAction } from 'mobx';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { AddressSuggestions, DaDataAddressSuggestion } from "react-dadata";
 import "react-dadata/dist/react-dadata.css";
 import { useAppContext } from '../../context/AppContext';
@@ -9,10 +9,12 @@ import { CityPickerProps } from './props';
 
 import styles from './style.module.scss';
 
-export const CityPicker = ({ uid, defaultCity, onSelect, className, ...rest }: CityPickerProps) => {
+export const CityPicker = ({ defaultCity, onSelect, className, ...rest }: CityPickerProps) => {
 
     const [value, setValue] = useState<DaDataAddressSuggestion>();
+    const uid = useId();
     const appStore = useAppContext();
+
     useEffect(() => {
         if (value) {
             runInAction(() => appStore.city = value.value);

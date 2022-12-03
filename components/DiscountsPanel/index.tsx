@@ -61,6 +61,7 @@ export const DiscountsPanel = observer(({ className, ...rest }: DiscountsPanelPr
                     </div>
                     <InputForm
                         ref={bonusRef}
+                        aria-describedby='bonus'
                         onSubmit={handleBonus}
                         className={styles.discountsField}
                         placeholder='Введите сумму' />
@@ -68,6 +69,7 @@ export const DiscountsPanel = observer(({ className, ...rest }: DiscountsPanelPr
             }
             <InputForm
                 ref={promoRef}
+                aria-describedby='promo'
                 onSubmit={handlePromo}
                 className={styles.discountsField}
                 placeholder='Введите промокод' />
@@ -76,21 +78,26 @@ export const DiscountsPanel = observer(({ className, ...rest }: DiscountsPanelPr
                 <AnimatePresence>
                     {basketStore.bonusDiscount > 0 &&
                         <motion.div
-                            {...animationConfig}>
+                            {...animationConfig}
+                            id='bonus'
+                        >
                             {`- ${formatNumName(basketStore.bonusDiscount, ['бонус', 'бонуса', 'бонусов'])}`}
                         </motion.div>}
                 </AnimatePresence>
                 <AnimatePresence>
                     {basketStore.promoActive &&
                         <motion.div
-                            {...animationConfig}>
+                            {...animationConfig}
+                            id='promo'
+                        >
                             {basketStore.promoActive}
                         </motion.div>}
                 </AnimatePresence>
                 <AnimatePresence>
                     {message &&
                         <motion.div
-                            {...animationConfig}>
+                            {...animationConfig}
+                            role='alert'>
                             {message}
                         </motion.div>}
                 </AnimatePresence>

@@ -99,9 +99,12 @@ export interface ProductDetails extends ProductPreview {
 }
 
 export interface Certificate {
+    id: number;
     name: string;
     price: number;
     img: string;
+    reatedAt: string;
+    updatedAt: string;
 }
 
 export interface Review {
@@ -271,3 +274,7 @@ export interface Order {
     userId: number;
     products: OrderProduct[];
 }
+
+export type Delivery = 'самовывоз' | 'курьер';
+
+export type Payment = 'онлайн' | 'при получении';

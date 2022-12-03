@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { ForwardedRef, forwardRef } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { AnimatePresence, motion } from 'framer-motion';
 import { isEmptySpaces } from '../../helpers/isEmptySpaces';
 import { MAlertMessage, Button, CustomCheckbox, Input, PrivacyLabel } from '..';
@@ -18,10 +18,7 @@ export const RegistrationForm = observer(forwardRef(({ className, onAuth, ...pro
         handleSubmit,
         reset,
         control,
-        formState: { errors, isSubmitting } } = useForm<RegisterFormFields>({
-            defaultValues: { privacyCheck: false }
-        });
-
+        formState: { errors, isSubmitting } } = useForm<RegisterFormFields>();
 
     const userStore = useUserContext();
 
@@ -44,12 +41,14 @@ export const RegistrationForm = observer(forwardRef(({ className, onAuth, ...pro
             className={cn(styles.form, className)} {...props}>
             <Input
                 {...register('name', {
-                    required: 'Обязательно для заполнения',
+                    required: true,
                     maxLength: 20,
                     validate: isEmptySpaces
                 })}
                 error={errors.name}
-                placeholder='Имя*'
+                placeholder='Имя'
+                hint='*Обязательное поле'
+                required
                 isWide
             />
             <Input
@@ -60,19 +59,23 @@ export const RegistrationForm = observer(forwardRef(({ className, onAuth, ...pro
             />
             <Input
                 {...register('email', {
-                    required: 'Обязательно для заполнения',
+                    required: true,
                     validate: isEmptySpaces
                 })}
                 error={errors.email}
                 type='email'
-                placeholder='Ваша почта*'
+                placeholder='Ваша почта'
+                hint='*Обязательное поле'
+                required
                 isWide
             />
             <Input
                 {...register('password', { required: 'Обязательно для заполнения', minLength: 5 })}
                 error={errors.password}
                 type='password'
-                placeholder='Пароль*'
+                placeholder='Пароль'
+                hint='*Не менее 5 символов'
+                required
                 isWide
             />
             <Input
@@ -83,19 +86,11 @@ export const RegistrationForm = observer(forwardRef(({ className, onAuth, ...pro
                 placeholder='Дата рождения'
                 isWide
             />
-            <Controller
-                name='privacyCheck'
+            <CustomCheckbox
+                label={<PrivacyLabel />}
                 control={control}
-                rules={{ required: true }}
-                render={({ field: { ref, onChange, value } }) => (
-                    <CustomCheckbox
-                        error={errors.privacyCheck}
-                        label={<PrivacyLabel />}
-                        ref={ref}
-                        onChange={onChange}
-                        value={value}
-                    />
-                )}
+                name='privacyCheck'
+                value='privacy'
             />
             <Button
                 withLoading

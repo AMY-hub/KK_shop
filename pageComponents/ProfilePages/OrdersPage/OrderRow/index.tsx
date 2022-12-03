@@ -40,7 +40,9 @@ export const OrderRow = ({ order }: OrderRowProps): JSX.Element => {
                         })}
                         type='button'
                         aria-label={showDetails ?
-                            'Скрыть детали заказа' : 'Показать детали заказа'}
+                            `Скрыть детали заказа №${order.key}`
+                            :
+                            `Показать детали заказа №${order.key}`}
                         onClick={() => setShowDetails(!showDetails)}>
                         {order.key}
                     </button>

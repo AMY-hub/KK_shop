@@ -41,8 +41,9 @@ export const Header = observer(({ catalog }: HeaderProps): JSX.Element => {
                             {city}
                             <button
                                 onClick={() => setModalShown(true)}
+                                aria-label='Изменить город'
                                 className={styles.headerTopPick}>
-                                <PickIcon />
+                                <PickIcon aria-hidden={true} />
                             </button>
                         </span>
                         <a className={styles.headerTopTel}
@@ -58,7 +59,7 @@ export const Header = observer(({ catalog }: HeaderProps): JSX.Element => {
                             <img
                                 className={styles.headerBodyLogo}
                                 src={logo.src}
-                                alt='logo'
+                                alt='Логотип магазина'
                                 width={124}
                                 height={38}
                             />

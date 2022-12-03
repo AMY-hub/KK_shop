@@ -24,6 +24,7 @@ export const MainPage = ({ newest, sale, popular }: MainPageProps): JSX.Element 
                 <section className={styles.about}>
                     <Image
                         src={aboutImg}
+                        alt='о корейской косметике'
                         layout='intrinsic'
                         objectFit='cover'
                     />

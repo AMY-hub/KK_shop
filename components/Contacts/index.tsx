@@ -10,6 +10,7 @@ export const Contacts = ({ className, ...props }: ContactsProps): JSX.Element =>
         <div className={cn(styles.contacts, className)} {...props}>
             <Image
                 src={logo}
+                alt='Логотип магазина'
                 layout='fixed'
                 width={195}
                 height={60}

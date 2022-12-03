@@ -20,10 +20,11 @@ export const Scroll = ({ children, width = 5, className, ...rest }: ScrollProps)
 
     return (
         <div className={cn(styles.container, className)} {...rest}>
-            <div className={styles.content} ref={contentRef}>
+            <div className={styles.content} id='content' ref={contentRef}>
                 {children}
             </div>
-            <div className={styles.scrollbar}>
+            <div className={styles.scrollbar}
+                role='scrollbar' aria-controls='content'>
                 <div className={styles.scrollbarBar} style={{ width }}>
                     <div
                         onClick={handleTrackClick}

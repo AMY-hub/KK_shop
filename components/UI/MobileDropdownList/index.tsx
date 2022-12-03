@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { Button } from '../..';
 import { useMathMedia } from '../../../hooks/useMathMedia';
 import { DropdownListProps } from './props';
@@ -10,6 +10,7 @@ import styles from './style.module.scss';
 export const DropdownList = ({ title, options, className, ...props }: DropdownListProps): JSX.Element => {
 
     const [opened, setOpened] = useState<boolean>(false);
+    const id = useId();
     const isMobile = useMathMedia('(max-width: 760px)');
 
     const optionItems = options.map(opt => (
@@ -20,7 +21,6 @@ export const DropdownList = ({ title, options, className, ...props }: DropdownLi
                 styleType='plain'
                 size='s'
                 className={cn({ [styles.disabled]: !opened })}
-                tabIndex={opened ? 0 : -1}
             >{opt.name}
             </Button>
         </motion.li>
@@ -34,6 +34,8 @@ export const DropdownList = ({ title, options, className, ...props }: DropdownLi
                         className={cn(styles.dropdownExpBtn, 'icon-arr-exp_fill', {
                             [styles.dropdownExpBtn_active]: opened
                         })}
+                        aria-expanded={opened}
+                        aria-controls={id}
                         onClick={() => setOpened(!opened)}
                     >
                         {title}
@@ -41,6 +43,7 @@ export const DropdownList = ({ title, options, className, ...props }: DropdownLi
                     <AnimatePresence initial={false}>
                         {opened &&
                             <motion.ul
+                                id={id}
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}

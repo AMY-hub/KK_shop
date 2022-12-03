@@ -5,7 +5,7 @@ import styles from './style.module.scss';
 
 export const ErrorMessage = ({ message, className, ...props }: ErrorMessageProps): JSX.Element => {
     return (
-        <p className={cn(styles.error, className)} {...props}>
+        <p role='alert' className={cn(styles.error, className)} {...props}>
             {message}
         </p>
     );

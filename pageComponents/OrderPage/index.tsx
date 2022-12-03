@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { useMemo, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import cn from 'classnames';
 import { AnimatePresence } from 'framer-motion';
 import { CustomCheckbox, Dropdown, Input, Button, Title, Container, RadioBadge, PrivacyLabel, Modal, CityPicker, InputTel, MAlertMessage } from '../../components';
@@ -11,7 +11,8 @@ import { isEmptySpaces } from '../../helpers/isEmptySpaces';
 import { SuccessMessage } from './SuccessMessage';
 import { AddressTab } from './AddressTab';
 import { useOrderSubmit } from './useOrderSubmit';
-import { Delivery, OrderFormFields } from './interfaces';
+import { useDelivery } from '../../hooks/useDelivery';
+import { OrderFormFields } from './interfaces';
 import { OrderPageProps } from './props';
 import CardIcon from '../../assets/images/icons/credit-card.svg';
 import PickIcon from '../../assets/images/icons/pick.svg';
@@ -23,9 +24,9 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
     const userState = useUserContext();
     const city = useAppContext().city;
     const basket = useBasketContext().basket;
-    const [delivery, setDelivery] = useState<Delivery>('курьер');
     const [modalAddressShown, setModalAddressShown] = useState<boolean>(false);
     const [modalCityShown, setModalCityShown] = useState<boolean>(false);
+    const { deliveryPrice, pickPrice, pick } = useDelivery(addresses);
     const {
         register,
         formState: { errors, isSubmitting },
@@ -37,43 +38,43 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                 lastName: userState.user?.lastname || '',
                 email: userState.user?.email || '',
                 privacy: true,
-                delivery: delivery,
+                delivery: 'курьер',
                 payment: 'онлайн'
             }
         });
+    const deliveryType = useWatch({ control, name: 'delivery' });
 
-    const deliveryPrice = useMemo(() => {
-        if (delivery === 'курьер') {
-            return cities.includes(city) ? 100 : 400;
-        }
-        return 0;
-    }, [cities, city, delivery]);
+    const {
+        orderNumber,
+        error,
+        setError,
+        submitHandler } = useOrderSubmit(reset, deliveryPrice);
 
     const deliveryOptions = useMemo(() => {
-        if (cities.includes(city)) {
+        if (pick) {
             return [{
                 value: 'курьер',
                 labelTitle: 'Курьер',
-                labelFooter: `${cities.includes(city) ? 100 : 400} руб`,
+                labelFooter: `${deliveryPrice} руб`,
                 labelBody: 'Служба доставки'
             },
             {
                 value: 'cамовывоз',
                 labelTitle: 'Самовывоз',
-                labelFooter: 'Бесплатно',
+                labelFooter: pickPrice ? `${pickPrice} руб` : 'Бесплатно',
                 labelBody: 'Пункты выдачи'
             }];
         } else {
             return [{
                 value: 'курьер',
                 labelTitle: 'Курьер',
-                labelFooter: `${cities.includes(city) ? 100 : 400} руб`,
+                labelFooter: `${deliveryPrice} руб`,
                 labelBody: 'Служба доставки'
             }];
         }
-    }, [city, cities]);
+    }, [deliveryPrice, pickPrice, pick]);
 
-    const paymentOprions = useMemo(() => (
+    const paymentOptions = useMemo(() => (
         [{
             value: 'онлайн',
             labelBody: (
@@ -91,12 +92,6 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                 </div>)
         }]), []);
 
-    const {
-        orderNumber,
-        error,
-        setError,
-        submitHandler } = useOrderSubmit(reset, deliveryPrice);
-
     if (orderNumber) {
         return (<SuccessMessage order={orderNumber} isAuthorized={userState.isLoggedIn} />);
     }
@@ -111,8 +106,9 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
 
     return (
         <Container className={styles.order}>
-            <Title tag='h1'
-                className={styles.orderTitle}>Оформление заказа</Title>
+            <Title tag='h1' className={styles.orderTitle}>
+                Оформление заказа
+            </Title>
             <div className={styles.orderRegistration}>
 
                 <form onSubmit={(handleSubmit((data, e) => submitHandler(data, e)))}>
@@ -136,24 +132,11 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                         </div>
                         <div className={styles.orderStepSection}>
                             <Title tag='h3'>Способ доставки</Title>
-                            <div
-                                className={styles.orderStepSectionFields}>
-                                <Controller
-                                    name='delivery'
+                            <div className={styles.orderStepSectionFields}>
+                                <RadioBadge
                                     control={control}
-                                    rules={{ required: 'Обязательно для заполнения' }}
-                                    render={({ field: { ref, onChange, value } }) => (
-                                        <RadioBadge
-                                            error={errors.delivery}
-                                            name='delivery'
-                                            ref={ref}
-                                            value={value}
-                                            onChange={(value: Delivery) => {
-                                                onChange(value);
-                                                setDelivery(value);
-                                            }}
-                                            options={deliveryOptions}
-                                        />)}
+                                    name='delivery'
+                                    options={deliveryOptions}
                                 />
                                 {!cities.includes(city) &&
                                     <div className={styles.orderDisclaimer}>
@@ -163,7 +146,10 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                             </div>
                         </div>
                         <div className={styles.orderStepSection}>
-                            <Title tag='h3'>Адрес</Title>
+                            <Title tag='h3'>
+                                {deliveryType === 'курьер'
+                                    ? 'Адрес' : 'Пункт самовывоза'}
+                            </Title>
                             <div className={styles.orderStepSectionFields}>
                                 <div className={styles.orderAddress}>
                                     {getValues('address') || 'Не выбран'}
@@ -172,7 +158,9 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                                     type='button'
                                     styleType='ghost'
                                     onClick={() => setModalAddressShown(true)}
-                                >Изменить адрес
+                                >
+                                    {deliveryType === 'курьер'
+                                        ? 'Изменить адрес' : 'Выбрать пункт самовывоза'}
                                 </Button>
                             </div>
                         </div>
@@ -192,6 +180,7 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                                 })}
                                     error={errors.lastName}
                                     placeholder='Фамилия'
+                                    required
                                     isWide />
                                 <Input {...register('name', {
                                     required: 'Обязательно для заполнения', maxLength: 20,
@@ -199,12 +188,14 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                                 })}
                                     error={errors.name}
                                     placeholder='Имя'
+                                    required
                                     isWide />
                                 <Input {...register('middleName', {
                                     required: 'Обязательно для заполнения', maxLength: 20,
                                     validate: isEmptySpaces
                                 })}
                                     error={errors.middleName}
+                                    required
                                     placeholder='Отчество'
                                     isWide />
                             </div>
@@ -214,19 +205,13 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                             <Title tag='h3'>Контакты</Title>
                             <div
                                 className={cn(styles.orderStepSectionFields, styles.personalData)}>
-                                <Controller
-                                    name='phone'
+                                <InputTel
                                     control={control}
-                                    rules={{ required: 'Обязательно для заполнения' }}
-                                    render={({ field: { ref, onChange } }) => (
-                                        <InputTel
-                                            placeholder='(XXX) XXX-XX-XX'
-                                            code='+7 '
-                                            error={errors.phone}
-                                            isWide
-                                            ref={ref}
-                                            onChange={onChange}
-                                        />)}
+                                    name='phone'
+                                    placeholder='(XXX) XXX-XX-XX'
+                                    code='+7 '
+                                    required
+                                    isWide
                                 />
                                 <Input {...register('email', {
                                     required: 'Обязательно для заполнения',
@@ -235,19 +220,14 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                                     type='email'
                                     error={errors.email}
                                     placeholder='Ваша почта'
+                                    hint='*Необходимо для отправки чека'
+                                    required
                                     isWide />
-                                <Controller
-                                    name='privacy'
+                                <CustomCheckbox
+                                    label={<PrivacyLabel />}
                                     control={control}
-                                    rules={{ required: true }}
-                                    render={({ field: { ref, onChange, value } }) => (
-                                        <CustomCheckbox
-                                            error={errors.privacy}
-                                            label={<PrivacyLabel />}
-                                            ref={ref}
-                                            onChange={onChange}
-                                            value={value}
-                                        />)}
+                                    name='privacy'
+                                    value='privacy'
                                 />
                             </div>
                         </div>
@@ -258,19 +238,10 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                         className={styles.orderStep}
                         header={<StepHeader step='3/3' title='Оплата' />}>
                         <p><b>Бесконтактная доставка действует для всех заказов, оплаченных онлайн</b></p>
-                        <Controller
-                            name='payment'
+                        <RadioBadge
                             control={control}
-                            rules={{ required: 'Обязательно для заполнения' }}
-                            render={({ field: { ref, onChange, value } }) => (
-                                <RadioBadge
-                                    error={errors.delivery}
-                                    name='delivery'
-                                    ref={ref}
-                                    value={value}
-                                    onChange={onChange}
-                                    options={paymentOprions}
-                                />)}
+                            name='payment'
+                            options={paymentOptions}
                         />
                         <pre />
                         <p>Оплата курьеру банковской картой или наличными.</p>
@@ -290,7 +261,9 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
 
             </div>
             <OrderPreview
+                deliveryType={deliveryType}
                 deliveryPrice={deliveryPrice}
+                pickPrice={pickPrice}
                 className={styles.orderPreview} />
             <AnimatePresence>
                 {error &&
@@ -309,9 +282,11 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                 shown={modalCityShown}
                 onClose={() => setModalCityShown(false)}>
                 <CityPicker
-                    uid='city-picker'
                     defaultCity={city}
-                    onSelect={() => setModalCityShown(false)} />
+                    onSelect={() => {
+                        setModalCityShown(false);
+                        setValue('delivery', 'курьер');
+                    }} />
             </Modal>
             <Modal
                 shown={modalAddressShown}

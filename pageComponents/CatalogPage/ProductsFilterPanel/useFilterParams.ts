@@ -46,7 +46,7 @@ export const useFilterParams: UseFilterParams = ({ brandsOptions, priceOptions, 
     }
 
     function getSortFromQuery(): Option | null {
-        const sortParam = router.query.order;
+        const sortParam = router.query.sort;
         const sortOrder = router.query.order;
         if (sortParam && typeof sortParam === 'string') {
             const option = sortingOptions

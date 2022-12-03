@@ -14,14 +14,20 @@ export const DeliveryRules = () => {
                 className={styles.deliveryTitle}
             >Правила предоставления услуг
             </Title>
-            <div className={styles.rulesControls}>
+            <div className={styles.rulesControls} role='tablist'>
                 <Button
+                    id='delivery'
+                    role='tab'
+                    aria-selected={visibleList === 'delivery'}
                     size='l'
                     styleType={visibleList === 'delivery' ? 'primary' : 'ghost'}
                     onClick={() => setVisibleList('delivery')}
                 >Доставка
                 </Button>
                 <Button
+                    id='receiving'
+                    role='tab'
+                    aria-selected={visibleList === 'receiving'}
                     size='l'
                     styleType={visibleList === 'receiving' ? 'primary' : 'ghost'}
                     onClick={() => setVisibleList('receiving')}
@@ -29,7 +35,9 @@ export const DeliveryRules = () => {
                 </Button>
             </div>
             {visibleList === 'delivery' ?
-                <ol className={styles.rulesDelivery}>
+                <ol className={styles.rulesDelivery}
+                    role='tabpanel'
+                    aria-labelledby='delivery'>
                     <li>
                         <h4 className={styles.rulesSubTitle}
                         >Быстрая доставка из магазина</h4>
@@ -118,7 +126,9 @@ export const DeliveryRules = () => {
                     </li>
                 </ol>
                 :
-                <ul className={styles.rulesReceiving}>
+                <ul className={styles.rulesReceiving}
+                    role='tabpanel'
+                    aria-labelledby='receiving'>
                     <li>
                         <h4>При получении заказа рекомендуем выполнить следующие действия:</h4>
                         <ul>

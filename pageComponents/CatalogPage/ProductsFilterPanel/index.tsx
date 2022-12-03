@@ -42,7 +42,6 @@ export const ProductsFilterPanel = (props: FilterProps): JSX.Element => {
     return (
         <div className={cn(styles.panel, className)} {...rest}>
             <CustomSelect
-                id='sort'
                 options={sortingOptions}
                 value={sorting}
                 name='Сортировать'
@@ -50,7 +49,6 @@ export const ProductsFilterPanel = (props: FilterProps): JSX.Element => {
                 isMulti={false}
             />
             <CustomSelect
-                id='price'
                 options={priceOptions}
                 value={price}
                 name='Цена'
@@ -58,7 +56,6 @@ export const ProductsFilterPanel = (props: FilterProps): JSX.Element => {
                 isMulti={false}
             />
             <CustomSelect
-                id='brand'
                 options={brandsOptions}
                 value={brands.length ? brands : null}
                 name='Бренд'

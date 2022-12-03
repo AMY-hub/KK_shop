@@ -1,5 +1,5 @@
 import { Address } from '../../interfaces';
 
-export interface ContactsPageProps {
+export interface DeliveryPageProps {
     addresses: Address[];
 }

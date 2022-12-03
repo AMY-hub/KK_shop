@@ -1,7 +1,6 @@
 // Import Swiper React components
-import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
+import { Navigation, A11y } from 'swiper';
 import cn from 'classnames';
 import { ProductCard, SpecialCard, Title } from '..';
 import IconLeft from '../../assets/images/icons/arr_left.svg';
@@ -25,21 +24,17 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
                 })}
                 key={product.id}>
                 {size === 'l' ?
-                    <Link href={`/products/${product.id}`} passHref>
-                        <SpecialCard
-                            name={product.name}
-                            nameRus={product.name_rus}
-                            price={product.price}
-                            sale={product.brand.special_sale}
-                            type='square'
-                            img={product.img}
-                            size='m'
-                        />
-                    </Link>
+                    <SpecialCard
+                        name={product.name}
+                        nameRus={product.name_rus}
+                        price={product.price}
+                        sale={product.brand.special_sale}
+                        type='square'
+                        img={product.img}
+                        size='m'
+                    />
                     :
-                    <Link href={`/products/${product.id}`} passHref>
-                        <ProductCard productData={product} />
-                    </Link>
+                    <ProductCard productData={product} />
                 }
             </SwiperSlide>
         );
@@ -62,7 +57,7 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
             </div>
             <Swiper
                 className={styles.sliderWrapper}
-                modules={[Navigation]}
+                modules={[Navigation, A11y]}
                 navigation={{
                     prevEl: `.prev_${sliderId}`,
                     nextEl: `.next_${sliderId}`,

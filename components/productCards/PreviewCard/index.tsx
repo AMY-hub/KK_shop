@@ -16,6 +16,7 @@ export const PreviewCard = forwardRef(({ productData, amount, className, ...prop
             <div className={styles.cardImg}>
                 <Image
                     src={process.env.NEXT_PUBLIC_DOMAIN + productData.img}
+                    alt={productData.name}
                     layout='fixed'
                     width={80}
                     height={80} />

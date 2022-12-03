@@ -37,14 +37,16 @@ export const LoginForm = observer(forwardRef(({ className, onAuth, ...props }: L
                 {...register('email', { required: 'Обязательно для заполнения' })}
                 error={errors.email}
                 type='email'
-                placeholder='Ваша почта*'
+                placeholder='Ваша почта'
+                required
                 isWide
             />
             <Input
                 {...register('password', { required: 'Обязательно для заполнения', minLength: 5 })}
                 error={errors.password}
                 type='password'
-                placeholder='Пароль*'
+                placeholder='Пароль'
+                required
                 isWide
             />
             <Button

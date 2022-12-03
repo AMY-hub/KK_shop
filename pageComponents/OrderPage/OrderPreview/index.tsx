@@ -1,26 +1,24 @@
 import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
-import { useMemo } from 'react';
 import { DiscountsPanel, PreviewCard, Scroll } from '../../../components';
 import { useBasketContext } from '../../../context/AppContext';
 import { OrderPreviewProps } from './props';
 
 import styles from './style.module.scss';
 
-export const OrderPreview = observer(({ deliveryPrice, className, ...props }: OrderPreviewProps): JSX.Element => {
+export const OrderPreview = observer(({ deliveryPrice, pickPrice, deliveryType, className, ...props }: OrderPreviewProps): JSX.Element => {
 
     const basketStore = useBasketContext();
     const basket = useBasketContext().basket;
+    const delivery = deliveryType === 'курьер' ? deliveryPrice : pickPrice;
+
+    const cards = basket.map(p => (<PreviewCard
+        productData={p.product}
+        amount={p.amount}
+        key={p.id} />));
 
     const amount = basket.reduce((prev, cur) => (cur.amount + prev), 0);
-
-    const cards = useMemo(() => (
-        basket.map(p => (<PreviewCard
-            productData={p.product}
-            amount={p.amount}
-            key={p.id} />))
-    ), [basket]);
 
     return (
         <div className={cn(styles.preview, className)} {...props}>
@@ -45,15 +43,14 @@ export const OrderPreview = observer(({ deliveryPrice, className, ...props }: Or
                 </div>
                 <div className={styles.previewDelivery}>
                     <span>Доставка</span>
-                    <span>{
-                        deliveryPrice > 0 ? `${deliveryPrice} руб`
-                            : 'Бесплатно'
-                    }</span>
+                    <span>
+                        {delivery > 0 ? `${delivery} руб.` : 'Бесплатно'}
+                    </span>
                 </div>
                 <hr />
                 <div className={styles.previewFinal}>
                     <span>Итого</span>
-                    <br />{`${basketStore.finalPrice + deliveryPrice} руб`}
+                    <br />{`${basketStore.finalPrice + delivery} руб`}
                 </div>
             </div>
         </div>

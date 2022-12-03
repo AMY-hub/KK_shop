@@ -11,8 +11,11 @@ export const InputForm = forwardRef(({ placeholder, className, ...rest }: InputF
         <form className={cn(styles.form, className)} {...rest}>
             <input
                 ref={ref}
+                required
                 placeholder={placeholder} />
-            <button type='submit'>
+            <button
+                type='submit'
+                aria-label='отправить'>
                 <ArrowIcon widht={24} height={24} />
             </button>
         </form>

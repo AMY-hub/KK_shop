@@ -1,9 +1,9 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
-import { FieldError } from 'react-hook-form';
+import { Control, FieldValues, Path } from 'react-hook-form';
 
-export interface InputTelProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+export interface InputTelProps<T extends FieldValues> extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     code: string;
-    error?: FieldError;
-    onChange?: (...event: any[]) => void;
+    control: Control<T>;
+    name: Path<T>;
     isWide?: boolean;
 }

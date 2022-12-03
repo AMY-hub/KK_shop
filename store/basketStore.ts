@@ -192,9 +192,11 @@ export class BasketStore {
             const basketId = this._basket[0].basketId;
             const res = await basketService.clearBasket(basketId);
             if (res.status === 200) {
-                this.bonusDiscount = 0;
-                this.promoDiscount = 0;
-                this.basket = [];
+                runInAction(() => {
+                    this.bonusDiscount = 0;
+                    this.promoDiscount = 0;
+                    this.basket = [];
+                });
             }
         }
     }

@@ -40,7 +40,6 @@ export const BasketProductCard = forwardRef(({ productData, amount, className, .
                                 loading='lazy'
                             />
                         </a>
-
                     </Link>
                 </div>
 

@@ -13,13 +13,48 @@ import styles from './style.module.scss';
 export const Socials = ({ className, ...props }: SocialsProps): JSX.Element => {
     return (
         <div className={cn(styles.socials, className)} {...props}>
-            <a href='#' target='_blank'> <TelegramIcon /> </a>
-            <a href='#' target='_blank'> <OKIcon /> </a>
-            <a href='#' target='_blank'> <FacebookIcon /> </a>
-            <a href='#' target='_blank'> <WhatsAppIcon /> </a>
-            <a href='#' target='_blank'> <ViberIcon /> </a>
-            <a href='#' target='_blank'> <InstaIcon /> </a>
-            <a href='#' target='_blank'> <VKIcon /> </a>
+            <a href='#' target='_blank'>
+                <TelegramIcon aria-hidden={true} />
+                <span className={styles.hidden}>
+                    Телеграм магазина
+                </span>
+            </a>
+            <a href='#' target='_blank'>
+                <OKIcon aria-hidden={true} />
+                <span className={styles.hidden}>
+                    Одноклассники магазина
+                </span>
+            </a>
+            <a href='#' target='_blank'>
+                <FacebookIcon aria-hidden={true} />
+                <span className={styles.hidden}>
+                    Facebook магазина
+                </span>
+            </a>
+            <a href='#' target='_blank'>
+                <WhatsAppIcon aria-hidden={true} />
+                <span className={styles.hidden}>
+                    WhatsApp магазина
+                </span>
+            </a>
+            <a href='#' target='_blank'>
+                <ViberIcon aria-hidden={true} />
+                <span className={styles.hidden}>
+                    Viber магазина
+                </span>
+            </a>
+            <a href='#' target='_blank'>
+                <InstaIcon aria-hidden={true} />
+                <span className={styles.hidden}>
+                    Instagram магазина
+                </span>
+            </a>
+            <a href='#' target='_blank'>
+                <VKIcon aria-hidden={true} />
+                <span className={styles.hidden}>
+                    Вконтакте магазина
+                </span>
+            </a>
         </div>
     );
 };

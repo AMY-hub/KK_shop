@@ -1,6 +1,4 @@
-export type Delivery = 'самовывоз' | 'курьер';
-
-export type Payment = 'онлайн' | 'при получении';
+import { Delivery, Payment } from '../../interfaces';
 
 export interface OrderFormFields {
     delivery: Delivery;

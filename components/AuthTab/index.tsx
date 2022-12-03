@@ -12,7 +12,7 @@ export const AuthTab = ({ className, onAuth, ...rest }: AuthTabProps): JSX.Eleme
 
     return (
         <div className={cn(styles.auth, className)} {...rest}>
-            <div className={styles.authNav}>
+            <div className={styles.authNav} role='tablist'>
                 <motion.button
                     initial={{ color: "var(--semi-black)" }}
                     animate={{
@@ -20,6 +20,9 @@ export const AuthTab = ({ className, onAuth, ...rest }: AuthTabProps): JSX.Eleme
                             "var(--accent-dark)" : "var(--semi-black)"
                     }}
                     className={styles.authBtn}
+                    id='login'
+                    role='tab'
+                    aria-selected={currentTab === 'login'}
                     onClick={() => setCurrentTab('login')}
                 >
                     Войти
@@ -35,6 +38,9 @@ export const AuthTab = ({ className, onAuth, ...rest }: AuthTabProps): JSX.Eleme
                             "var(--accent-dark)" : "var(--semi-black)"
                     }}
                     className={styles.authBtn}
+                    role='tab'
+                    id='register'
+                    aria-selected={currentTab === 'register'}
                     onClick={() => setCurrentTab('register')}
                 >
                     Зарегистрироваться
@@ -47,10 +53,14 @@ export const AuthTab = ({ className, onAuth, ...rest }: AuthTabProps): JSX.Eleme
             {currentTab === 'login' ?
                 <MLoginForm
                     layoutId='auth'
+                    role='tabpanel'
+                    aria-labelledby='login'
                     onAuth={onAuth} />
                 :
                 <MRegistrationForm
                     layoutId='auth'
+                    role='tabpanel'
+                    aria-labelledby='register'
                     onAuth={onAuth} />
             }
         </div>

@@ -30,7 +30,10 @@ export const AmountControls = observer(({ initial, productId, className, ...rest
                 aria-label='уменьнить количество'>
                 -
             </button>
-            <span className={styles.controlsAmount}>{initial}</span>
+            <span
+                className={styles.controlsAmount}
+                aria-label={`количество товара ${initial} единиц`}
+            >{initial}</span>
             <button
                 onClick={handleIncr}
                 className={styles.controlsIncr}

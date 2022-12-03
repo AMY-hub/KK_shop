@@ -23,17 +23,30 @@ export const useOrderSubmit: UseOrderSubmit = (reset, deliveryPrice) => {
     const userState = useUserContext();
     const city = useAppContext().city;
 
+    const validateData = (data: OrderFormFields): string | null => {
+        if (!data.privacy) {
+            return 'Необходимо согласие на обработку персональных данных.';
+        }
+        if (!data.address || !data.address.includes(city)) {
+            return 'Выбран некорректный адрес. Указанный населенный пункт должен соответствовать точному адресу.';
+        }
+        if (data.delivery === 'курьер' && !/д \d/gm.test(data.address)) {
+            return 'Выбран некорректный адрес. Укажите точный адрес, включая дом';
+        }
+        return null;
+    };
+
     const submitHandler: SubmitHandler<OrderFormFields> = async (data, e) => {
         e?.preventDefault();
+        console.log(data);
+
         try {
-            setError('');
-            if (!data.address || !data.address.includes(city)) {
-                setError('Выбран некорректный адрес. Указанный населенный пункт должен соответствовать точному адресу.');
+            const error = validateData(data);
+            if (error) {
+                setError(error);
                 return;
-            }
-            if (data.delivery === 'курьер' && !/д \d/gm.test(data.address)) {
-                setError('Выбран некорректный адрес. Укажите точный адрес, включая дом');
-                return;
+            } else {
+                setError('');
             }
 
             const res = await API.post<OrderCreateData, AxiosResponse<OrderCreateResponse>, OrderCreateData>(ORDER, {

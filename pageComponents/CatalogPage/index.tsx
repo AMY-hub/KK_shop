@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { CatalogPageProps } from './props';
 import { BreadCrumbs, Container, Grid, MProductCard, Pagination, Title } from '../../components';
@@ -20,12 +19,11 @@ export const CatalogPage = ({ products, pages, brandList }: CatalogPageProps): J
     };
 
     const cards = products.map(el => (
-        <Link href={`/products/${el.id}`} passHref key={el.id} >
-            <MProductCard
-                {...animationConfig}
-                productData={el}
-            />
-        </Link>
+        <MProductCard
+            {...animationConfig}
+            key={el.id}
+            productData={el}
+        />
     ));
 
     return (

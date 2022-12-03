@@ -1,7 +1,15 @@
 import Head from 'next/head';
+import { GetStaticProps } from 'next';
 import { DeliveryPage } from '../pageComponents/DeliveryPage';
+import { Address } from '../interfaces';
+import { ADDRESS } from '../api/APIendpoints';
+import { API } from '../api/axiosConfig';
 
-function Delivery(): JSX.Element {
+interface PageProps {
+    addresses: Address[];
+}
+
+function Delivery({ addresses }: PageProps): JSX.Element {
     const title = 'Купить корейскую косметику с бесплатной доставкой | Корейская косметика самовывоз | Интернет-магазин KKshop';
     const description = 'Информация о вариантах доставки в зависимости от региона и способах оплаты в магазине KKshop.ru';
 
@@ -17,10 +25,19 @@ function Delivery(): JSX.Element {
                 <meta property='og:image:width' content='917' />
                 <meta property='og:image:height' content='502' />
             </Head>
-            <DeliveryPage />
+            <DeliveryPage addresses={addresses} />
         </>
     );
 }
+
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
+    const { data } = await API.get<Address[]>(ADDRESS);
+    return {
+        props: {
+            addresses: data
+        }
+    };
+};
 
 export default Delivery;
 

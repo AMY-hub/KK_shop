@@ -1,6 +1,7 @@
 .card {
 		overflow: hidden;
 		display: flex;
+		flex-shrink: 0;
 		margin-bottom: 1rem;
 
 		&Img {

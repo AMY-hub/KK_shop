@@ -1,11 +1,9 @@
 import { ReactNode } from 'react';
-import { FieldError } from 'react-hook-form';
 
-export interface RadioBadgeProps {
-    error?: FieldError,
-    name: string,
-    value: string;
-    onChange: (...event: any[]) => void;
+export interface RadioBadgeProps<T extends FieldValues> {
+    name: Path<T>;
+    control: Control<T>;
+    className?: string;
     options: {
         value: string,
         labelTitle?: string,
@@ -13,3 +11,5 @@ export interface RadioBadgeProps {
         labelBody: ReactNode
     }[];
 }
+
+import { Control, FieldValues, Path } from 'react-hook-form';

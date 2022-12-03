@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import cn from 'classnames';
 import { ForwardedRef, forwardRef } from 'react';
 import { motion } from 'framer-motion';
@@ -7,23 +8,38 @@ import { SpecialCardProps } from './props';
 
 import styles from './style.module.scss';
 
-export const SpecialCard = forwardRef(({ name, nameRus, price, img, sale, type, size = 'l', className, ...props }: SpecialCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const SpecialCard = forwardRef((props: SpecialCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
+    const {
+        id,
+        name,
+        nameRus,
+        price,
+        img,
+        sale,
+        type,
+        size = 'l',
+        className,
+        ...rest } = props;
     const [salePrice] = getPricesWithSale(price, sale?.discount);
 
     return (
         <div
             className={cn(styles.card, styles[type], styles[size], className)}
-            {...props}
+            {...rest}
             ref={ref}>
-            <Image
-                src={'http://localhost:8080/' + img}
-                alt={name}
-                height={500}
-                width={500}
-                layout='intrinsic'
-                loading='lazy'
-            />
+            <Link href={`/products/${id}`}>
+                <a>
+                    <Image
+                        src={process.env.NEXT_PUBLIC_DOMAIN + img}
+                        alt={name}
+                        height={500}
+                        width={500}
+                        layout='intrinsic'
+                        loading='lazy'
+                    />
+                </a>
+            </Link>
             <div className={styles.cardInfo}>
                 {type === 'long' ?
                     <>
