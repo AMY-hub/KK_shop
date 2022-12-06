@@ -29,11 +29,12 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
     const { deliveryPrice, pickPrice, pick } = useDelivery(addresses);
     const {
         register,
-        formState: { errors, isSubmitting },
+        formState: { errors, isSubmitting, dirtyFields },
         getValues,
         setValue,
         handleSubmit, reset, control } = useForm<OrderFormFields>({
             defaultValues: {
+                address: '',
                 name: userState.user?.name || '',
                 lastName: userState.user?.lastname || '',
                 email: userState.user?.email || '',
@@ -42,7 +43,7 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                 payment: 'онлайн'
             }
         });
-    const deliveryType = useWatch({ control, name: 'delivery' });
+    const [deliveryType, address] = useWatch({ control, name: ['delivery', 'address'] });
 
     const {
         orderNumber,
@@ -114,7 +115,7 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                 <form onSubmit={(handleSubmit((data, e) => submitHandler(data, e)))}>
 
                     <Dropdown
-                        inititialOpen
+                        opened
                         className={styles.orderStep}
                         header={<StepHeader step='1/3' title='Адрес и доставка' />}>
                         <div className={styles.orderStepSection}>
@@ -167,7 +168,7 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                     </Dropdown>
 
                     <Dropdown
-                        inititialOpen
+                        opened={address ? true : false}
                         className={styles.orderStep}
                         header={<StepHeader step='2/3' title='Получатель' />}>
                         <div className={styles.orderStepSection}>
@@ -234,7 +235,11 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                     </Dropdown>
 
                     <Dropdown
-                        inititialOpen
+                        opened={dirtyFields.name
+                            && dirtyFields.lastName
+                            && dirtyFields.middleName
+                            && dirtyFields.email
+                            && dirtyFields.phone}
                         className={styles.orderStep}
                         header={<StepHeader step='3/3' title='Оплата' />}>
                         <p><b>Бесконтактная доставка действует для всех заказов, оплаченных онлайн</b></p>

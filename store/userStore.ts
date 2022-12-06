@@ -100,9 +100,13 @@ export class UserStore {
             }
         } catch (err) {
             if (axios.isAxiosError(err) && err.response?.status === 401) {
+                this.status = 'idle';
                 return;
             } else {
-                this.error = getErrorMessage(err);
+                runInAction(() => {
+                    this.error = getErrorMessage(err);
+                    this.status = 'idle';
+                });
             }
         }
     }

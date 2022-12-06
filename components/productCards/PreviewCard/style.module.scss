@@ -1,29 +1,28 @@
 .card {
-		overflow: hidden;
-		display: flex;
+	display: flex;
+	flex-shrink: 0;
+	margin-bottom: 1rem;
+	overflow: hidden;
+
+	&Img {
 		flex-shrink: 0;
-		margin-bottom: 1rem;
+	}
 
-		&Img {
-			flex-shrink: 0;
-		}
+	&Text {
+		margin-left: 0.5rem;
+	}
 
-		&Text {
-			margin-left: 0.5rem;
-		}
+	&Name {
+		margin-bottom: 0.5rem;
+		color: var(--semi-black);
+		font-family: Oswald, sans-serif;
+		font-weight: 600;
+		line-height: 1.1;
+		text-transform: uppercase;
+	}
 
-		&Name{
-			margin-bottom: 0.5rem;
-			font-family: 'Bebas Neue';
-			color: var(--semi-black);
-			font-weight: 700;
-			line-height: 1.1;
-			letter-spacing: 0.04rem;
-			text-transform: uppercase;
-		}
-
-		&Amount {
-			font-size: .875rem;
-			color: var(--gray-dark);
-		}	
+	&Amount {
+		color: var(--gray-dark);
+		font-size: 0.875rem;
+	}
 }

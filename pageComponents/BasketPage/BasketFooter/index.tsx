@@ -14,11 +14,13 @@ export const BasketFooter = observer((): JSX.Element => {
                 <DiscountsPanel />
 
                 <div className={styles.footerPrice}>
-                    <div className={styles.footerDiscount}>
-                        <span>Скидка</span>
-                        <br />
-                        {`-${basketStore.finalDiscount}`}
-                    </div>
+                    {basketStore.finalDiscount > 0 &&
+                        <div className={styles.footerDiscount}>
+                            <span>Скидка</span>
+                            <br />
+                            {`-${basketStore.finalDiscount}`}
+                        </div>
+                    }
                     <div>
                         <span>К оплате</span>
                         <br />

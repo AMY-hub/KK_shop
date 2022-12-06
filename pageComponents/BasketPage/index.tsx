@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { observer } from 'mobx-react-lite';
-import { Title, MBasketProductCard, Preloader } from '../../components';
+import { Title, MBasketProductCard, Preloader, BasketCertificateCard } from '../../components';
 import { useBasketContext } from '../../context/AppContext';
 import { BasketFooter } from './BasketFooter';
 
@@ -20,6 +20,23 @@ export const BasketPage = observer((): JSX.Element => {
         exit: { opacity: 0, x: -500 },
         transition: { bounce: 0 },
     };
+    let cardsCounter = 0;
+
+    const cards = basket.map(el => {
+        cardsCounter += 1;
+        return el.type === 'product' ?
+            <MBasketProductCard
+                {...animationConfig}
+                key={cardsCounter}
+                productData={el.product}
+                amount={el.amount} />
+            :
+            <BasketCertificateCard
+                key={cardsCounter}
+                certificateData={el.certificate}
+                amount={el.amount}
+            />;
+    });
 
     return (
         <div className={styles.basket}>
@@ -29,13 +46,7 @@ export const BasketPage = observer((): JSX.Element => {
                 <>
                     <div className={styles.basketList}>
                         <AnimatePresence initial={false}>
-                            {basket.map(el => (
-                                <MBasketProductCard
-                                    {...animationConfig}
-                                    key={el.id}
-                                    productData={el.product}
-                                    amount={el.amount} />
-                            ))}
+                            {cards}
                         </AnimatePresence>
                     </div>
                     <BasketFooter />

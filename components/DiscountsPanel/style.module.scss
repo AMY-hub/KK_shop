@@ -1,20 +1,20 @@
 .discounts {
 	position: relative;
-    margin-bottom: 50px;
+	margin-bottom: 50px;
 
 	&Bonus {
-        margin-bottom: 0.5rem;
-        font-size: 14px;
-        line-height: 2;
-        color: var(--gray);
-        display: flex;
-        justify-content: space-between;
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 0.5rem;
+		color: var(--gray);
+		font-size: 14px;
+		line-height: 2;
 
-        span {
-            color: var(--semi-black);
-            font-weight: 600;
-        }
-    }
+		span {
+			color: var(--semi-black);
+			font-weight: 600;
+		}
+	}
 
 	&Field {
 		margin-bottom: 0.5rem;
@@ -22,9 +22,10 @@
 
 	&Message {
 		overflow: hidden;
+		color: var(--accent-dark);
 		font-size: 0.9rem;
 		line-height: 1.5;
-		color: var(--accent-dark);
+
 		div {
 			overflow: hidden;
 		}
@@ -36,5 +37,3 @@
 		}
 	}
 }
-
-   

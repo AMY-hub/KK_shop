@@ -1,30 +1,32 @@
 .table {
-    width: 100%;
-    border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 
-    &Head {
-        background-color: var(--dark-bg);
-        th {
-            border-right: 2px solid #FFF;
-            padding: 0.8rem 1rem;
-            font-size: 1.2rem;
+	&Head {
+		background-color: var(--dark-bg);
 
-            &:last-child {
-                border-right: none;
-            }
-        }
-    }
+		th {
+			padding: 0.8rem 1rem;
+			border-right: 2px solid #FFF;
+			font-size: 1.2rem;
 
-    @media (max-width: 600px) {
-         &Head {
-            th {
-               display: none;
-               text-align: left;
-                &:first-child {
-                    display: block;
-                    border-right: none;
-                } 
-            }
-         }
-    }
+			&:last-child {
+				border-right: none;
+			}
+		}
+	}
+
+	@media (max-width: 600px) {
+		&Head {
+			th {
+				display: none;
+				text-align: left;
+
+				&:first-child {
+					display: block;
+					border-right: none;
+				}
+			}
+		}
+	}
 }

@@ -10,12 +10,10 @@ export function InputTel<T extends FieldValues = FieldValues>({ control, name, c
 
     const [phone, setPhone] = useState<string>(code);
     const id = useId();
-    const { field, fieldState } = useController({ control, name, rules: { required: 'Обязательно для заполнения' } });
+    const { field, fieldState } = useController({ control, name, rules: { required: 'Обязательно для заполнения', maxLength: 18, minLength: 18 } });
 
     function formatPhone(value: string) {
         value = value.slice(code.length);
-        console.log(value);
-
         value = value.replace(/\D/g, "");
         value = value.replace(/^(\d{3})(\d)/, "($1) $2");
         value = value.replace(/(\d{3})(\d)/, "$1-$2");
@@ -52,7 +50,7 @@ export function InputTel<T extends FieldValues = FieldValues>({ control, name, c
             </span>
             {fieldState.error &&
                 <ErrorMessage message={fieldState.error.message
-                    ?? 'Возникла ошибка при заполнении формы'}
+                    || 'Возникла ошибка при заполнении формы'}
                     className={styles.errorMessage}
                     role='alert' />
             }

@@ -4,7 +4,7 @@ import { ForwardedRef, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import cn from 'classnames';
 import { AmountControls } from '../..';
-import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
+import { getPriceWithSale } from '../../../helpers/getPriceWithSale';
 import { BasketProductProps } from './props';
 
 import styles from './style.module.scss';
@@ -21,8 +21,8 @@ export const BasketProductCard = forwardRef(({ productData, amount, className, .
         brand: { special_sale },
     } = productData;
 
-    const [salePrice, highPrice] = getPricesWithSale(price, special_sale?.discount);
-    const discount = highPrice - salePrice;
+    const salePrice = getPriceWithSale(price, special_sale?.discount);
+    const discount = price - salePrice;
 
     return (
         <div className={cn(styles.card, className)} {...props} ref={ref}>
@@ -51,6 +51,7 @@ export const BasketProductCard = forwardRef(({ productData, amount, className, .
                             className={styles.cardControls}
                             initial={amount}
                             productId={id}
+                            type='product'
                         />
                     </div>
 
@@ -59,17 +60,23 @@ export const BasketProductCard = forwardRef(({ productData, amount, className, .
                             {`${volume} мл`}
                         </div>
                         <div className={styles.cardPriceWrapper}>
-                            {discount > 0 &&
-                                <div className={styles.cardDiscount}>
-                                    {`Скидка ${discount * amount} руб`}
-                                </div>
+                            {discount > 0 ?
+                                <>
+                                    <div className={styles.cardDiscount}>
+                                        {`Скидка ${discount * amount} руб`}
+                                    </div>
+                                    <span className={styles.cardPriceOld}>
+                                        {`${price * amount} руб`}
+                                    </span>
+                                    <span className={styles.cardPrice}>
+                                        {`${salePrice * amount} руб`}
+                                    </span>
+                                </>
+                                :
+                                <span className={styles.cardPrice}>
+                                    {`${price * amount} руб`}
+                                </span>
                             }
-                            <span className={styles.cardPriceOld}>
-                                {`${highPrice * amount} руб`}
-                            </span>
-                            <span className={styles.cardPrice}>
-                                {`${salePrice * amount} руб`}
-                            </span>
                         </div>
                     </div>
                 </div>

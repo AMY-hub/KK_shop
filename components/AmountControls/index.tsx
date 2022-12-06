@@ -6,19 +6,19 @@ import ClearIcon from '../../assets/images/icons/clear.svg';
 
 import styles from './style.module.scss';
 
-export const AmountControls = observer(({ initial, productId, className, ...rest }: AmountControlsProps): JSX.Element => {
+export const AmountControls = observer(({ initial, type, productId, className, ...rest }: AmountControlsProps): JSX.Element => {
 
     const basketStore = useBasketContext();
 
     const handleIncr = () => {
         if (initial < 100) {
-            basketStore.updateProduct(productId, initial + 1);
+            basketStore.updateProduct(productId, initial + 1, type);
         }
     };
 
     const handleDecr = () => {
         if (initial > 1) {
-            basketStore.updateProduct(productId, initial - 1);
+            basketStore.updateProduct(productId, initial - 1, type);
         }
     };
 
@@ -41,7 +41,7 @@ export const AmountControls = observer(({ initial, productId, className, ...rest
                 +
             </button>
             <button
-                onClick={() => basketStore.deleteProduct(productId)}
+                onClick={() => basketStore.deleteProduct(productId, type)}
                 className={styles.controlsClear}
                 aria-label='удалить из корзины'>
                 <ClearIcon />

@@ -1,34 +1,35 @@
 .form {
-        padding: 10px 17px;
-        display: flex;
-        align-items: center;
-        border: 1px solid var(--gray-light);
+	display: flex;
+	align-items: center;
+	padding: 10px 17px;
+	border: 1px solid var(--gray-light);
 
-        input {
-            font-size: 1rem;
-            line-height: 1.5;
-            outline: none;
-            border: none;
-            background: transparent;
-            color: var(--semi-black);
+	input {
+		border: none;
+		outline: none;
+		background: transparent;
+		color: var(--semi-black);
+		font-size: 1rem;
+		line-height: 1.5;
 
-            &::placeholder {
-            color: var(--gray);
-            }
-        }
+		&::placeholder {
+			color: var(--gray);
+		}
+	}
 
-        button {
-            display: flex;
-            align-items: center;
-            svg {
-                fill: var(--gray-light);
-                transition: fill 300ms;
-            }
+	button {
+		display: flex;
+		align-items: center;
 
-            &:hover {
-                svg {
-                    fill: var(--gray);
-                }
-            }
-        }
-    }
+		svg {
+			transition: fill 300ms;
+			fill: var(--gray-light);
+		}
+
+		&:hover {
+			svg {
+				fill: var(--gray);
+			}
+		}
+	}
+}

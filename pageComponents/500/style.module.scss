@@ -7,7 +7,7 @@
 		justify-content: center;
 		margin-bottom: 2rem;
 
-		svg  {
+		svg {
 			flex-shrink: 0;
 		}
 
@@ -30,7 +30,7 @@
 
 	@media (max-width: 600px) {
 		padding-top: 1rem;
-		
+
 		&Header {
 			margin-bottom: 0;
 
@@ -38,13 +38,13 @@
 				margin-left: 0;
 			}
 
-			svg  {
+			svg {
 				transform: scale(0.7);
 			}
 		}
 
 		&Text {
-		text-align: left;
-	}
+			text-align: left;
+		}
 	}
 }

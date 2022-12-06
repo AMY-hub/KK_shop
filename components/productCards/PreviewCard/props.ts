@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
-import { ProductPreview } from '../../../interfaces';
 
 export interface PreviewCardProps extends HTMLAttributes<HTMLDivElement> {
-    productData: ProductPreview;
+    img: string;
+    name: string;
     amount: number;
 }

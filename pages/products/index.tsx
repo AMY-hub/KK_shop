@@ -51,11 +51,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
         }
     }
 
-    console.log('QUERY', query);
-    console.log('QUERYSTRING', queryString);
-
     const { data } = await API.get<ProductsResponse>(PRODUCTS + queryString);
-    console.log('DATA', data);
     const pages = Math.ceil(data.products.count / limitPerPage);
 
     return {

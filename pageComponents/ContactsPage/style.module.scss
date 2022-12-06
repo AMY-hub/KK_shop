@@ -1,83 +1,83 @@
 .contacts {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 1.5rem;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 1.5rem;
 
-    @media (max-width: 1060px) {
-        grid-template-columns: 1fr;
-        grid-template-rows: 500px 500px;
-    }
+	@media (max-width: 1060px) {
+		grid-template-columns: 1fr;
+		grid-template-rows: 500px 500px;
+	}
 
-    @media (max-width: 600px) {
-        grid-template-rows: 300px 600px;
+	@media (max-width: 600px) {
+		grid-template-rows: 300px 600px;
 
-        &MapWrapper {
-            grid-row: 1;
-        }
-    }
+		&MapWrapper {
+			grid-row: 1;
+		}
+	}
 }
 
 .pointsList {
-    max-height: 1080px;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
+	display: flex;
+	flex-direction: column;
+	max-height: 1080px;
+	margin-right: 1rem;
+	margin-bottom: 1rem;
 }
 
 .point {
-    padding-right: 4rem;
-    padding-left: 4rem;
-    margin-bottom: 2rem;
+	margin-bottom: 2rem;
+	padding-right: 4rem;
+	padding-left: 4rem;
 
-    &:last-child {
-        margin-bottom: 0;
-    }
+	&:last-child {
+		margin-bottom: 0;
+	}
 
-    &Type {
-        font-size: 0.9rem;
-        line-height: 2;
-        color: var(--gray);
-    }
+	&Type {
+		color: var(--gray);
+		font-size: 0.9rem;
+		line-height: 2;
+	}
 
-    &Address {
-        font-weight: 700;
-    }
+	&Address {
+		font-weight: 700;
+	}
 
-    &Mail {
-        display: block;
-        color: var(--accent-pale);
-        line-height: 2;
-    }
+	&Mail {
+		display: block;
+		color: var(--accent-pale);
+		line-height: 2;
+	}
 
-    &Phone {
-        display: block;
-        font-size: 1.1rem;
-        line-height: 2;
-    }
+	&Phone {
+		display: block;
+		font-size: 1.1rem;
+		line-height: 2;
+	}
 
-    &Btn {
-        padding: 0;
-        color: var(--accent-pale);
-        font-size: 1rem;
-        line-height: 2;
-    }
+	&Btn {
+		padding: 0;
+		color: var(--accent-pale);
+		font-size: 1rem;
+		line-height: 2;
+	}
 
-    @media (max-width: 1400px) {
-        padding: 1.5rem;
-    }
+	@media (max-width: 1400px) {
+		padding: 1.5rem;
+	}
 
-    @media (max-width: 1060px) {
-        margin-bottom: 0.9rem;
-    }
+	@media (max-width: 1060px) {
+		margin-bottom: 0.9rem;
+	}
 
-    @media (max-width: 600px) {
-        padding: 1rem;
-    }
+	@media (max-width: 600px) {
+		padding: 1rem;
+	}
 }
 
 .disclaimer {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: var(--accent-pale);
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+	color: var(--accent-pale);
 }

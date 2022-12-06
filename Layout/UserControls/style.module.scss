@@ -5,25 +5,24 @@
 	gap: 8px;
 }
 
-
 .basket {
 	position: relative;
 
 	&Badge {
-		position: absolute;
-		bottom: -5px;
-		right: 0;
-		min-width: 24px;
 		display: flex;
+		position: absolute;
+		right: 0;
+		bottom: -5px;
 		align-items: center;
 		justify-content: center;
+		min-width: 24px;
 		padding: 5px;
 		border-radius: 50%;
-		font-size: 14px;
-		line-height: 1;
-		font-weight: 600;
-		color: var(--bg);
 		background-color: var(--accent-dark);
+		color: var(--bg);
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 1;
 	}
 }
 
@@ -31,11 +30,10 @@
 	position: absolute;
 	width: 1px !important;
 	height: 1px !important;
-	padding: 0 !important;
 	margin: -1px !important;
+	padding: 0 !important;
 	overflow: hidden !important;
-	clip: rect(0,0,0,0) !important;
-	white-space: nowrap !important;
+	clip: rect(0, 0, 0, 0) !important;
 	border: 0 !important;
+	white-space: nowrap !important;
 }
-

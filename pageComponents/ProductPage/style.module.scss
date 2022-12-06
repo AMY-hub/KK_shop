@@ -1,57 +1,58 @@
 .product {
 	padding-bottom: 7.5rem;
 
-    &Card {
-        margin-bottom: 2rem;
-    }
+	&Card {
+		margin-bottom: 2rem;
+	}
 
-    &Adv {
-        margin-bottom: 2.5rem;
-    }
+	&Adv {
+		margin-bottom: 2.5rem;
+	}
 
-    @media (max-width: 1060px) {
-        padding-bottom: 4.375rem;
-    }
+	@media (max-width: 1060px) {
+		padding-bottom: 4.375rem;
+	}
 
-     @media (max-width: 760px) {
-        padding-bottom: 3.125rem;
+	@media (max-width: 760px) {
+		padding-bottom: 3.125rem;
 
-        &Adv {
-        margin-bottom: 1.25rem;
-        }
-    }
+		&Adv {
+			margin-bottom: 1.25rem;
+		}
+	}
 }
 
-.similar,.popular {
-    padding-bottom: 4.875rem;
+.similar,
+.popular {
+	padding-bottom: 4.875rem;
 
-    @media (max-width: 760px) {
-        padding-bottom: 2.5rem;
+	@media (max-width: 760px) {
+		padding-bottom: 2.5rem;
 
-        h2 {
-            margin-bottom: 1.25rem;
-        }
-    }
+		h2 {
+			margin-bottom: 1.25rem;
+		}
+	}
 }
 
 .similar {
-    h2 {
-        margin-bottom: 1.875rem;
-    }
+	h2 {
+		margin-bottom: 1.875rem;
+	}
 }
 
 .similarProducts,
 .popularProducts {
-        display: flex;
+	display: flex;
 
-        @media (max-width: 760px) {
-            flex-direction: column;
-            align-items: flex-start;   
-        }
+	@media (max-width: 760px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
 
 .popularCard,
 .similarCard {
-    margin-right: 1.5rem;
-    margin-bottom: 1.5rem;
+	margin-right: 1.5rem;
+	margin-bottom: 1.5rem;
 }

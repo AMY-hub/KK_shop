@@ -4,17 +4,17 @@
 		gap: 1.5625rem;
 
 		&Item {
-			margin-bottom: 0.5rem;
 			flex-shrink: 0;
+			margin-bottom: 0.5rem;
 		}
 
 		@media (max-width: 860px) {
 			position: fixed;
 			z-index: 10;
 			top: 0;
+			right: 0;
 			bottom: 0;
 			left: 0;
-			right: 0;
 			flex-direction: column;
 			align-items: flex-start;
 			margin-top: 40px;
@@ -81,16 +81,18 @@
 		display: block;
 	}
 }
+
 .catalogListWrapper {
 	position: absolute;
-	left: 0;
 	right: 0;
+	left: 0;
 	background-color: var(--bg);
 
 	@media (max-width: 860px) {
 		position: static;
 	}
 }
+
 .catalogList {
 	position: relative;
 	width: fit-content;
@@ -109,17 +111,18 @@
 		font-size: 1.125rem;
 		line-height: 2;
 		gap: 1rem;
-		
+
 		&::after {
 			display: none;
-			font-size: 0.9rem;
-			color: var(--gray);
 			transition: all 300ms;
+			color: var(--gray);
+			font-size: 0.9rem;
 		}
 
 		&:hover,
 		&:focus {
 			opacity: 1;
+
 			&::after {
 				display: block;
 				opacity: 0.6;
@@ -130,10 +133,11 @@
 	&Btn_active {
 		opacity: 1;
 		color: var(--accent-dark);
+
 		&::after {
-				display: block;
-				opacity: 0.6;
-			}
+			display: block;
+			opacity: 0.6;
+		}
 	}
 
 	@media (max-width: 1200px) {
@@ -144,6 +148,7 @@
 		&Btn::after {
 			display: block;
 		}
+
 		&Btn_exp::after {
 			transform: rotate(90deg);
 		}
@@ -151,8 +156,8 @@
 }
 
 .catalogSubList {
+	padding-left: 0.9375rem;
 	overflow: hidden;
-	padding-left: .9375rem;
 	border-left: 1px solid var(--gray-light);
 
 	@media (min-width: 861px) {

@@ -1,12 +1,12 @@
 .message {
-	overflow: hidden;
 	position: relative;
+	overflow: hidden;
 	font-size: 1rem;
 	line-height: 1.3;
 
 	&Content {
-		overflow: hidden;
 		margin: 1.5rem;
+		overflow: hidden;
 	}
 
 	&Title {

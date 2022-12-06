@@ -1,31 +1,36 @@
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { DropdownProps } from './props';
 
 import styles from './style.module.scss';
 
-export const Dropdown = ({ children, header, inititialOpen = false, className, ...props }: DropdownProps): JSX.Element => {
+export const Dropdown = ({ children, header, opened = false, className, ...props }: DropdownProps): JSX.Element => {
 
-    const [opened, setOpened] = useState<boolean>(inititialOpen);
+    const [isOpened, setOpened] = useState<boolean>(opened);
     const id = useId();
+
+    useEffect(() => {
+        setOpened(opened);
+    }, [opened]);
+
 
     return (
         <div className={cn(styles.dropdown, className)} {...props}>
             <button
                 type='button'
-                aria-expanded={opened}
+                aria-expanded={isOpened}
                 aria-controls={id}
-                aria-label={opened ? `Свернуть секцию ${header}`
+                aria-label={isOpened ? `Свернуть секцию ${header}`
                     : `Развернуть секцию ${header}`}
-                onClick={() => setOpened(!opened)}
+                onClick={() => setOpened(!isOpened)}
                 className={cn(styles.dropdownExpBtn, 'icon-arr-exp', {
-                    [styles.dropdownExpBtn_active]: opened
+                    [styles.dropdownExpBtn_active]: isOpened
                 })}>
                 {header}
             </button>
             <AnimatePresence initial={false}>
-                {opened &&
+                {isOpened &&
                     <motion.div
                         id={id}
                         initial={{ opacity: 0, height: 0 }}

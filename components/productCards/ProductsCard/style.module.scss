@@ -1,6 +1,6 @@
 .card {
-	max-width: 500px;
 	position: relative;
+	max-width: 500px;
 	font-family: var(--accent-font);
 	cursor: pointer;
 
@@ -54,8 +54,8 @@
 
 	&PriceOld {
 		color: var(--gray-light);
+		font-size: 0.875rem;
 		text-decoration: line-through;
-		font-size: .875rem;
 	}
 
 	@media (max-width: 760px) {
@@ -66,7 +66,7 @@
 
 		&PriceWrapper {
 			margin-left: 0;
-			justify-self:flex-start;
+			justify-self: flex-start;
 		}
 
 		&Title {

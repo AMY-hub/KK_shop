@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import cn from 'classnames';
-import { useBasketContext, useFavContext, useUserContext } from '../../../context/AppContext';
+import { useFavContext, useUserContext } from '../../../context/AppContext';
 import { Title, ProductSlider, Modal, AuthTab, FavButton, BasketBtn } from '../../../components';
-import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
+import { getPriceWithSale } from '../../../helpers/getPriceWithSale';
 import { ProductFullCardProps } from './props';
 
 import styles from './style.module.scss';
@@ -12,7 +12,6 @@ export const ProductFullCard = ({ productData, className, ...rest }: ProductFull
 
     const [modalShown, setModalShown] = useState<boolean>(false);
     const suggestionRef = useRef<number>(0);
-    const basketStore = useBasketContext();
     const userStore = useUserContext();
     const favStore = useFavContext();
 
@@ -28,14 +27,14 @@ export const ProductFullCard = ({ productData, className, ...rest }: ProductFull
         art,
     } = productData;
     const addImages = product_add_images.map(el => el.img);
-    const [salePrice, highPrice] = getPricesWithSale(price, special_sale?.discount);
+    const salePrice = getPriceWithSale(price, special_sale?.discount);
+    const discount = price - salePrice;
 
     const handleSuggestion = () => {
-        if (suggestionRef.current) {
-            return;
+        if (!userStore.isLoggedIn && !suggestionRef.current) {
+            suggestionRef.current = 1;
+            setModalShown(true);
         }
-        suggestionRef.current = 1;
-        setModalShown(true);
     };
 
     const handleFav = (productId: number) => {
@@ -45,18 +44,6 @@ export const ProductFullCard = ({ productData, className, ...rest }: ProductFull
             return;
         }
         favStore.toggleProduct(productId);
-    };
-
-    const handleBasket = (productId: number) => {
-        if (!userStore.isLoggedIn) {
-            handleSuggestion();
-        }
-        const productInBasket = basketStore.findInBasket(productId);
-        if (productInBasket) {
-            basketStore.updateProduct(productId, productInBasket.amount + 1);
-        } else {
-            basketStore.addProduct(productId);
-        }
     };
 
     return (
@@ -93,27 +80,38 @@ export const ProductFullCard = ({ productData, className, ...rest }: ProductFull
                     объем / мл
                 </div>
                 <div className={styles.infoPrice}>
-                    <div className={styles.infoPriceNew}>
-                        <span className={styles.infoPriceNewPrice}>
-                            {`${salePrice} руб`}
-                        </span>
-                        <span className={styles.infoPriceNewText}>
-                            {`Со скидкой ${special_sale?.discount || 20}%`}
-                        </span>
-                    </div>
-                    <div className={styles.infoPriceOld}>
-                        <span className={styles.infoPriceOldPrice}>
-                            {`${highPrice} руб`}
-                        </span>
-                        <span className={styles.infoPriceOldText}>
-                            Без скидки
-                        </span>
-                    </div>
+                    {discount > 0 ?
+                        <>
+                            <div className={styles.infoPriceNew}>
+                                <span className={styles.infoPriceNewPrice}>
+                                    {`${salePrice} руб`}
+                                </span>
+                                <span className={styles.infoPriceNewText}>
+                                    {`Со скидкой ${special_sale?.discount}%`}
+                                </span>
+                            </div>
+                            <div className={styles.infoPriceOld}>
+                                <span className={styles.infoPriceOldPrice}>
+                                    {`${price} руб`}
+                                </span>
+                                <span className={styles.infoPriceOldText}>
+                                    Без скидки
+                                </span>
+                            </div>
+                        </>
+                        :
+                        <div className={styles.infoPriceNew}>
+                            <span className={styles.infoPriceNewPrice}>
+                                {`${salePrice} руб`}
+                            </span>
+                        </div>
+                    }
+
                 </div>
                 <div className={styles.infoBtns}>
                     <BasketBtn
                         productId={id}
-                        onClick={handleBasket}
+                        onClick={handleSuggestion}
                     />
                     <FavButton
                         productId={id}

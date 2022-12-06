@@ -1,5 +1,5 @@
+import { Certificate } from '../../../interfaces';
+
 export interface CertificateCardProps {
-    name: string;
-    price: number;
-    img: string;
+    certificateData: Certificate;
 }

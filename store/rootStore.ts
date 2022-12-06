@@ -18,8 +18,6 @@ export class RootStore {
     basketStore: BasketStore;
 
     constructor() {
-        console.log('STORE INIT');
-
         this.appStore = new AppStore(this);
         this.userStore = new UserStore(this);
         this.favStore = new FavStore(this);

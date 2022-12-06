@@ -25,34 +25,37 @@
 		font-weight: 800;
 	}
 
-	&Name,&Art,&Vol,&Price {
+	&Name,
+	&Art,
+	&Vol,
+	&Price {
 		margin-bottom: 1rem;
 	}
 
 	&Title {
-		font-family: var(--accent-font);
 		color: var(--accent-pale);
+		font-family: var(--accent-font);
 	}
 
 	&Art {
-		font-size: .875rem;
-		line-height: 2;
 		color: var(--gray-light);
+		font-size: 0.875rem;
+		line-height: 2;
 	}
 
 	&Vol {
 		span {
 			display: inline-block;
+			margin-right: 0.5rem;
 			padding: 0.5rem;
 			border: 1px solid black;
-			margin-right: 0.5rem;
 		}
 	}
 
 	&Price {
 		display: flex;
-		font-weight: 700;
 		font-size: 1.5rem;
+		font-weight: 700;
 		line-height: 1.5;
 
 		&Old {
@@ -60,7 +63,7 @@
 			flex-direction: column;
 			justify-content: center;
 			color: var(--gray-light);
-			
+
 			&Price {
 				text-decoration: line-through;
 			}
@@ -75,23 +78,23 @@
 
 		&OldText {
 			color: var(--gray-light);
+			font-size: 0.75rem;
 			font-weight: 500;
-			font-size: .75rem;
 			line-height: 1.5;
 		}
 
 		&NewText {
 			color: var(--accent-pale);
+			font-size: 0.75rem;
 			font-weight: 500;
-			font-size: .75rem;
 			line-height: 1.5;
 		}
 	}
 
 	&Btns {
-		margin-top: 2rem;
 		display: flex;
 		justify-content: flex-start;
+		margin-top: 2rem;
 
 		button {
 			margin-right: 1.875rem;
@@ -105,9 +108,15 @@
 
 	@media (max-width: 860px) {
 		padding-bottom: 2rem;
-		&Name,&Art,&Vol,&Price,&Title {
-		margin-bottom: 0.5rem;
+
+		&Name,
+		&Art,
+		&Vol,
+		&Price,
+		&Title {
+			margin-bottom: 0.5rem;
 		}
+
 		&Title {
 			font-size: 1.7rem;
 		}

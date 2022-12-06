@@ -14,7 +14,8 @@ export const OrderPreview = observer(({ deliveryPrice, pickPrice, deliveryType, 
     const delivery = deliveryType === 'курьер' ? deliveryPrice : pickPrice;
 
     const cards = basket.map(p => (<PreviewCard
-        productData={p.product}
+        name={p.type === 'certificate' ? p.certificate.name : p.product.name}
+        img={p.type === 'certificate' ? p.certificate.img : p.product.img}
         amount={p.amount}
         key={p.id} />));
 

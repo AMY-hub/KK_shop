@@ -86,8 +86,6 @@ export const useFilterParams: UseFilterParams = ({ brandsOptions, priceOptions, 
 
     const handleBrand = (opt: MultiValue<Option>) => {
         setBrands([...opt]);
-        console.log(router.query);
-
         router.push({
             pathname: router.pathname,
             query: {

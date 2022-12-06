@@ -11,6 +11,12 @@ export const OrderRow = ({ order }: OrderRowProps): JSX.Element => {
 
     const [showDetails, setShowDetails] = useState<boolean>(false);
 
+    const animationParams = {
+        initial: { opacity: 0, height: 0 },
+        animate: { opacity: 1, height: 'auto' },
+        exit: { opacity: 0, height: 0 }
+    };
+
     const animationConfig = {
         initial: { opacity: 0, height: 0 },
         animate: { opacity: 1, height: 'auto' },
@@ -18,17 +24,35 @@ export const OrderRow = ({ order }: OrderRowProps): JSX.Element => {
         transition: { bounce: 0 },
     };
 
-    const orderProducts = order.products.map((p, idx) => (
-        <MPreviewCard
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ bounce: 0, delay: 0.07 * idx }}
+    let cardCount = 0;
+
+    const orderProducts = order.products.map(p => {
+        cardCount += 1;
+
+        return <MPreviewCard
+            {...animationParams}
+            transition={{ bounce: 0, delay: 0.07 * cardCount }}
             className={styles.rowCard}
-            productData={p.product}
+            name={p.product.name}
+            img={p.product.img}
             amount={p.amount}
-            key={p.id}
-        />));
+            key={cardCount}
+        />;
+    });
+
+    const orderCertificates = order.certificates.map(c => {
+        cardCount += 1;
+
+        return <MPreviewCard
+            {...animationParams}
+            transition={{ bounce: 0, delay: 0.07 * cardCount }}
+            className={styles.rowCard}
+            name={c.certificate.name}
+            img={c.certificate.img}
+            amount={c.amount}
+            key={cardCount}
+        />;
+    });
 
     return (
         <>
@@ -73,6 +97,7 @@ export const OrderRow = ({ order }: OrderRowProps): JSX.Element => {
                             <td className={styles.rowDetails}
                                 colSpan={4}>
                                 {orderProducts}
+                                {orderCertificates}
                             </td>
                         </motion.tr>
                     </>

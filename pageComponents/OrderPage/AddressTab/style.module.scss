@@ -1,12 +1,12 @@
 .tab {
 	&Header {
-		border-bottom: 1px solid #c4c4c4;
+		margin-right: 2rem;
 		margin-bottom: 2rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid #C4C4C4;
 		font-family: var(--accent-font);
 		font-size: 1.2rem;
 		line-height: 1.5;
-		padding-bottom: 0.5rem;
-		margin-right: 2rem;
 
 		@media (max-width: 430px) {
 			margin-bottom: 1rem;

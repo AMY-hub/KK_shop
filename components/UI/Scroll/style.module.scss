@@ -5,8 +5,8 @@
 
 .content {
 	overflow: auto;
-  	scrollbar-width: none;
-  	-ms-overflow-style: none;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -18,8 +18,8 @@
 
 	&Bar {
 		position: relative;
-		height: 100%;  /* must have some height */
 		width: 0.3rem; /* must have some width */
+		height: 100%;  /* must have some height */
 	}
 
 	&Track {
@@ -27,8 +27,8 @@
 		top: 0;
 		bottom: 0;
 		width: 0.3rem;
-		cursor: pointer;
 		background-color: var(--gray-light);
+		cursor: pointer;
 	}
 
 	&Indicator {

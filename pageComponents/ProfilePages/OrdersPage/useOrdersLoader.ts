@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ORDER } from '../../../api/APIendpoints';
-import { API } from '../../../api/axiosConfig';
 import { getErrorMessage } from '../../../helpers/getErrorMessage';
 import { Order } from '../../../interfaces';
+import orderService from '../../../services/orderService';
 
 type UseOrdersLoader = () => {
     orders: Order[],
@@ -19,7 +18,7 @@ export const useOrdersLoader: UseOrdersLoader = () => {
         const loadOrders = async () => {
             try {
                 setLoading(true);
-                const res = await API.get<Order[]>(ORDER);
+                const res = await orderService.getAllOrders();
                 if (res.status === 200) {
                     setOrders(res.data);
                 }

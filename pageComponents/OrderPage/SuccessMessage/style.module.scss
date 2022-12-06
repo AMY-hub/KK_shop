@@ -2,15 +2,14 @@
 	&Num {
 		margin-bottom: 2rem;
 		font-size: 1.3rem;
+
 		span {
-			font-weight: 600;
 			font-family: var(--accent-font);
-		}		
+			font-weight: 600;
+		}
 	}
 
 	a {
 		color: var(--accent-dark);
 	}
 }
-
-

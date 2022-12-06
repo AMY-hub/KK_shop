@@ -3,7 +3,7 @@ import Link from 'next/link';
 import cn from 'classnames';
 import { ForwardedRef, forwardRef } from 'react';
 import { motion } from 'framer-motion';
-import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
+import { getPriceWithSale } from '../../../helpers/getPriceWithSale';
 import { SpecialCardProps } from './props';
 
 import styles from './style.module.scss';
@@ -21,7 +21,8 @@ export const SpecialCard = forwardRef((props: SpecialCardProps, ref: ForwardedRe
         size = 'l',
         className,
         ...rest } = props;
-    const [salePrice] = getPricesWithSale(price, sale?.discount);
+
+    const salePrice = getPriceWithSale(price, sale?.discount);
 
     return (
         <div
@@ -53,7 +54,7 @@ export const SpecialCard = forwardRef((props: SpecialCardProps, ref: ForwardedRe
                     </>
                 }
                 {type === 'square' &&
-                    <span className={styles.cardPrice}>от {salePrice}</span>
+                    <span className={styles.cardPrice}>от{salePrice}</span>
                 }
             </div>
         </div>

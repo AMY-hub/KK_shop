@@ -2,11 +2,11 @@
 	input[type="checkbox"] {
 		width: 1px;
 		height: 1px;
-		border: 0;
 		padding: 0;
-		opacity: 0;
-		clip: rect(0 0 0 0);
 		overflow: hidden;
+		clip: rect(0 0 0 0);
+		border: 0;
+		opacity: 0;
 	}
 }
 
@@ -16,51 +16,54 @@
 
 .checkFake {
 	display: flex;
+	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
-	flex-shrink: 0;
-	margin-right: 1rem;
 	width: 1.1rem;
 	height: 1.1rem;
-	border-radius: 3px;
-	border: 1px solid var(--gray);
-	background-color: var(--dark-bg);
+	margin-right: 1rem;
 	transition: all 300ms;
+	border: 1px solid var(--gray);
+	border-radius: 3px;
+	background-color: var(--dark-bg);
 
 	svg {
 		width: 0.9rem;
 		height: 0.9rem;
-		fill: #fff;
+		fill: #FFF;
 	}
 
 	&_error {
-		background-color: var(--invalid);
 		border: 1px solid var(--warning);
+		background-color: var(--invalid);
 	}
 
 	&_checked {
-		background-color: var(--semi-black);
 		border: 1px solid var(--semi-black);
+		background-color: var(--semi-black);
 
 		svg {
-			 animation: bounce;
-			 animation-duration: 500ms;
-			 animation-fill-mode: forwards;
+			animation: bounce;
+			animation-duration: 500ms;
+			animation-fill-mode: forwards;
 		}
 	}
 }
 
 @keyframes bounce {
-    20% {
-        transform: scale(1.2);
-    }
-    35% {
-        transform: scale(1);
-    }
+	20% {
+		transform: scale(1.2);
+	}
+
+	35% {
+		transform: scale(1);
+	}
+
 	65% {
-        transform: scale(0.8);
-    }
-    100% {
-        transform: scale(1);
-    }
+		transform: scale(0.8);
+	}
+
+	100% {
+		transform: scale(1);
+	}
 }

@@ -1,25 +1,25 @@
 .advantages {
-	max-width: 635px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	max-width: 635px;
 	font-family: var(--accent-font);
+	font-size: 0.875rem;
 	font-weight: 500;
-	font-size: .875rem;
 	line-height: 1.5;
 
 	&Item {
-		margin-right: 1.5rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin-right: 1.5rem;
 
 		&:last-child {
 			margin-right: 0;
 		}
 
 		span {
-			margin-left:.8125rem;
+			margin-left: 0.8125rem;
 		}
 	}
 

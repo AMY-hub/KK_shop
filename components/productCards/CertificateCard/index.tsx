@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import { ForwardedRef, forwardRef } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '../..';
+import { BasketBtn } from '../..';
 import { CertificateCardProps } from './props';
 
 import styles from './style.module.scss';
 
-export const CertificateCard = forwardRef(({ name, price, img }: CertificateCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const CertificateCard = forwardRef(({ certificateData }: CertificateCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+
+    const { id, name, price, img } = certificateData;
 
     return (
         <div className={styles.card} ref={ref}>
@@ -24,11 +26,9 @@ export const CertificateCard = forwardRef(({ name, price, img }: CertificateCard
                     <span className={styles.cardPrice}>
                         {`${price} руб`}
                     </span>
-                    <Button
-                        className={styles.cardBuy}
-                    >
-                        В корзину
-                    </Button>
+                    <BasketBtn
+                        productId={id}
+                        productType='certificate' />
                 </div>
             </div>
         </div>

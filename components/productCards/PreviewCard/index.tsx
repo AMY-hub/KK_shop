@@ -6,7 +6,7 @@ import { PreviewCardProps } from './props';
 
 import styles from './style.module.scss';
 
-export const PreviewCard = forwardRef(({ productData, amount, className, ...props }: PreviewCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const PreviewCard = forwardRef(({ img, name, amount, className, ...props }: PreviewCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     return (
         <div
@@ -15,14 +15,14 @@ export const PreviewCard = forwardRef(({ productData, amount, className, ...prop
             ref={ref}>
             <div className={styles.cardImg}>
                 <Image
-                    src={process.env.NEXT_PUBLIC_DOMAIN + productData.img}
-                    alt={productData.name}
+                    src={process.env.NEXT_PUBLIC_DOMAIN + img}
+                    alt={name}
                     layout='fixed'
                     width={80}
                     height={80} />
             </div>
             <div className={styles.cardText}>
-                <div className={styles.cardName}>{productData.name}</div>
+                <div className={styles.cardName}>{name}</div>
                 <div className={styles.cardAmount}>
                     {`Количество: ${amount}`}
                 </div>

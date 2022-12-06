@@ -12,8 +12,6 @@ export const Pagination = ({ pagesCount, currentPage, className, ...props }: Pag
     const pagesInterval = 5;
     const paginationRange = usePaginationRange(pagesCount, currentPage, pagesInterval);
 
-    console.log('PAGE: ', currentPage);
-
     const handlePageNav = (page: number) => {
         let newPage = page;
         if (newPage < 1) {

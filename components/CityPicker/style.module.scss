@@ -1,77 +1,79 @@
 .picker {
-    max-width: 470px;
-    ul {
-        border-radius: 1px;
-        box-shadow: none;
-        border-bottom: 1px solid var(--accent-light);
-    }
+	max-width: 470px;
 
-    &Title {
-        font-size: 1.7rem;
-        color: var(--gray);
-    }
+	ul {
+		border-bottom: 1px solid var(--accent-light);
+		border-radius: 1px;
+		box-shadow: none;
+	}
 
-    &Text {
-        margin-bottom: 1.5rem;
-        line-height: 1.5;
-        color: var(--gray);
-        span {
-            color: var(--black);
-        }
-    }
+	&Title {
+		color: var(--gray);
+		font-size: 1.7rem;
+	}
 
-    &Container {
-        position: relative;
-        input {
-            height: 4rem;
-            padding: 0.5rem;
-            font-weight: 700;
-            font-size: 3rem;
-            line-height: 1.5;
-            border: none;
-            border-radius: 1px;
-            border-bottom: 1px solid var(--gray);
-            transition: all 300ms;
+	&Text {
+		margin-bottom: 1.5rem;
+		color: var(--gray);
+		line-height: 1.5;
 
-            &::placeholder {
-                color: var(--dark-bg);
-            }
+		span {
+			color: var(--black);
+		}
+	}
 
-            &:focus {
-                box-shadow: 0 0 5px var(--accent-light);
-                border-bottom: none;
-            }
-        }
-    }
+	&Container {
+		position: relative;
 
-    &Selected {
-        color: var(--accent-dark);
-    }
+		input {
+			height: 4rem;
+			padding: 0.5rem;
+			transition: all 300ms;
+			border: none;
+			border-bottom: 1px solid var(--gray);
+			border-radius: 1px;
+			font-size: 3rem;
+			font-weight: 700;
+			line-height: 1.5;
 
-    &Option {
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-        width: 100%;
-        line-height: 2;
-        transition: color 300ms;
+			&::placeholder {
+				color: var(--dark-bg);
+			}
 
-        &:hover {
-            color: var(--accent-dark);
-        }
-    }
+			&:focus {
+				border-bottom: none;
+				box-shadow: 0 0 5px var(--accent-light);
+			}
+		}
+	}
 
-    @media (max-width: 430px) {
-        &Title {
-            font-size: 1.2rem;
-        }
+	&Selected {
+		color: var(--accent-dark);
+	}
 
-        &Container {
-            input {
-                height: 3rem;
-                font-size: 2.5rem;
-            }
-        }
-    }
+	&Option {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		transition: color 300ms;
+		line-height: 2;
+		text-align: left;
+
+		&:hover {
+			color: var(--accent-dark);
+		}
+	}
+
+	@media (max-width: 430px) {
+		&Title {
+			font-size: 1.2rem;
+		}
+
+		&Container {
+			input {
+				height: 3rem;
+				font-size: 2.5rem;
+			}
+		}
+	}
 }
-

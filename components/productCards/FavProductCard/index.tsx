@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import cn from 'classnames';
 import { useBasketContext, useFavContext } from '../../../context/AppContext';
 import Link from 'next/link';
-import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
+import { getPriceWithSale } from '../../../helpers/getPriceWithSale';
 import { IconButton } from '../..';
 import { FavProductCardProps } from './props';
 import CartIcon from '../../../assets/images/icons/cart.svg';
@@ -26,7 +26,8 @@ export const FavProductCard = forwardRef(({ productData, className, ...props }: 
         brand: { special_sale },
     } = productData;
 
-    const [salePrice, highPrice] = getPricesWithSale(price, special_sale?.discount);
+    const salePrice = getPriceWithSale(price, special_sale?.discount);
+    const discount = price - salePrice;
 
     return (
         <div className={cn(styles.card, className)} {...props} ref={ref}>
@@ -65,18 +66,26 @@ export const FavProductCard = forwardRef(({ productData, className, ...props }: 
                             <IconButton
                                 title='Добавить в корзину'
                                 aria-label='Добавить в корзину'
-                                onClick={() => basketStore.addProduct(id)}
+                                onClick={() => basketStore.addProduct(id, 'product')}
                             >
                                 <CartIcon />
                             </IconButton>
                         </div>
                         <div className={styles.cardPriceWrapper}>
-                            <span className={styles.cardPriceOld}>
-                                {`${highPrice} руб`}
-                            </span>
-                            <span className={styles.cardPrice}>
-                                {`${salePrice} руб`}
-                            </span>
+                            {discount > 0 ?
+                                <>
+                                    <span className={styles.cardPriceOld}>
+                                        {`${price} руб`}
+                                    </span>
+                                    <span className={styles.cardPrice}>
+                                        {`${salePrice} руб`}
+                                    </span>
+                                </>
+                                :
+                                <span className={styles.cardPrice}>
+                                    {`${price} руб`}
+                                </span>
+                            }
                         </div>
                     </div>
                 </div>

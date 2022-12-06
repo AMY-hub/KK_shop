@@ -12,37 +12,24 @@
 		pointer-events: none;
 
 		svg {
-			fill: var(--gray-light);
 			transition: all 300ms;
+			fill: var(--gray-light);
 
 			path {
-				fill: var(--gray-light); 
 				transition: all 300ms;
+				fill: var(--gray-light);
 			}
 		}
 	}
 
 	&.light {
 		svg {
-			fill: var(--black);
 			transition: all 300ms;
+			fill: var(--black);
 
 			path {
-				fill: var(--black); 
 				transition: all 300ms;
-			}
-		}
-
-		&:hover,
-		&:focus {
-			svg {
-				fill: var(--accent-dark);
-				transition: all 300ms;
-
-				path {
-					fill: var(--accent-dark); 
-					transition: all 300ms;
-				}
+				fill: var(--black);
 			}
 		}
 	}
@@ -51,18 +38,31 @@
 		background-color: var(--black);
 
 		svg {
-			fill: var(--bg);
 			transition: all 300ms;
+			fill: var(--bg);
 
 			path {
-				fill: var(--bg); 
 				transition: all 300ms;
+				fill: var(--bg);
 			}
 		}
+	}
 
-		&:hover,
-		&:focus {
-			background-color: var(--gray-dark);
+	&.light:hover,
+	&.light:focus {
+		svg {
+			transition: all 300ms;
+			fill: var(--accent-dark);
+
+			path {
+				transition: all 300ms;
+				fill: var(--accent-dark);
+			}
 		}
+	}
+
+	&.dark:hover,
+	&.dark:focus {
+		background-color: var(--gray-dark);
 	}
 }

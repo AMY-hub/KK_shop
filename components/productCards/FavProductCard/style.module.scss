@@ -1,7 +1,7 @@
 .card {
 	padding: 1.375rem 0 2.4375rem;
-	font-family: var(--main-font);
 	border-bottom: 1px solid var(--dark-bg);
+	font-family: var(--main-font);
 
 	&Wrapper {
 		display: flex;
@@ -13,27 +13,27 @@
 	}
 
 	&Info {
-		padding-left: 20px;
-		padding-top: 20px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		padding-top: 20px;
+		padding-left: 20px;
 	}
 
 	&Title {
-		margin-bottom: .8125rem;
-		font-family: 'Bebas Neue';
+		margin-bottom: 0.8125rem;
 		color: var(--semi-black);
+		font-family: Oswald, sans-serif;
 		font-size: 1.125rem;
 		font-weight: 700;
-		line-height: 1.1;
 		letter-spacing: 0.04rem;
+		line-height: 1.1;
 		text-transform: uppercase;
 	}
 
 	&Description {
-		color: var(--gray-medium);
 		margin-bottom: 0.5rem;
+		color: var(--gray-medium);
 		font-size: 1rem;
 		line-height: 1.1;
 	}
@@ -61,7 +61,7 @@
 	}
 
 	@media (max-width: 470px) {
-		padding: 1rem 0 1rem;
+		padding: 1rem 0;
 
 		&Wrapper {
 			flex-direction: column;
@@ -72,8 +72,8 @@
 		}
 
 		&Info {
-			padding-left: 0;
 			padding-top: 5px;
+			padding-left: 0;
 		}
 	}
 }

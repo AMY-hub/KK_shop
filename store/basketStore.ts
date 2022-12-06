@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { makeAutoObservable, runInAction } from 'mobx';
 import { getErrorMessage } from '../helpers/getErrorMessage';
-import { getPricesWithSale } from '../helpers/getPricesWithSale';
-import { BasketProduct } from '../interfaces';
+import { getPriceWithSale } from '../helpers/getPriceWithSale';
+import { BasketCertificate, BasketItemType, BasketProduct } from '../interfaces';
 import basketService from '../services/basketService';
 import { RootStore } from './rootStore';
 
 export class BasketStore {
     private _root: RootStore;
-    private _basket: BasketProduct[] = [];
+    private _basket: Array<BasketProduct | BasketCertificate> = [];
     private _finalPrice = 0;
     private _oldPrice = 0;
     private _error = '';
@@ -22,7 +23,7 @@ export class BasketStore {
         makeAutoObservable(this);
     }
 
-    set basket(data: BasketProduct[]) {
+    set basket(data: Array<BasketProduct | BasketCertificate>) {
         this._basket = data;
         this.setFinalPrice();
     }
@@ -117,9 +118,9 @@ export class BasketStore {
         }
     }
 
-    async addProduct(productId: number) {
+    async addProduct(productId: number, type: BasketItemType) {
         try {
-            const res = await basketService.addProduct(productId);
+            const res = await basketService.addProduct(productId, type);
             if (res.status === 200) {
                 runInAction(() => {
                     this._error = '';
@@ -133,18 +134,26 @@ export class BasketStore {
         }
     }
 
-    async updateProduct(productId: number, amount: number) {
+    async updateProduct(productId: number, amount: number, type: BasketItemType) {
         try {
-            const basketProduct = this._basket.find(p => p.productId === productId);
-            if (!basketProduct) return;
+            let item: BasketProduct | BasketCertificate | undefined;
+            if (type === 'certificate') {
+                item = this._basket
+                    .find(p => p.type === 'certificate' && p.certificateId === productId);
+            } else {
+                item = this._basket
+                    .find(p => p.type === 'product' && p.productId === productId);
+            }
 
-            const res = await basketService.updateProduct(basketProduct.id, amount);
-            if (res.status === 200) {
-                runInAction(() => {
-                    this._error = '';
-                    basketProduct.amount = amount;
-                    this.setFinalPrice();
-                });
+            if (item) {
+                const res = await basketService.updateProduct(item.id, amount, type);
+                if (res.status === 200) {
+                    runInAction(() => {
+                        this._error = '';
+                        item!.amount = amount;
+                        this.setFinalPrice();
+                    });
+                }
             }
         } catch (err) {
             this.error = getErrorMessage(err);
@@ -152,18 +161,27 @@ export class BasketStore {
         }
     }
 
-    async deleteProduct(productId: number) {
+    async deleteProduct(productId: number, type: BasketItemType) {
         try {
-            const basketProduct = this._basket.find(p => p.productId === productId);
-            if (!basketProduct) return;
-            const res = await basketService.deleteProduct(basketProduct.id);
-            if (res.status === 200 && res.data && this._basket) {
-                runInAction(() => {
-                    this._error = '';
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    this.basket = this.basket.filter(p => p.id !== basketProduct.id);
-                    this.setFinalPrice();
-                });
+            let item: BasketProduct | BasketCertificate | undefined;
+            if (type === 'certificate') {
+                item = this._basket
+                    .find(p => p.type === 'certificate' && p.certificateId === productId);
+            } else {
+                item = this._basket
+                    .find(p => p.type === 'product' && p.productId === productId);
+            }
+
+            if (item) {
+                const res = await basketService.deleteProduct(item.id, type);
+                if (res.status === 200 && res.data && this._basket) {
+                    runInAction(() => {
+                        this._error = '';
+                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                        this.basket = this.basket.filter(p => p.id !== item?.id);
+                        this.setFinalPrice();
+                    });
+                }
             }
         } catch (err) {
             this.error = getErrorMessage(err);
@@ -171,16 +189,27 @@ export class BasketStore {
         }
     }
 
-    findInBasket(productId: number) {
-        return this._basket.find(p => p.productId === productId);
+    findInBasket(productId: number, type: BasketItemType) {
+        return type === 'product' ?
+            this._basket
+                .find(p => p.type === 'product' && p.productId === productId)
+            :
+            this._basket
+                .find(p => p.type === 'certificate' && p.certificateId === productId);
     }
 
     setFinalPrice() {
         const sum = this._basket.reduce<[number, number]>((prev, cur) => {
-            const [salePrice, oldPrice] = getPricesWithSale(cur.product.price, cur.product.brand.special_sale?.discount);
-            prev[0] += (salePrice * cur.amount);
-            prev[1] += (oldPrice * cur.amount);
-            return prev;
+            if (cur.type === 'product') {
+                const salePrice = getPriceWithSale(cur.product.price, cur.product.brand.special_sale?.discount);
+                prev[0] += (salePrice * cur.amount);
+                prev[1] += (cur.product.price * cur.amount);
+                return prev;
+            } else {
+                prev[0] += (cur.certificate.price * cur.amount);
+                prev[1] += (cur.certificate.price * cur.amount);
+                return prev;
+            }
         }, [0, 0]);
 
         this._finalPrice = sum[0];
@@ -195,6 +224,7 @@ export class BasketStore {
                 runInAction(() => {
                     this.bonusDiscount = 0;
                     this.promoDiscount = 0;
+                    this.promoActive = '';
                     this.basket = [];
                 });
             }

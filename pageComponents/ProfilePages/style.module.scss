@@ -1,29 +1,29 @@
 .bonus {
-    &Card {
-        margin-bottom: 1rem;
-        font-size: 1.3rem;
-        font-weight: 700;
-        line-height: 1.5;
-    }
+	&Card {
+		margin-bottom: 1rem;
+		font-size: 1.3rem;
+		font-weight: 700;
+		line-height: 1.5;
+	}
 
-    &Points {
-        margin-bottom: 4rem;
-        font-size: 1.2rem;
-        color: var(--semi-black);
+	&Points {
+		margin-bottom: 4rem;
+		color: var(--semi-black);
+		font-size: 1.2rem;
 
-        span {
-            color: var(--accent-dark)
-        }
-    }
+		span {
+			color: var(--accent-dark);
+		}
+	}
 
-    &Rules {
-        p {
-            margin-bottom: 0.5rem;
-        }
-    }
+	&Rules {
+		p {
+			margin-bottom: 0.5rem;
+		}
+	}
 
-    &Disclaimer {
-        font-size: 0.9rem;
-        color: var(--gray);
-    }
+	&Disclaimer {
+		color: var(--gray);
+		font-size: 0.9rem;
+	}
 }

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ForwardedRef, forwardRef } from 'react';
 import { motion } from 'framer-motion';
-import { getPricesWithSale } from '../../../helpers/getPricesWithSale';
+import { getPriceWithSale } from '../../../helpers/getPriceWithSale';
 import cn from 'classnames';
 import { ProductCardProps } from './props';
 import { InfoBadge } from '../..';
@@ -20,7 +20,8 @@ export const ProductCard = forwardRef(({ productData, className, ...props }: Pro
         brand: { special_sale },
     } = productData;
 
-    const [salePrice, highPrice] = getPricesWithSale(price, special_sale?.discount);
+    const salePrice = getPriceWithSale(price, special_sale?.discount);
+    const discount = price - salePrice;
 
     return (
         <div className={cn(styles.card, className)} {...props} ref={ref}>
@@ -50,12 +51,20 @@ export const ProductCard = forwardRef(({ productData, className, ...props }: Pro
                     <div className={styles.cardTitle}>{name}</div>
                     <div className={styles.cardDescription}>{name_rus}</div>
                     <div className={styles.cardPriceWrapper}>
-                        <span className={styles.cardPrice}>
-                            {`${salePrice} руб`}
-                        </span>
-                        <span className={styles.cardPriceOld}>
-                            {`${highPrice} руб`}
-                        </span>
+                        {discount > 0 ?
+                            <>
+                                <span className={styles.cardPrice}>
+                                    {`${salePrice} руб`}
+                                </span>
+                                <span className={styles.cardPriceOld}>
+                                    {`${price} руб`}
+                                </span>
+                            </>
+                            :
+                            <span className={styles.cardPrice}>
+                                {`${price} руб`}
+                            </span>
+                        }
                     </div>
                 </div>
 

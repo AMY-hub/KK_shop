@@ -50,7 +50,6 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
             notFound: true
         };
     }
-    console.log(params);
 
     let similar = [],
         popular = [];

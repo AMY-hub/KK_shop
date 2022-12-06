@@ -6,7 +6,7 @@
 	--accent-light: #F287AB;
 	--accent-pale: #D785A1;
 	--warning: #F10D48;
-	--invalid: rgba(255, 145, 145, 0.3);
+	--invalid: rgb(255 145 145 / 30%);
 	--light-text: #FFFBFB;
 	--black: #000;
 	--semi-black: #1D1D1D;
@@ -15,11 +15,11 @@
 	--gray: #828282;
 	--gray-light: #BCBCBC;
 
-	//fonts:
+	// fonts:
 	--main-font: "Roboto", sans-serif;
 	--accent-font: "Montserrat", sans-serif;
 
-	//breakpoints
+	// breakpoints
 	--L: 1060px;
 	--M: 760px;
 	--S: 424px;

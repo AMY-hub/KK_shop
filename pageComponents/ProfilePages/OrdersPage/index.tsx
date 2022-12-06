@@ -1,9 +1,9 @@
+import { AnimatePresence } from 'framer-motion';
 import { Title, MAlertMessage, Preloader } from '../../../components';
 import { useOrdersLoader } from './useOrdersLoader';
 import { OrderRow } from './OrderRow';
 
 import styles from './style.module.scss';
-import { AnimatePresence } from 'framer-motion';
 
 export const OrdersPage = (): JSX.Element => {
 

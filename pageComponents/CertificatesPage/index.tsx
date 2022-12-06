@@ -15,9 +15,6 @@ export const CertificatesPage = ({ certificates }: CertificatesPageProps): JSX.E
                     В этой ситуации оптимальным решением может стать подарочный сертификат нашего магазина. Приобретая наши подарочные сертификаты вы дарите выбор! Наши консультанты профессионально подберут для ваших близких самые нужные и подходящие средства, которые дадут ощущение собственной красоты, уникальности и неповторимости. С корейской косметикой Вы дарите больше чем подарок - Вы дарите ощущения!
                 </Paragraph>
                 <Paragraph fontSize='l'>
-                    На покупку подарочных сертификатов не действуют карты постоянного клиента (но если у вас есть карта, вы можете получить скидку по ней при обналичивании сертификата).
-                </Paragraph>
-                <Paragraph fontSize='l'>
                     Срок действия подарочного сертификата - год с момента приобретения (дата будет указана на сертификате).
                 </Paragraph>
                 <Paragraph fontSize='l'>
@@ -32,10 +29,8 @@ export const CertificatesPage = ({ certificates }: CertificatesPageProps): JSX.E
                 {certificates &&
                     certificates.map(el => (
                         <CertificateCard
-                            key={el.name}
-                            name={el.name}
-                            price={el.price}
-                            img={el.img}
+                            key={el.id}
+                            certificateData={el}
                         />
                     ))}
             </Grid>

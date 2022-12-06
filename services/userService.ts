@@ -5,21 +5,21 @@ import { LoginFormFields, RegisterFormFields, UserResponse } from '../interfaces
 
 class UserService {
 
-    login = async (data: LoginFormFields): Promise<AxiosResponse<UserResponse>> => {
+    async login(data: LoginFormFields): Promise<AxiosResponse<UserResponse>> {
         return API.post<UserResponse>(LOGIN, data);
-    };
+    }
 
-    registration = async (data: RegisterFormFields): Promise<AxiosResponse<UserResponse>> => {
+    async registration(data: RegisterFormFields): Promise<AxiosResponse<UserResponse>> {
         return API.post<UserResponse>(REGISTRATION, data);
-    };
+    }
 
-    logout = async (): Promise<void> => {
+    async logout(): Promise<void> {
         return API.get(LOGOUT);
-    };
+    }
 
-    checkAuth = async (): Promise<AxiosResponse<UserResponse>> => {
+    async checkAuth(): Promise<AxiosResponse<UserResponse>> {
         return axios.get<UserResponse>(REFRESH, { withCredentials: true });
-    };
+    }
 }
 
 export default new UserService();

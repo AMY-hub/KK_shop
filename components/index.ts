@@ -25,6 +25,7 @@ export * from './BasketBtn';
 export * from './productCards/ProductsCard';
 export * from './productCards/FavProductCard';
 export * from './productCards/BasketProductCard';
+export * from './productCards/BasketCertificateCard';
 export * from './productCards/SpecialCard';
 export * from './productCards/CertificateCard';
 export * from './productCards/PreviewCard';

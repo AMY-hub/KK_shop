@@ -6,15 +6,15 @@
 
 	@media (max-width: 1130px) {
 		grid-template-columns: 1fr;
-		margin: .9375rem 6.25rem 3.375rem 6.25rem;
+		margin: 0.9375rem 6.25rem 3.375rem;
 	}
 
 	@media (max-width: 760px) {
-		margin: .625rem 0 2.125rem 0;
+		margin: 0.625rem 0 2.125rem;
 	}
 
 	&Title {
-		margin-bottom: .75rem;
+		margin-bottom: 0.75rem;
 		font-family: "Open Sans", sans-serif;
 		font-size: 1.125rem;
 		font-weight: 700;
@@ -68,7 +68,7 @@
 		}
 
 		@media (max-width: 430px) {
-			padding: .75rem;
+			padding: 0.75rem;
 		}
 	}
 }
@@ -83,7 +83,7 @@
 	@media (max-width: 1060px) {
 		grid-template-columns: 1fr;
 		gap: 0;
-		margin-bottom: .9375rem;
+		margin-bottom: 0.9375rem;
 	}
 
 	&Info {
@@ -99,7 +99,7 @@
 		font-weight: 700;
 
 		@media (max-width: 600px) {
-			padding-bottom: .625rem;
+			padding-bottom: 0.625rem;
 		}
 	}
 
@@ -120,7 +120,7 @@
 	&Pick {
 		display: flex;
 		flex-direction: column;
-		margin-top: .9375rem;
+		margin-top: 0.9375rem;
 		color: var(--black);
 		font-size: 1.375rem;
 		font-weight: 700;
@@ -141,7 +141,7 @@
 		}
 
 		@media (max-width: 600px) {
-			padding: .8125rem .9375rem;
+			padding: 0.8125rem 0.9375rem;
 		}
 	}
 
@@ -168,8 +168,8 @@
 
 	&List {
 		margin-top: -10px;
-		font-weight: 400;
 		font-size: 1rem;
+		font-weight: 400;
 		line-height: 2;
 	}
 }
@@ -178,11 +178,10 @@
 	position: absolute;
 	width: 1px !important;
 	height: 1px !important;
-	padding: 0 !important;
 	margin: -1px !important;
+	padding: 0 !important;
 	overflow: hidden !important;
-	clip: rect(0,0,0,0) !important;
-	white-space: nowrap !important;
+	clip: rect(0, 0, 0, 0) !important;
 	border: 0 !important;
+	white-space: nowrap !important;
 }
-

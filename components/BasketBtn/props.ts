@@ -1,4 +1,7 @@
+import { BasketItemType } from '../../interfaces';
+
 export interface BasketBtnProps {
     productId: number;
-    onClick: (id: number) => void;
+    productType?: BasketItemType;
+    onClick?: () => void;
 }

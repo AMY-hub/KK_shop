@@ -12,8 +12,8 @@
 	padding-bottom: 2.25rem;
 
 	&Info {
-		margin-left: 3.875rem;
 		margin-bottom: 1rem;
+		margin-left: 3.875rem;
 
 		p {
 			margin-right: 4rem;
@@ -47,7 +47,7 @@
 	@media (max-width: 1060px) {
 		grid-template-columns: 1fr;
 		gap: 1rem;
-		padding: 0 3rem 1.625rem 3rem;
+		padding: 0 3rem 1.625rem;
 	}
 
 	@media (max-width: 760px) {
@@ -98,6 +98,6 @@
 	}
 
 	@media (max-width: 760px) {
-		margin-bottom: 3.1280rem;
+		margin-bottom: 3.128rem;
 	}
 }

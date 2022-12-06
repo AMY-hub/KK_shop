@@ -13,18 +13,18 @@
 			font-size: 1.375rem;
 			font-weight: 700;
 		}
-		
+
 		a {
-			font-size: 14px;
 			color: var(--gray-dark);
+			font-size: 14px;
 		}
 	}
 
 	&Cards {
-		padding-right: 1rem;
 		display: flex;
 		flex-direction: column;
 		max-height: 500px;
+		padding-right: 1rem;
 	}
 
 	&Discount {
@@ -32,7 +32,8 @@
 		margin-top: 1rem;
 	}
 
-	&Sum,&Delivery {
+	&Sum,
+	&Delivery {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -45,8 +46,8 @@
 
 	&Final {
 		margin-top: 1rem;
-		text-align: right;
 		font-size: 1.125rem;
+		text-align: right;
 
 		span:first-child {
 			color: var(--gray-dark);

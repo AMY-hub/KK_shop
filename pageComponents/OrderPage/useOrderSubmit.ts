@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { AxiosResponse } from 'axios';
 import { SubmitHandler, UseFormReset } from 'react-hook-form';
-import { OrderCreateData, OrderCreateResponse, OrderFormFields } from './interfaces';
-import { ORDER } from '../../api/APIendpoints';
-import { API } from '../../api/axiosConfig';
+import { OrderFormFields } from './interfaces';
 import { useAppContext, useBasketContext, useUserContext } from '../../context/AppContext';
 import { getErrorMessage } from '../../helpers/getErrorMessage';
+import orderService from '../../services/orderService';
 
 type UseOrderSubmit = (reset: UseFormReset<OrderFormFields>, deliveryPrice: number) => {
     orderNumber: string;
@@ -49,13 +47,28 @@ export const useOrderSubmit: UseOrderSubmit = (reset, deliveryPrice) => {
                 setError('');
             }
 
-            const res = await API.post<OrderCreateData, AxiosResponse<OrderCreateResponse>, OrderCreateData>(ORDER, {
+            const products: Array<{ id: number, amount: number }> = [];
+            const certificates: Array<{ id: number, amount: number }> = [];
+            basket.forEach(el => {
+                if (el.type === 'certificate') {
+                    certificates.push({
+                        id: el.certificateId,
+                        amount: el.amount
+                    });
+                }
+                if (el.type === 'product') {
+                    products.push({
+                        id: el.productId,
+                        amount: el.amount
+                    });
+                }
+            });
+
+            const res = await orderService.createOrder({
                 ...data,
-                phone: '+7' + data.phone.replace(' ', ''),
-                products: basket.map(p => ({
-                    id: p.productId,
-                    amount: p.amount
-                })),
+                phone: data.phone.replace(' ', ''),
+                products,
+                certificates,
                 userId: userState.user?.id || null,
                 price: basketStore.finalPrice,
                 delivery_price: deliveryPrice,

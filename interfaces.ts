@@ -122,7 +122,21 @@ export interface BasketProduct {
     productId: number;
     amount: number;
     product: ProductPreview;
+    type: 'product';
 }
+
+export interface BasketCertificate {
+    id: number;
+    createdAt: string;
+    updatedAt: string;
+    basketId: number;
+    certificateId: number;
+    amount: number;
+    certificate: Certificate;
+    type: 'certificate'
+}
+
+export type BasketItemType = 'certificate' | 'product';
 
 export interface Basket {
     id: number;
@@ -130,7 +144,7 @@ export interface Basket {
     createdAt: string;
     updatedAt: string;
     temporary_key: string | null;
-    products: BasketProduct;
+    products: Array<BasketProduct | BasketCertificate>;
 }
 
 export interface FavProduct {
@@ -257,6 +271,17 @@ export interface OrderProduct {
     product: ProductPreview;
 }
 
+export interface OrderCertificate {
+    id: number;
+    amount: number;
+    createdAt: string;
+    updatedAt: string;
+    orderId: number;
+    certificateId: number;
+    certificate: Certificate;
+    type: 'certificate'
+}
+
 export interface Order {
     id: number;
     key: string;
@@ -273,6 +298,7 @@ export interface Order {
     updatedAt: string;
     userId: number;
     products: OrderProduct[];
+    certificates: OrderCertificate[];
 }
 
 export type Delivery = 'самовывоз' | 'курьер';

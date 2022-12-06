@@ -10,7 +10,6 @@
 
 	&Img {
 		flex-shrink: 0;
-		cursor: pointer;
 	}
 
 	&Header {
@@ -39,44 +38,20 @@
 		color: var(--semi-black);
 		font-family: Oswald, sans-serif;
 		font-size: 1.125rem;
-		font-weight: 700;
+		font-weight: 600;
 		line-height: 1.1;
 		text-transform: uppercase;
-	}
-
-	&Description {
-		margin-bottom: 0.5rem;
-		color: var(--gray-medium);
-		font-size: 1rem;
-		line-height: 1.1;
 	}
 
 	&Body {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: flex-end;
 	}
 
 	&Price {
 		color: var(--semi-black);
 		font-size: 1.125rem;
-	}
-
-	&PriceOld {
-		margin-right: 1.25rem;
-		color: var(--gray-light);
-		font-size: 1.125rem;
-	}
-
-	&Discount {
-		color: var(--accent-dark);
-		font-size: 0.875rem;
-		line-height: 2;
-		text-align: right;
-	}
-
-	&Volume {
-		margin-bottom: 1rem;
 	}
 
 	@media (max-width: 620px) {
@@ -94,14 +69,6 @@
 		&Info {
 			padding-top: 0;
 			padding-left: 10px;
-		}
-
-		&Volume {
-			margin-bottom: 0;
-		}
-
-		&Discount {
-			text-align: left;
 		}
 
 		&Controls {
