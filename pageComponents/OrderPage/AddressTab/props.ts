@@ -1,6 +1,6 @@
 import { Control } from 'react-hook-form';
-import { OrderFormFields } from '..';
 import { Address } from '../../../interfaces';
+import { OrderFormFields } from '../interfaces';
 
 export interface AddressTabProps {
     addresses: Address[];

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import cn from 'classnames';
 import Link from 'next/link';
 import { ButtonProps } from './props';

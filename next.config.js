@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 
 module.exports = {
+	staticPageGenerationTimeout: 120,
 	images: {
-		domains: ['localhost']
+		domains: ['localhost', 'kkshop.onrender.com']
 	},
 	webpack(config, options) {
 		config.module.rules.push({

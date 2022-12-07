@@ -79,7 +79,6 @@ export const Header = observer(({ catalog }: HeaderProps): JSX.Element => {
                 shown={modalShown}
                 onClose={() => setModalShown(false)}>
                 <CityPicker
-                    uid='city-picker'
                     defaultCity={city}
                     onSelect={() => setModalShown(false)} />
             </Modal>

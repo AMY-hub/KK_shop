@@ -192,7 +192,7 @@ export const NavBar = ({ catalog, catalogOpen, setCatalogOpen, menuOpen, setMenu
                     >
                         <span></span>
                     </button>
-                    <AnimatePresence>
+                    <AnimatePresence initial={false}>
                         {menuOpen &&
                             <motion.ul
                                 {...animationConfigX}

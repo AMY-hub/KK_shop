@@ -111,6 +111,8 @@ export class BasketStore {
                     this.setFinalPrice();
                     this.status = 'idle';
                 });
+            } else {
+                runInAction(() => this.status = 'idle');
             }
         } catch (err) {
             this.error = getErrorMessage(err);
