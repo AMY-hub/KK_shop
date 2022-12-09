@@ -36,6 +36,7 @@ export const ProductSlider = ({ images, className, ...rest }: ProductSliderProps
                     src={process.env.NEXT_PUBLIC_DOMAIN + img}
                     alt={`Изображение товара ${idx + 1}`}
                     layout='intrinsic'
+                    priority
                     width={550}
                     height={550}
                 />
