@@ -2,6 +2,7 @@
 	&List {
 		display: flex;
 		gap: 1.5625rem;
+		overflow: auto;
 
 		&Item {
 			flex-shrink: 0;

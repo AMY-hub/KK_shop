@@ -29,8 +29,12 @@ export const useFilterParams: UseFilterParams = ({ brandsOptions, priceOptions, 
     const [brands, setBrands] = useState<Option[]>(getBrandFromQuery);
 
     function getBrandFromQuery(): Option[] {
-        if (router.query.brandId) {
-            return brandsOptions.filter(opt => router.query.brandId?.includes(opt.value));
+        const brandsFromQuery = router.query.brandId;
+        if (brandsFromQuery) {
+            return Array.isArray(brandsFromQuery) ?
+                brandsOptions.filter(opt => router.query.brandId?.includes(opt.value))
+                :
+                brandsOptions.filter(opt => router.query.brandId === opt.value);
         }
         return [];
     }

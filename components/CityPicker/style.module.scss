@@ -26,13 +26,13 @@
 		position: relative;
 
 		input {
-			height: 4rem;
+			height: fit-content !important;
 			padding: 0.5rem;
 			transition: all 300ms;
 			border: none;
 			border-bottom: 1px solid var(--gray);
 			border-radius: 1px;
-			font-size: 3rem;
+			font-size: 1.8rem;
 			font-weight: 700;
 			line-height: 1.5;
 
@@ -71,8 +71,7 @@
 
 		&Container {
 			input {
-				height: 3rem;
-				font-size: 2.5rem;
+				font-size: 1.3rem;
 			}
 		}
 	}

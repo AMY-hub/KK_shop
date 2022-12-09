@@ -30,6 +30,14 @@ export const Header = observer(({ catalog }: HeaderProps): JSX.Element => {
         }
     }, []);
 
+    useEffect(() => {
+        if (catalogOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [catalogOpen]);
+
     return (
         <div className={cn(styles.overlay, {
             [styles.overlay_visible]: catalogOpen
