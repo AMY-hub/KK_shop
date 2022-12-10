@@ -28,7 +28,13 @@ export const BasketPage = observer((): JSX.Element => {
             <MBasketProductCard
                 {...animationConfig}
                 key={cardsCounter}
-                productData={el.product}
+                productId={el.product.id}
+                name={el.product.name}
+                name_rus={el.product.name_rus}
+                img={el.product.img}
+                price={el.product.price}
+                volume={el.product.volume}
+                discount={el.product.brand.special_sale?.discount}
                 amount={el.amount} />
             :
             <BasketCertificateCard

@@ -35,7 +35,7 @@ export const MainPage = ({ newest, sale, popular }: MainPageProps): JSX.Element 
                         <p>
                             Мы делаем мир профессиональной корейской косметики доступным для каждого косметолога в России, предоставляя возможность работать с лучшими достижениями корейских учёных и специалистов в области сохранения здоровья и ухода за кожей.
                         </p>
-                        <Link href='/certificates'>
+                        <Link href='/cosmetologists'>
                             <a className={cn(styles.aboutLink, 'icon-arr_right')}
                             >Подробнее</a>
                         </Link>

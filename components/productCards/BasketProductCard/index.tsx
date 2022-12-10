@@ -9,26 +9,29 @@ import { BasketProductProps } from './props';
 
 import styles from './style.module.scss';
 
-export const BasketProductCard = forwardRef(({ productData, amount, className, ...props }: BasketProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const BasketProductCard = forwardRef((props: BasketProductProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     const {
-        id,
+        productId,
         name,
         name_rus,
         price,
         img,
         volume,
-        brand: { special_sale },
-    } = productData;
+        discount,
+        className,
+        amount,
+        ...rest
+    } = props;
 
-    const salePrice = getPriceWithSale(price, special_sale?.discount);
-    const discount = price - salePrice;
+    const salePrice = getPriceWithSale(price, discount);
+    const productDiscount = price - salePrice;
 
     return (
-        <div className={cn(styles.card, className)} {...props} ref={ref}>
+        <div className={cn(styles.card, className)} {...rest} ref={ref}>
             <div className={styles.cardWrapper}>
                 <div className={styles.cardImg}>
-                    <Link href={`/products/${id}`}>
+                    <Link href={`/products/${productId}`}>
                         <a>
                             <Image
                                 className={styles.cardImg}
@@ -50,7 +53,7 @@ export const BasketProductCard = forwardRef(({ productData, amount, className, .
                         <AmountControls
                             className={styles.cardControls}
                             initial={amount}
-                            productId={id}
+                            productId={productId}
                             type='product'
                         />
                     </div>
@@ -60,10 +63,10 @@ export const BasketProductCard = forwardRef(({ productData, amount, className, .
                             {`${volume} мл`}
                         </div>
                         <div className={styles.cardPriceWrapper}>
-                            {discount > 0 ?
+                            {productDiscount > 0 ?
                                 <>
                                     <div className={styles.cardDiscount}>
-                                        {`Скидка ${discount * amount} руб`}
+                                        {`Скидка ${productDiscount * amount} руб`}
                                     </div>
                                     <span className={styles.cardPriceOld}>
                                         {`${price * amount} руб`}

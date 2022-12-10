@@ -54,7 +54,7 @@ export const SpecialCard = forwardRef((props: SpecialCardProps, ref: ForwardedRe
                     </>
                 }
                 {type === 'square' &&
-                    <span className={styles.cardPrice}>от{salePrice}</span>
+                    <span className={styles.cardPrice}>от {salePrice}</span>
                 }
             </div>
         </div>

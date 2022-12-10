@@ -24,7 +24,13 @@ export const FavPage = observer((): JSX.Element => {
                         <MFavProductCard
                             {...animationConfig}
                             key={el.id}
-                            productData={el.product} />
+                            productId={el.product.id}
+                            name={el.product.name}
+                            name_rus={el.product.name_rus}
+                            img={el.product.img}
+                            price={el.product.price}
+                            discount={el.product.brand.special_sale?.discount}
+                        />
                     ))
                 }
             </AnimatePresence>

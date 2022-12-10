@@ -51,11 +51,16 @@ export const ProductPage = ({ productData, similar, popular }: ProductPageProps)
                     <Title tag='h2'>Вас могут заинтересовать</Title>
                     {popular.length < 3 ?
                         <div className={styles.similarProducts}>
-                            {popular.map(prod => (
+                            {popular.map(product => (
                                 <ProductCard
                                     className={styles.popularCard}
-                                    productData={prod}
-                                    key={prod.id} />
+                                    productId={product.id}
+                                    name={product.name}
+                                    name_rus={product.name_rus}
+                                    img={product.img}
+                                    price={product.price}
+                                    discount={product.brand.special_sale?.discount}
+                                    key={product.id} />
                             ))}
                         </div>
                         :
@@ -70,11 +75,16 @@ export const ProductPage = ({ productData, similar, popular }: ProductPageProps)
                     <Title tag='h2'>Похожие товары</Title>
                     {similar.length < 3 ?
                         <div className={styles.similarProducts}>
-                            {similar.map(prod => (
+                            {similar.map(product => (
                                 <ProductCard
                                     className={styles.similarCard}
-                                    productData={prod}
-                                    key={prod.id} />
+                                    productId={product.id}
+                                    name={product.name}
+                                    name_rus={product.name_rus}
+                                    img={product.img}
+                                    price={product.price}
+                                    discount={product.brand.special_sale?.discount}
+                                    key={product.id} />
                             ))}
                         </div>
                         :

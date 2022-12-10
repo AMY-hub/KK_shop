@@ -9,24 +9,26 @@ import { InfoBadge } from '../..';
 
 import styles from './style.module.scss';
 
-export const ProductCard = forwardRef(({ productData, className, ...props }: ProductCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const ProductCard = forwardRef((props: ProductCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     const {
-        id,
+        productId,
         name,
         name_rus,
         price,
         img,
-        brand: { special_sale },
-    } = productData;
+        discount,
+        className,
+        ...rest
+    } = props;
 
-    const salePrice = getPriceWithSale(price, special_sale?.discount);
-    const discount = price - salePrice;
+    const salePrice = getPriceWithSale(price, discount);
+    const priceDiscount = price - salePrice;
 
     return (
-        <div className={cn(styles.card, className)} {...props} ref={ref}>
+        <div className={cn(styles.card, className)} {...rest} ref={ref}>
             <div className={styles.cardWrapper}>
-                {special_sale &&
+                {discount &&
                     <InfoBadge
                         className={styles.cardSale}
                         styleType='accent'
@@ -34,7 +36,7 @@ export const ProductCard = forwardRef(({ productData, className, ...props }: Pro
                         sale
                     </InfoBadge>
                 }
-                <Link href={`/products/${id}`}>
+                <Link href={`/products/${productId}`}>
                     <a>
                         <Image
                             className={styles.cardImg}
@@ -51,7 +53,7 @@ export const ProductCard = forwardRef(({ productData, className, ...props }: Pro
                     <div className={styles.cardTitle}>{name}</div>
                     <div className={styles.cardDescription}>{name_rus}</div>
                     <div className={styles.cardPriceWrapper}>
-                        {discount > 0 ?
+                        {priceDiscount > 0 ?
                             <>
                                 <span className={styles.cardPrice}>
                                     {`${salePrice} руб`}

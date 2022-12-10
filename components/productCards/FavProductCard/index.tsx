@@ -12,28 +12,30 @@ import HeartIcon from '../../../assets/images/icons/heart_fill.svg';
 
 import styles from './style.module.scss';
 
-export const FavProductCard = forwardRef(({ productData, className, ...props }: FavProductCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+export const FavProductCard = forwardRef((props: FavProductCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     const favStore = useFavContext();
     const basketStore = useBasketContext();
 
     const {
-        id,
+        productId,
         name,
         name_rus,
         price,
         img,
-        brand: { special_sale },
-    } = productData;
+        discount,
+        className,
+        ...rest
+    } = props;
 
-    const salePrice = getPriceWithSale(price, special_sale?.discount);
-    const discount = price - salePrice;
+    const salePrice = getPriceWithSale(price, discount);
+    const productDiscount = price - salePrice;
 
     return (
-        <div className={cn(styles.card, className)} {...props} ref={ref}>
+        <div className={cn(styles.card, className)} {...rest} ref={ref}>
             <div className={styles.cardWrapper}>
                 <div className={styles.cardImg}>
-                    <Link href={`/products/${id}`}>
+                    <Link href={`/products/${productId}`}>
                         <a>
                             <Image
                                 className={styles.cardImg}
@@ -59,20 +61,20 @@ export const FavProductCard = forwardRef(({ productData, className, ...props }: 
                             <IconButton
                                 title=' Удалить из избранного'
                                 aria-label='Удалить из избранного'
-                                onClick={() => favStore.toggleProduct(id)}
+                                onClick={() => favStore.toggleProduct(productId)}
                             >
                                 <HeartIcon width={24} />
                             </IconButton>
                             <IconButton
                                 title='Добавить в корзину'
                                 aria-label='Добавить в корзину'
-                                onClick={() => basketStore.addProduct(id, 'product')}
+                                onClick={() => basketStore.addProduct(productId, 'product')}
                             >
                                 <CartIcon />
                             </IconButton>
                         </div>
                         <div className={styles.cardPriceWrapper}>
-                            {discount > 0 ?
+                            {productDiscount > 0 ?
                                 <>
                                     <span className={styles.cardPriceOld}>
                                         {`${price} руб`}

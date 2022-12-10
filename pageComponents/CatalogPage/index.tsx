@@ -18,11 +18,16 @@ export const CatalogPage = ({ products, pages, brandList }: CatalogPageProps): J
         exit: { opacity: 0 }
     };
 
-    const cards = products.map(el => (
+    const cards = products.map(product => (
         <MProductCard
             {...animationConfig}
-            key={el.id}
-            productData={el}
+            key={product.id}
+            productId={product.id}
+            name={product.name}
+            name_rus={product.name_rus}
+            img={product.img}
+            price={product.price}
+            discount={product.brand.special_sale?.discount}
         />
     ));
 

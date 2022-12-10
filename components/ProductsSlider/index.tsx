@@ -1,11 +1,12 @@
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y } from 'swiper';
 import cn from 'classnames';
 import { ProductCard, SpecialCard, Title } from '..';
 import IconLeft from '../../assets/images/icons/arr_left.svg';
 import IconRight from '../../assets/images/icons/arr_right.svg';
 import { ProductsSliderProps } from './props';
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, A11y } from 'swiper';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -34,7 +35,13 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
                         size='m'
                     />
                     :
-                    <ProductCard productData={product} />
+                    <ProductCard
+                        productId={product.id}
+                        name={product.name}
+                        name_rus={product.name_rus}
+                        img={product.img}
+                        price={product.price}
+                        discount={product.brand.special_sale?.discount} />
                 }
             </SwiperSlide>
         );
