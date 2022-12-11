@@ -38,7 +38,7 @@ function ProductsCatalog({ pages, products, brands }: PageProps): JSX.Element {
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
 
-    const limitPerPage = 10;
+    const limitPerPage = 8;
 
     const { data: { brands } } = await API.get<{ brands: Brand[] }>(BRAND);
 

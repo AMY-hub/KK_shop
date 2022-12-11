@@ -26,12 +26,12 @@
 	}
 
 	&Link {
+		transition: color 300ms;
 		color: var(--accent-dark);
 		font-family: var(--accent-font);
 		font-size: 1rem;
 		font-weight: 600;
 		line-height: 1.5;
-		transition: color 300ms;
 
 		&::after {
 			margin-left: 3px;
