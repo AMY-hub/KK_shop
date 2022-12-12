@@ -22,6 +22,7 @@ export const ContextProvider = observer(({ children, hydrationData }: RootContex
 
 const initStore = (hydrationData?: RootHydration): RootStore => {
     const _store = store ?? new RootStore();
+
     if (hydrationData) {
         _store.hydrate(hydrationData);
     }

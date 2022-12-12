@@ -2,6 +2,7 @@
 
 module.exports = {
 	staticPageGenerationTimeout: 120,
+	reactStrictMode: false,
 	images: {
 		domains: ['localhost', 'kkshop.onrender.com', 'kk-shop-server.vercel.app', 'api.kkshop.site']
 	},
