@@ -26,6 +26,7 @@ export const ProductsSlider = ({ products, title, sliderId, size = 'm' }: Produc
                 key={product.id}>
                 {size === 'l' ?
                     <SpecialCard
+                        productId={product.id}
                         name={product.name}
                         nameRus={product.name_rus}
                         price={product.price}

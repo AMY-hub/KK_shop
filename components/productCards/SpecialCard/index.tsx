@@ -11,7 +11,7 @@ import styles from './style.module.scss';
 export const SpecialCard = forwardRef((props: SpecialCardProps, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
 
     const {
-        id,
+        productId,
         name,
         nameRus,
         price,
@@ -29,7 +29,7 @@ export const SpecialCard = forwardRef((props: SpecialCardProps, ref: ForwardedRe
             className={cn(styles.card, styles[type], styles[size], className)}
             {...rest}
             ref={ref}>
-            <Link href={`/products/${id}`}>
+            <Link href={`/products/${productId}`}>
                 <a>
                     <Image
                         src={process.env.NEXT_PUBLIC_DOMAIN + img}
