@@ -14,6 +14,7 @@ interface PageProps {
 function Home({ newest, sale, popular }: PageProps): JSX.Element {
   const title = 'Интернет-магазин корейской косметики KKshop — купить косметику из Кореи в Москве, Санкт-Петербурге и регионах РФ';
   const description = 'Оригинальная корейская косметика по низким ценам в интернет-магазине KKshop. Косметика из Южной Кореи от официальных поставщиков. Купить корейскую косметику онлайн с доставкой.';
+  console.log(process.env.NODE_ENV);
 
   return (
     <>

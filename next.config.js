@@ -3,7 +3,7 @@
 module.exports = {
 	staticPageGenerationTimeout: 120,
 	images: {
-		domains: ['localhost', 'kkshop.onrender.com']
+		domains: ['localhost', 'kkshop.onrender.com', 'kk-shop-server.vercel.app']
 	},
 	webpack(config, options) {
 		config.module.rules.push({
