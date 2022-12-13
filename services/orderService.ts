@@ -1,12 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { ORDER } from '../api/APIendpoints';
 import { API } from '../api/axiosConfig';
-import { Delivery, Order, Payment } from '../interfaces';
-
-export interface OrderCreateResponse {
-    orderNumber: string;
-    points: number | undefined;
-}
+import { Delivery, Order, OrderCreateResponse, Payment } from '../interfaces';
 
 export interface OrderCreateData {
     userId: number | null;

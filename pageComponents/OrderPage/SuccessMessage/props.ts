@@ -1,4 +1,6 @@
+import { OrderCreateResponse } from '../../../interfaces';
+
 export interface SuccessMessageProps {
-    order: string;
+    order: OrderCreateResponse;
     isAuthorized: boolean;
 }

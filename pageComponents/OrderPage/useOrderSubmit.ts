@@ -4,16 +4,17 @@ import { OrderFormFields } from './interfaces';
 import { useAppContext, useBasketContext, useUserContext } from '../../context/AppContext';
 import { getErrorMessage } from '../../helpers/getErrorMessage';
 import orderService from '../../services/orderService';
+import { OrderCreateResponse } from '../../interfaces';
 
 type UseOrderSubmit = (reset: UseFormReset<OrderFormFields>, deliveryPrice: number) => {
-    orderNumber: string;
+    orderData: OrderCreateResponse | null;
     error: string;
     setError: (err: string) => void;
     submitHandler: SubmitHandler<OrderFormFields>;
 };
 
 export const useOrderSubmit: UseOrderSubmit = (reset, deliveryPrice) => {
-    const [orderNumber, setOrderNumber] = useState<string>('');
+    const [orderData, setOrderData] = useState<OrderCreateResponse | null>(null);
     const [error, setError] = useState<string>('');
 
     const basketStore = useBasketContext();
@@ -36,7 +37,6 @@ export const useOrderSubmit: UseOrderSubmit = (reset, deliveryPrice) => {
 
     const submitHandler: SubmitHandler<OrderFormFields> = async (data, e) => {
         e?.preventDefault();
-        console.log(data);
 
         try {
             const error = validateData(data);
@@ -77,7 +77,7 @@ export const useOrderSubmit: UseOrderSubmit = (reset, deliveryPrice) => {
 
             if (res.status === 200 && res.data.orderNumber) {
                 reset();
-                setOrderNumber(res.data.orderNumber);
+                setOrderData(res.data);
                 basketStore.clearBasket();
                 if (res.data.points) {
                     userState.updateBonusCard(res.data.points);
@@ -88,5 +88,5 @@ export const useOrderSubmit: UseOrderSubmit = (reset, deliveryPrice) => {
         }
     };
 
-    return { orderNumber, error, setError, submitHandler };
+    return { orderData, error, setError, submitHandler };
 };

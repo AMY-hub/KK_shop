@@ -74,28 +74,51 @@ export const OrderRow = ({ order }: OrderRowProps): JSX.Element => {
                 <td>{formatDateTime(order.createdAt, 'date')}</td>
                 <td>{`${order.price} руб`}</td>
                 <td>{order.status}</td>
+                <td>
+                    {order.payment_status}
+                    <br />
+                    {order.payment_status === 'не оплачен'
+                        && order.payment_confirmation
+                        && <a
+                            className={styles.paymentLink}
+                            href={order.payment_confirmation}>
+                            Оплатить
+                        </a>}
+                </td>
             </tr>
             <AnimatePresence>
                 {showDetails &&
                     <>
                         <motion.tr {...animationConfig}>
-                            <td className={styles.rowDate} colSpan={4}>
+                            <td className={styles.rowDate} colSpan={5}>
                                 {formatDateTime(order.createdAt, 'date')}
                             </td>
                         </motion.tr>
                         <motion.tr {...animationConfig}>
-                            <td className={styles.rowPrice} colSpan={4}>
+                            <td className={styles.rowPrice} colSpan={5}>
                                 {`${order.price} руб`}
                             </td>
                         </motion.tr>
                         <motion.tr {...animationConfig}>
-                            <td className={styles.rowStatus} colSpan={4}>
+                            <td className={styles.rowStatus} colSpan={5}>
                                 {order.status}
                             </td>
                         </motion.tr>
                         <motion.tr {...animationConfig}>
+                            <td className={styles.rowStatus} colSpan={5}>
+                                {order.payment_status}
+                                {order.payment_status === 'не оплачен'
+                                    && order.payment_confirmation
+                                    && <a
+                                        className={styles.paymentLink}
+                                        href={order.payment_confirmation}>
+                                        Оплатить
+                                    </a>}
+                            </td>
+                        </motion.tr>
+                        <motion.tr {...animationConfig}>
                             <td className={styles.rowDetails}
-                                colSpan={4}>
+                                colSpan={5}>
                                 {orderProducts}
                                 {orderCertificates}
                             </td>

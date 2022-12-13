@@ -46,7 +46,7 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
     const [deliveryType, address] = useWatch({ control, name: ['delivery', 'address'] });
 
     const {
-        orderNumber,
+        orderData,
         error,
         setError,
         submitHandler } = useOrderSubmit(reset, deliveryPrice);
@@ -93,8 +93,12 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                 </div>)
         }]), []);
 
-    if (orderNumber) {
-        return (<SuccessMessage order={orderNumber} isAuthorized={userState.isLoggedIn} />);
+    if (orderData) {
+        return (
+            <SuccessMessage
+                order={orderData}
+                isAuthorized={userState.isLoggedIn}
+            />);
     }
     if (basket.length === 0) {
         return (
@@ -238,7 +242,6 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                         opened={dirtyFields.name
                             && dirtyFields.lastName
                             && dirtyFields.middleName
-                            && dirtyFields.email
                             && dirtyFields.phone}
                         className={styles.orderStep}
                         header={<StepHeader step='3/3' title='Оплата' />}>

@@ -288,7 +288,9 @@ export interface Order {
     address: string;
     delivery: string;
     status: string;
-    payment_status: string;
+    payment_status: 'не оплачен' | 'оплачен';
+    payment_id: string | null;
+    payment_confirmation: string | null;
     payment: string;
     phone: string;
     email: string;
@@ -299,6 +301,12 @@ export interface Order {
     userId: number;
     products: OrderProduct[];
     certificates: OrderCertificate[];
+}
+
+export interface OrderCreateResponse {
+    orderNumber: string;
+    points: number | undefined;
+    payment_url: string | undefined;
 }
 
 export type Delivery = 'самовывоз' | 'курьер';

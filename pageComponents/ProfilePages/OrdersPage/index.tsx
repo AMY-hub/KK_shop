@@ -29,6 +29,7 @@ export const OrdersPage = (): JSX.Element => {
                             <th>Дата</th>
                             <th>Сумма</th>
                             <th>Статус</th>
+                            <th>Оплата</th>
                         </tr>
                     </thead>
                     <tbody className={styles.tableBody}>

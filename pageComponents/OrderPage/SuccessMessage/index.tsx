@@ -14,8 +14,14 @@ export const SuccessMessage = ({ order, isAuthorized }: SuccessMessageProps): JS
         <Container className={styles.order}>
             <Title tag='h1'>Ваш заказ успешно оформлен!</Title>
             <div className={styles.orderNum}>
-                Номер заказа: <span> {order}</span>
+                Номер заказа: <span> {order.orderNumber}</span>
             </div>
+            {order.payment_url ?
+                <Paragraph>
+                    Для оплаты заказа перейдите по ссылке:
+                    <a href={order.payment_url}>Оплатить заказ</a>
+                </Paragraph>
+                : null}
             <Paragraph>
                 Вы получите СМС о прибытии заказа на номер, указанный при оформлении. В случае курьерской доставки курьер свяжется с вами по указанному номеру для согласования времени доставки.
             </Paragraph>
