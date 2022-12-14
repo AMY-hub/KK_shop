@@ -1,5 +1,4 @@
 import { ForwardedRef, forwardRef, useId } from 'react';
-import { motion } from 'framer-motion';
 import cn from 'classnames';
 import { InputProps } from './props';
 import { ErrorMessage } from '../..';
@@ -11,7 +10,7 @@ export const Input = forwardRef(({ error, hint, isWide, className, ...props }: I
     const id = useId();
 
     return (
-        <motion.div layout className={cn(styles.inputWrapper, className)}>
+        <div className={cn(styles.inputWrapper, className)}>
             <input className={cn(styles.input, {
                 [styles.input_error]: error,
                 [styles.input_wide]: isWide
@@ -30,6 +29,6 @@ export const Input = forwardRef(({ error, hint, isWide, className, ...props }: I
                 <ErrorMessage message={error.message}
                     className={styles.errorMessage} />
             }
-        </motion.div>
+        </div>
     );
 });

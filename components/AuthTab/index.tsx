@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import cn from 'classnames';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { MLoginForm, MRegistrationForm } from '../../components';
 import { AuthTabProps } from './props';
 
@@ -9,6 +9,13 @@ import styles from './style.module.scss';
 export const AuthTab = ({ className, onAuth, ...rest }: AuthTabProps): JSX.Element => {
 
     const [currentTab, setCurrentTab] = useState<'login' | 'register'>('register');
+
+    const animationConfig = {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { bounce: 0 },
+    };
 
     return (
         <div className={cn(styles.auth, className)} {...rest}>
@@ -50,19 +57,21 @@ export const AuthTab = ({ className, onAuth, ...rest }: AuthTabProps): JSX.Eleme
                             layoutId="active"></motion.span>}
                 </motion.button>
             </div>
-            {currentTab === 'login' ?
-                <MLoginForm
-                    layoutId='auth'
-                    role='tabpanel'
-                    aria-labelledby='login'
-                    onAuth={onAuth} />
-                :
-                <MRegistrationForm
-                    layoutId='auth'
-                    role='tabpanel'
-                    aria-labelledby='register'
-                    onAuth={onAuth} />
-            }
+            <AnimatePresence>
+                {currentTab === 'login' ?
+                    <MLoginForm
+                        {...animationConfig}
+                        role='tabpanel'
+                        aria-labelledby='login'
+                        onAuth={onAuth} />
+                    :
+                    <MRegistrationForm
+                        {...animationConfig}
+                        role='tabpanel'
+                        aria-labelledby='register'
+                        onAuth={onAuth} />
+                }
+            </AnimatePresence>
         </div>
     );
 };

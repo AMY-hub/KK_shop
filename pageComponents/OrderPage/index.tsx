@@ -29,10 +29,12 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
     const { deliveryPrice, pickPrice, pick } = useDelivery(addresses);
     const {
         register,
-        formState: { errors, isSubmitting, dirtyFields },
+        formState: { errors, isSubmitting, isValid },
         getValues,
         setValue,
         handleSubmit, reset, control } = useForm<OrderFormFields>({
+            mode: 'onChange',
+            reValidateMode: 'onChange',
             defaultValues: {
                 address: '',
                 name: userState.user?.name || '',
@@ -239,10 +241,7 @@ export const OrderPage = observer(({ cities, addresses }: OrderPageProps): JSX.E
                     </Dropdown>
 
                     <Dropdown
-                        opened={dirtyFields.name
-                            && dirtyFields.lastName
-                            && dirtyFields.middleName
-                            && dirtyFields.phone}
+                        opened={isValid}
                         className={styles.orderStep}
                         header={<StepHeader step='3/3' title='Оплата' />}>
                         <p><b>Бесконтактная доставка действует для всех заказов, оплаченных онлайн</b></p>

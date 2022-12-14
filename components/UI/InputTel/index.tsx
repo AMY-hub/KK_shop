@@ -10,7 +10,13 @@ export function InputTel<T extends FieldValues = FieldValues>({ control, name, c
 
     const [phone, setPhone] = useState<string>(code);
     const id = useId();
-    const { field, fieldState } = useController({ control, name, rules: { required: 'Обязательно для заполнения', maxLength: 18, minLength: 18 } });
+    const { field, fieldState } = useController({
+        control, name, rules: {
+            required: 'Обязательно для заполнения',
+            maxLength: 18,
+            minLength: 18,
+        }
+    });
 
     function formatPhone(value: string) {
         value = value.slice(code.length);
@@ -48,9 +54,11 @@ export function InputTel<T extends FieldValues = FieldValues>({ control, name, c
             <span id={id} className={styles.inputHint}>
                 Введите номер телефона, начиная с цифры 9
             </span>
-            {fieldState.error &&
+            {fieldState.error
+                && fieldState.error.type !== 'minLength'
+                &&
                 <ErrorMessage message={fieldState.error.message
-                    || 'Возникла ошибка при заполнении формы'}
+                    || 'Некорректный ввод!'}
                     className={styles.errorMessage}
                     role='alert' />
             }
